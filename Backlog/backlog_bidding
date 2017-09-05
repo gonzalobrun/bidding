@@ -1,0 +1,88 @@
+User stories:
+
+1) Creacion de entorno de desarollo:
+Considero esta tarea completa cuando tenga configurado el entorno de desarollo para crear la aplicacion.
+- Instalacion de software necesario.
+- Creacion de estructura del proyecto
+
+2) Desarollo de bases de datos.
+Considero esta tarea como completa cuando este configurada la estructura de la base de datos modelada para la aplicacion.
+- Instalacion de software necesario.
+- Creacion de estructura de la base de datos.
+- Configurar restricciones.
+- Ingreso de datos modelos.
+
+3) Creacion de servcios.
+Como desarollador considero esta tarea completa cuando esten configuradas las distintas APIs que consumira la aplicacion.
+- Creacion de servicios de Usuarios (GET).
+- Creacion de servicios de Usuarios (SET).
+- Creacion de servicios de Usuarios (UPDATE).
+
+- Creacion de servicios de publicaciones (GET)
+- Creacion de servicios de publicaciones (SET)
+- Creacion de servicios de publicaciones (UPDATE)
+
+- Creacion de servicios de trasacciones (GET).
+- Creacion de servicios de trasacciones (SET).
+- Creacion de servicios de trasacciones (UPDATE).
+
+4) Creacion de estructura font-end
+Como desarollador considero como completa esta historia cuando tenga creada la estructura de archivos de fron-end de la aplicacion.
+- Creacion de proyecto con Ionic
+
+5) Creacion de pantalla de principal.
+Considero esta tarea completa cuando la pantalla principal de la aplicacion se vea como el diseño propuesto.
+- Creacion de controlador
+- Creacion de vista.
+- Creacion de estilos.
+
+6} Popular pantalla principal
+Considero esta tarea como completa cuando como usuario puedo ver publicaciones de manera aleatoria en la pagina principal
+- Consumir API de publicaciones.
+- Creacion de tarjetas de pantalla principal.
+- Imprimir en la vista los datos obtenidos del servicio.
+
+7) Logueo de usuario.
+Condero esta historia completa cuando como usuario pueda loguearme en la aplicacion.
+- Creacion de controlador de login.
+- Creacion de vista de login.
+- Creacion de estilos de login.
+- Desarollo de la funcionalidad de login.
+- Desarollo de la funcionalidad de logout.
+
+8) Creacion de pantalla Home (Usuario Logueado)
+Considero esta tarea como completa cuando el usuario este logueado y vea publicaciones segun su configuracion.
+- Creacion de controlador de home.
+- Creacion de vista de home.
+- Creacion de estilos de home.
+
+9) Popular datos Home
+Considero esta tarea como compelta cuando pueda loguearme con un usuario y ver en la pantalla Home.
+- Consumir API de Publicaciones
+- Mostrar informacion de acuerdo a la configuracion del usuario.
+
+10) Creacion de seccion filtros.
+Considero esta tarea como completa cuando como usuario puedo loguearme, ver informacion en la pantalla Home, y poder editar la vista seleccionando filtros de acuerdo a mi busqueda, y ver que esos filtros se aplican correctamente a las publicaciones.
+- Creaccion de seccion filtros.
+- Creacion de funcionalidad filtros.
+- Afectar vista de publicaciones segun los filtros seleccionados.
+
+11) Creacion de pantalla de usuario.
+Como usuario considero esta tarea compelta cuando pueda acceder a mi perfil y ver mi infomacion y poder editarla y tambien poder ver mis publicaciones realizadas.
+- Creacion de controller perfil
+- creacion de vista perfil.
+- creacion de estilos perfil
+- consumir API de usuarios (GET)
+- Consumir api de usuarios (UPDATE)
+- Consumir api de publicaciones (GET).
+- Consumir api de publicaciones (UPDATE).
+
+12) Creacion de Publicaciones.
+Como usuario quiero poder entrar a una publicacion en la pagina Home y poder ver toda la informacion disponible sobre esa publicacion.
+- creacion de controlador publicacon
+- creacion de vista publicacion
+- creacion de estilos publicacion
+- Creacion de funcionalidad ofertar
+- creacion de funcionalidad querer.
+- consumir API publicaciones (SET).
+
