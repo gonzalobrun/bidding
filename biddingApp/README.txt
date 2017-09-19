@@ -16,3 +16,4 @@ mongod
 C:\Users\Development\Documents\Bidding\biddingApp\biddingBackend
 
 node server.js
+to keep files watching nodemon server.js

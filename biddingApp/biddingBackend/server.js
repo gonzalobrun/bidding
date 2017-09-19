@@ -2,8 +2,26 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var generalRouter = express.Router();
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
 var userRouter = express.Router();
 var publicationRouter = express.Router();
+var mongoose = require('mongoose');
+var port = process.env.PORT || 8080;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(function(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+	next();
+});
+app.use(morgan('dev'));
+
+var promise = mongoose.connect('mongodb://localhost/biddingDB', {
+	useMongoClient: true
+});
 
 userRouter.use(function(req, res, next){
 	console.log(req.method, req.url);

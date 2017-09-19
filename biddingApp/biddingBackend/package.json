@@ -1,7 +1,7 @@
 {
   "name": "biddingbackend",
   "version": "1.0.0",
-  "description": "This is the API for BiddingApp",
+  "description": "API for BiddingApp",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,14 +10,17 @@
     "type": "git",
     "url": "git+https://github.com/gonzalobrun/bidding.git"
   },
-  "author": "Gonzalo Brun",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gonzalobrun/bidding/issues"
   },
   "homepage": "https://github.com/gonzalobrun/bidding#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.1",
     "express": "^4.15.4",
-    "mongodb": "^2.2.31"
+    "mongoose": "^4.11.12",
+    "morgan": "^1.8.2"
   }
 }
