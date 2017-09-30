@@ -1,12 +1,18 @@
 var express = require('express');
 var app = express();
+var port = process.env.PORT || 8080;
 var path = require('path');
-var routes = require('./app/config/routes');
+
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
-var port = process.env.PORT || 8080;
+
 var User = require('./app/models/user');
+var userRoutes = require('./app/config/userRoutes');
+
+
+//var publicationRoutes = require('./app/config/publicationRoutes');
+//var Publication = require('./app/models/Publication');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/biddingDB', {
@@ -23,7 +29,8 @@ app.use(function(req, res, next) {
 });
 app.use(morgan('dev'));
 
-routes(app);
+userRoutes(app);
+//publicationRoutes(app)
 
 app.use(function(req, res){
 	res.status(500).send('Page not found.')

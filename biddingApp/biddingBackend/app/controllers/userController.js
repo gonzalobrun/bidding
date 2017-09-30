@@ -1,19 +1,10 @@
 'use strict'
 var mongoose = require('mongoose');
 var User = require('../models/user');
-var UserModel = mongoose.model('User');
 
 function createUser (req, res) {
 
-	//console.log(req.body);
 	var user = new User(req.body);
-
-	// user.name = req.body.name;
-	// user.username = req.body.userName;
-	// user.password = req.body.password;
-	// user.country = req.body.country;
-	// user.province = req.body.province;
-	// user.city = req.body.city;
 
 	user.save(function(err, user) {
 		if(err){
@@ -32,12 +23,30 @@ function createUser (req, res) {
 }
 
 function logUser (req, res) {
-	res.send('Check password for the user ' + req.params.userId);
-}
+
+	var user = new User();
+	console.log('+++++++++++++++++ ' + user);
+	//res.send('Check password for the user ' + req.params.userId);
+	user.find(function(err, user){
+		if(err){
+			res.send(err);
+		}
+		else{
+			res.json({message: 'The user!', user});
+		}
+	});
+};
 
 function updateUser (req, res){
-	res.send('this will delete the user ' + req.params.userId);
-	next();
+	//res.send('this will delete the user ' + req.params.userId);
+	user.finOneAndUpdate({username: req.params.username}, req.body, {new: true}, function(err, user){
+		if(err){
+			res.send(err);
+		}
+		else{
+			res.json({message: 'User Updated', user: user});
+		}
+	});
 }
 
 function deleteUser(req, res){
