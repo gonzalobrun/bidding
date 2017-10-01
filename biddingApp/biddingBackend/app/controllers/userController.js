@@ -1,6 +1,7 @@
 'use strict'
 var mongoose = require('mongoose');
 var User = require('../models/user');
+var UserModel = mongoose.model('Users');
 
 function createUser (req, res) {
 
@@ -23,28 +24,56 @@ function createUser (req, res) {
 }
 
 function logUser (req, res) {
-
-	var user = new User();
-	console.log('+++++++++++++++++ ' + user);
 	//res.send('Check password for the user ' + req.params.userId);
-	user.find(function(err, user){
-		if(err){
+	UserModel.find({username: req.body.username, password: req.body.password}, function(err, user){
+
+		if(err) {
 			res.send(err);
 		}
-		else{
-			res.json({message: 'The user!', user});
+		else {
+			var logged = false;
+			if(user.length === 1) {
+				logged = true;
+				res.json({ message: 'User Logged', user: user, logged : logged});
+			}
+			else {
+				res.json({ message: 'Check your username or passowrd', user: user, logged : logged});
+			}
 		}
 	});
+
+	// UserModel.findById(req.params.userId, function(err, user){
+
+	// 	if(err){
+	// 		res.send(err);
+	// 	}
+	// 	else{
+	// 		res.json({message: 'The user!', user});
+	// 	}
+
+	// });
 };
 
 function updateUser (req, res){
 	//res.send('this will delete the user ' + req.params.userId);
-	user.finOneAndUpdate({username: req.params.username}, req.body, {new: true}, function(err, user){
+	var query = { _id: req.params.userId },
+		update = {	name: req.body.name, 
+					password: req.body.password, 
+					country: req.body.country, 
+					province: req.body.province, 
+					city: req.body.city},
+		options = {multi: true};
+
+	UserModel.update(query, update, options, function(err, numAffected){
 		if(err){
 			res.send(err);
 		}
 		else{
-			res.json({message: 'User Updated', user: user});
+			var userUpdated = false;
+			if(numAffected.nModified === 1) {
+				userUpdated = true;
+			}
+			res.json({message:'User updated', userUpdated: userUpdated});
 		}
 	});
 }

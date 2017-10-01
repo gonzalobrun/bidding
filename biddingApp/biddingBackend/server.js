@@ -33,7 +33,10 @@ userRoutes(app);
 //publicationRoutes(app)
 
 app.use(function(req, res){
-	res.status(500).send('Page not found.')
+	res.status(500).send('Internal Server Error');
+});
+app.use(function(req, res) {
+  res.status(404).send({url: req.originalUrl + ' not found'})
 });
 
 app.listen(port);
