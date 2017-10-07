@@ -3,18 +3,46 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var PublicationSchema = new Schema({
-	owner : String,
-    creationDate : Date,
+	owner : { 
+        type: Object, 
+        required: true
+    },
+    creationDate : { 
+        type: Date, 
+        required: true
+    },
     countdownStarted : Boolean,
-    location : String,
-    type : Number,
-    status : Number,
-    description : String,
-    title : String,
-    imgURL : [],
+    location : { 
+        type: Object, 
+        required: true
+    },
+    type : { 
+        type: Number, 
+        required: true
+    },
+    status : { 
+        type: Number, 
+        required: true
+    },
+    description : { 
+        type: String, 
+        required: true
+    },
+    title : { 
+        type: String, 
+        required: true
+    },
+    expirationDate: { 
+        type: Date, 
+        required: true
+    },
+    expired: Boolean,
+    minimunPrice: Number,
+    offerers: [],
+    imgURL : [String],
     comments : [],
-    category : [],
-    likesCount : 0
+    categories : [],
+    likesCount : Number
 });
 
-module.exports = mongoose.model('Publication', PublicationSchema);
+module.exports = mongoose.model('Publications', PublicationSchema);

@@ -41,28 +41,17 @@ function logUser (req, res) {
 			}
 		}
 	});
-
-	// UserModel.findById(req.params.userId, function(err, user){
-
-	// 	if(err){
-	// 		res.send(err);
-	// 	}
-	// 	else{
-	// 		res.json({message: 'The user!', user});
-	// 	}
-
-	// });
 };
 
 function updateUser (req, res){
-	//res.send('this will delete the user ' + req.params.userId);
+	
 	var query = { _id: req.params.userId },
 		update = {	name: req.body.name, 
 					password: req.body.password, 
 					country: req.body.country, 
 					province: req.body.province, 
 					city: req.body.city},
-		options = {multi: true};
+		options = {multi: false};
 
 	UserModel.update(query, update, options, function(err, numAffected){
 		if(err){

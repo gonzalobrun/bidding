@@ -2,7 +2,7 @@ var express = require('express');
 var userRoutes = express.Router();
 var user = require('../controllers/userController');
 
-//MIDDLEWARE
+//MIDDLEWARES
 userRoutes.param('userId', function(req, res, next, user){
 
 	console.log('Doing Validations on ' + user);

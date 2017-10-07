@@ -7,12 +7,13 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 
-var User = require('./app/models/user');
+//var User = require('./app/models/user');
 var userRoutes = require('./app/config/userRoutes');
 
-
-//var publicationRoutes = require('./app/config/publicationRoutes');
 //var Publication = require('./app/models/Publication');
+var publicationRoutes = require('./app/config/publicationRoutes');
+
+//I should import the models once. 
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/biddingDB', {
@@ -30,7 +31,7 @@ app.use(function(req, res, next) {
 app.use(morgan('dev'));
 
 userRoutes(app);
-//publicationRoutes(app)
+publicationRoutes(app);
 
 app.use(function(req, res){
 	res.status(500).send('Internal Server Error');
