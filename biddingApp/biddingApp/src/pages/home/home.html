@@ -1,18 +1,51 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Bidding</ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-8>
+        <h2 class="title">Bidding</h2>
+      </ion-col>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+      <ion-col col-2>
+        <button ion-button block (click)="goToLogin()">Login</button>
+      </ion-col>
+
+      <ion-col col-2>
+        <button ion-button outline block (click)="goToSignin()">Sign in</button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, illo saepe libero inventore quidem expedita, modi ipsa in. Quis, libero unde facilis, adipisci quisquam omnis fugit. Cum quos repudiandae culpa? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit suscipit, nulla ullam blanditiis sequi temporibus, natus quisquam in laudantium fugiat nemo sed perferendis consequuntur aliquid iusto labore dolore iure repellat.
+      </ion-col>
+    </ion-row>  
+  </ion-grid>
+  
+  <div  class="card-block" *ngFor="let pub of pubsArr">
+    <ion-card>
+     <!--  <img src="../content/img/relax.jpg"> -->
+      <ion-card-content>
+        <ion-card-title>
+          {{pub.title}}
+          </ion-card-title>
+        <p>
+          {{pub.description}}
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+
+  
+
 </ion-content>

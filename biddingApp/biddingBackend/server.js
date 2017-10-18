@@ -7,13 +7,15 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 
+
+//I should import the models once. 
 //var User = require('./app/models/user');
 var userRoutes = require('./app/config/userRoutes');
 
 //var Publication = require('./app/models/Publication');
 var publicationRoutes = require('./app/config/publicationRoutes');
 
-//I should import the models once. 
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/biddingDB', {

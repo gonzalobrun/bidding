@@ -12,6 +12,7 @@ userRoutes.param('userId', function(req, res, next, user){
 });
 
 module.exports = function(app){
+	
 	userRoutes.post('/', [user.logReq, user.createUser]);
 
 	userRoutes.post('/login', [user.logReq, user.logUser]);
