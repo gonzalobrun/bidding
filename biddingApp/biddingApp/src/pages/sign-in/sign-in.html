@@ -1,51 +1,48 @@
 <ion-header>
+  <ion-navbar>
+    <ion-title>SignIn</ion-title>
+  </ion-navbar>
+</ion-header>
   
-    <ion-navbar>
-      <ion-title>SignIn</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  <ion-content padding>
-  
-    <form [formGroup]="signInForm">
-      <ion-list>
-          
-        <ion-item>
-          <ion-label floating>Name</ion-label>
-          <ion-input type="text" required id="name" formControlName="name"></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label floating>Username</ion-label>
-          <ion-input type="text" required id="username" formControlName="username"></ion-input>
-        </ion-item>
+<ion-content padding>
 
-        <ion-item>
-          <ion-label floating>Password</ion-label>
-          <ion-input type="password" required id="password" formControlName="password"></ion-input>
-        </ion-item>
+  <form [formGroup]="signInForm">
+    <ion-list>
+        
+      <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text" required id="name" formControlName="name"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" required id="username" formControlName="username"></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label floating>City</ion-label>
-          <ion-input type="text" required id="city" formControlName="city"></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" required id="password" formControlName="password"></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label floating>Province</ion-label>
-          <ion-input type="text" required id="province" formControlName="province"></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label floating>City</ion-label>
+        <ion-input type="text" required id="city" formControlName="city"></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label floating>Country</ion-label>
-          <ion-input type="text" required id="country" formControlName="country"></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label floating>Province</ion-label>
+        <ion-input type="text" required id="province" formControlName="province"></ion-input>
+      </ion-item>
 
-        <ion-item>
-            <button ion-button outline (click)="register()" [disabled]="!signInForm.valid" >Register</button>
-        </ion-item>
-  
-      </ion-list>
-    </form>
-  
-  </ion-content>
+      <ion-item>
+        <ion-label floating>Country</ion-label>
+        <ion-input type="text" required id="country" formControlName="country"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <button ion-button outline (click)="register()" [disabled]="!signInForm.valid" >Register</button>
+      </ion-item>
+
+    </ion-list>
+  </form>  
+</ion-content>
