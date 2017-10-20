@@ -10,15 +10,15 @@ function createUser (req, res) {
 	user.save(function(err, user) {
 		if(err){
 			if(err.code == 11000){
-				return res.json({ success: false, message: 'This username alredy exist.', user: user});
+				return res.status(404).json({ success: false, message: 'This username alredy exist.', user: null});
 			}
 			else {
-				return res.send(err);
+				return res.json({ success: false, message: err, user: null});
 			}
-			console.log(err);
 		}
+		
 		else {
-			res.json({message: 'User Created!', user: user});
+			res.json({ success: true, message: 'User Created!', user: user});
 		}
 	});
 }
@@ -28,16 +28,16 @@ function logUser (req, res) {
 	UserModel.find({username: req.body.username, password: req.body.password}, function(err, user){
 
 		if(err) {
-			res.send(err);
+			res.json({success: false,  message: err, user: null, logged: false});
 		}
 		else {
 			var logged = false;
 			if(user.length === 1) {
 				logged = true;
-				res.json({ message: 'User Logged', user: user, logged : logged});
+				res.json({success: true,  message: 'User Logged', user: user, logged : logged});
 			}
 			else {
-				res.json({ message: 'Check your username or passowrd', user: user, logged : logged});
+				res.json({success: false, message: 'Check your username or passowrd', user: null, logged : logged});
 			}
 		}
 	});

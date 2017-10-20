@@ -8,7 +8,7 @@ export class User {
     public city: string;
 
     constructor(userDataObj) {
-        this._id = userDataObj._id;
+        this._id = userDataObj._id || null;
         this.name = userDataObj.name;
         this.username = userDataObj.username;
         this.password = userDataObj.password;
