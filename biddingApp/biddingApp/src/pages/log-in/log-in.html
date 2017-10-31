@@ -11,7 +11,7 @@
               
       <ion-item>
         <ion-label floating>Username</ion-label>
-        <ion-input type="text" required [(ngModel)]="userLoginModel.name" name="name" id="name" #name="ngModel"></ion-input>
+        <ion-input type="text" required [(ngModel)]="userLoginModel.username" name="username" id="username" #username="ngModel"></ion-input>
       </ion-item>
     
       <ion-item>
@@ -20,7 +20,7 @@
       </ion-item>
 
       <ion-item>
-          <button ion-button (click)="login()" [disabled]="!(name.valid && password.valid)">Login</button>
+          <button ion-button (click)="login()" [disabled]="!(username.valid && password.valid)">Login</button>
           <button ion-button outline (click)="goToSignin()">Register</button>
       </ion-item>
 

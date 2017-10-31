@@ -8,13 +8,13 @@ function createPub (req, res){
 	var pub = new Publication();
 
 	var owner = {};
-	owner.id = req.body.ownerId;
-	owner.username = req.body.username;
+	owner.id = req.body.owner.id;
+	owner.username = req.body.owner.username;
 
 	var location = {};
-	location.city = req.body.city;
-	location.country = req.body.country;
-	location.province = req.body.province;
+	location.city = req.body.location.city;
+	location.country = req.body.location.country;
+	location.province = req.body.location.province;
 
 	pub.owner = owner;
 	pub.creationDate = new Date;
@@ -44,13 +44,13 @@ function createPub (req, res){
 }
 
 function randomPub (req, res) {
-	//res.send('Im the top 20 publications randomly');
+	//TODO: This should get 9 publications randomly, actually is being sorted randomly, and split it on the UI.
 	PublicationModel.find(function(err, pub){
 		if(err) {
 			res.send(err);
 		}
 		else{
-			res.json({message: 'Random Pubs', pub: pub})
+			res.json({message: 'Random Pubs', pubs: pub})
 		}
 	});
 

@@ -7,18 +7,25 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LogInPage } from '../pages/log-in/log-in';
 import { SignInPage } from '../pages/sign-in/sign-in';
+import { MainPage } from '../pages/main/main';
+import { LoadPage } from '../pages/load/load';
+import { PublicationPage } from '../pages/publication/publication';
+
+import { TaxonomyService } from "../commons/taxonomy.service";
 
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
+  public taxonomy: any;
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public taxonomyService: TaxonomyService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -27,16 +34,20 @@ export class MyApp {
       { title: 'List', component: ListPage },
       { title: 'LogIn', component: LogInPage},
       { title: 'SignIn', component: SignInPage},
+      { title: 'Load', component: LoadPage},
+      { title: 'Publicaton', component: PublicationPage },
+      { title: 'MainPage', component: MainPage }
     ];
 
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.getTaxonomy();
+    this.platform.ready().then(() => {      
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.splashScreen.hide();      
     });
   }
 
@@ -45,4 +56,14 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  public getTaxonomy() {
+		this.taxonomyService.getTaxonomyData().subscribe(
+			(res) => {
+				this.taxonomy = res.data;				
+			},
+			(err) => console.log(err),
+			() => console.log('GET TAXONOMY')
+		)
+	};
 }

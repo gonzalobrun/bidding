@@ -35,13 +35,10 @@ export class Publication {
         this.description = pubDataObj.description;
         this.status = pubDataObj.status;
         this.type = pubDataObj.type;
-        this.location.city = pubDataObj.location.city;
-        this.location.country = pubDataObj.location.country;
-        this.location.province = pubDataObj.location.province;
+        this.location = pubDataObj.location
         this.countdownStarted = pubDataObj.countdownStarted;
         this.creationDate = pubDataObj.creationDate;
-        this.owner.username = pubDataObj.owner.username;
-        this.owner.id = pubDataObj.owner.id;
+        this.owner = pubDataObj.owner
         this.categories = pubDataObj.categories;
         this.comments = pubDataObj.comments;
         this.imgURL = pubDataObj.imgURL;
@@ -49,7 +46,7 @@ export class Publication {
     }
 
     public static BuildEmpty(): Publication {
-        const defaults = {
+        const defaults = {            
             _id : null,
             likesCount: null,
             minimunPrice: null,

@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Main</ion-title>
+    <div class="add-icon">
+      <ion-icon  name="add-circle" (click)="goToLoad()"></ion-icon>
+    </div>
+    <div class="user-icon">
+      <ion-icon name="contact"></ion-icon>
+    </div>   
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="view-wrapper">
+<section class="filters-section">
+    <h4 class="subtitle">Filters</h4>
+    <div class="filter-container">
+      <h5>Type</h5>
+      <ion-list>
+        <ion-item>
+          <ion-label>Gift</ion-label>
+          <ion-checkbox checked="true"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Auction</ion-label>
+          <ion-checkbox checked="true"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Service</ion-label>
+          <ion-checkbox checked="true"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div class="filter-container">
+      <h5>Sort By</h5>
+      <ion-list>
+        <ion-item>
+          <ion-select [(ngModel)]="sortby">
+            <ion-option value="name">Name</ion-option>
+            <ion-option value="price">Price</ion-option>
+            <ion-option value="date">Date</ion-option>
+            <ion-option value="expiration">Expiration</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Descending</ion-label>
+          <ion-toggle checked="false"></ion-toggle>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div class="filter-container">
+        <h5>Categories</h5>
+        <ion-list>
+          <ion-item>
+            <ion-label>Home/Office</ion-label>
+            <ion-checkbox checked="true"></ion-checkbox>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Tv, Audio, Video</ion-label>
+            <ion-checkbox checked="true"></ion-checkbox>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>Technology, Smartphones</ion-label>
+            <ion-checkbox checked="true"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </div>
+
+  </section>
+
+  <section class="pub-section">
+    <h4 class="subtitle">Results</h4>
+    <div  class="card-block" *ngFor="let pub of pubsArr">
+      <ion-card (click)="openPub(pub)">
+       <!--  <img src="../content/img/relax.jpg"> -->
+        <ion-card-content>
+          <ion-card-title>
+            {{pub.title}}
+            </ion-card-title>
+          <p>
+            {{pub.description}}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </section>
+  </div>
+  
+
+</ion-content>

@@ -4,8 +4,13 @@ page-home {
 		font-size: 80px;
 	}
 	
+	//TODO: This code is duplicated on main.scss. Take it to an external .scss file
 	.card-block{
 		width: 33%;
 		display: inline-block;
+		
+		&:hover {
+            cursor: pointer;
+        }
 	}
 }

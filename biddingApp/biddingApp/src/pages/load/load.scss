@@ -1,0 +1,38 @@
+page-load {
+    
+    //TODO: Duplicated class on main.scss
+    .view-wrapper{
+        display: flex;
+    }
+
+    .img-section{
+        width: 40%;
+    }
+
+    .form-section{
+        width: 60%;
+    }
+
+    //TODO: This code is duplicated on main.scss
+    .user-icon{
+        position: absolute;
+        right: 30px;
+        top: 10px;
+        font-size: 30px;
+        transition: color 0.3s ease;        
+        
+        &:hover {
+            color: #488aff;
+        }
+    }
+
+    //TODO: This class needs to ve moved to a single style sheet. GENERALS
+    //TODO: Duplicated Code on main.scss
+    .subtitle{
+        font-size: 30px;
+        margin-bottom: 23px;
+        padding-bottom: 7px;
+        border-bottom: solid 1px #dedede
+    }
+    
+}

@@ -15,7 +15,8 @@ var userRoutes = require('./app/config/userRoutes');
 //var Publication = require('./app/models/Publication');
 var publicationRoutes = require('./app/config/publicationRoutes');
 
-
+//var Publication = require('./app/models/Taxonomy');
+var taxonomyRoutes = require('./app/config/taxonomyRoutes');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/biddingDB', {
@@ -34,6 +35,7 @@ app.use(morgan('dev'));
 
 userRoutes(app);
 publicationRoutes(app);
+taxonomyRoutes(app)
 
 app.use(function(req, res){
 	res.status(500).send('Internal Server Error');

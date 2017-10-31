@@ -5,6 +5,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user.model';
 
 import { SignInService } from './sign-in.service';
+import { LogInService } from '../log-in/log-in.service'; 
+
+import { MainPage } from '../main/main';
+import { LogInPage } from '../log-in/log-in';
 
 @Component({
   selector: 'page-sign-in',
@@ -15,13 +19,17 @@ export class SignInPage {
   public user: User;
   public signInForm: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public signInService: SignInService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public signInService: SignInService, public logInService: LogInService) {
   }
 
   ngOnInit(){
       this.user = User.BuildEmpty();
       this.buildForm();
   };
+
+  ionViewDidLoad() {
+      //console.log('ionViewDidLoad SignInPage');
+    }
 
   buildForm() {
     this.signInForm = new FormGroup({
@@ -47,17 +55,37 @@ export class SignInPage {
         Validators.required
       ]),    
     });    
-  }
+  }  
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignInPage');
-  }
-
+  //TODO: Take the services to variables, it should be unsubscribe on ngOnDestroy()
   public register() {
+    let userfromResponse: User;
     this.signInService.signIn(this.signInForm.value).subscribe(
-      (response: any) => { console.log(response) },
-      err => console.warn(err),
-      () => console.log('DONE')
+      (res: any) => {        
+        let logInObj: any = {
+          username: this.signInForm.get('username').value, 
+          password: this.signInForm.get('password').value
+        };        
+        this.logInService.logIn(logInObj).subscribe(
+          (res) => {
+            userfromResponse = new User(res.user[0]);
+          },
+          (err) => {
+            console.log(err);
+            this.navCtrl.push(LogInPage, err);
+          },
+          () => {
+            this.navCtrl.push(MainPage, userfromResponse);
+          }
+        );
+      },
+      (err) => {
+        //TODO: Here should promt the error to the user in the UI.
+        console.warn(err)
+      },
+      () => console.log('USER CREATED')
     );
   }
+
+
 }

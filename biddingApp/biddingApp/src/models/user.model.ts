@@ -11,7 +11,7 @@ export class User {
         this._id = userDataObj._id || null;
         this.name = userDataObj.name;
         this.username = userDataObj.username;
-        this.password = userDataObj.password;
+        this.password = userDataObj.password || null;
         this.country = userDataObj.country;
         this.city = userDataObj.city;
     }
@@ -27,5 +27,9 @@ export class User {
         }
         
         return new User(defaults);
+    }
+
+    public get isLogged(): boolean {
+        return !! this._id;
     }
 }

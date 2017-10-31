@@ -4,72 +4,68 @@ var User = require('../models/user');
 var UserModel = mongoose.model('Users');
 
 function createUser (req, res) {
-
 	var user = new User(req.body);
-
 	user.save(function(err, user) {
 		if(err){
 			if(err.code == 11000){
-				return res.status(404).json({ success: false, message: 'This username alredy exist.', user: null});
+				return res.status(412).json({ success: false, message: 'This username alredy exist.', user: null});
 			}
 			else {
 				return res.json({ success: false, message: err, user: null});
 			}
-		}
-		
+		}		
 		else {
 			res.json({ success: true, message: 'User Created!', user: user});
 		}
 	});
-}
+};
 
-function logUser (req, res) {
-	//res.send('Check password for the user ' + req.params.userId);
-	UserModel.find({username: req.body.username, password: req.body.password}, function(err, user){
-
+function logUser (req, res) {	
+	UserModel.find({username: req.body.username, password: req.body.password}, function(err, user){		
 		if(err) {
-			res.json({success: false,  message: err, user: null, logged: false});
+			res.json({success: false,  message: err, user: null});
 		}
-		else {
-			var logged = false;
+		else {			
 			if(user.length === 1) {
-				logged = true;
-				res.json({success: true,  message: 'User Logged', user: user, logged : logged});
+				res.json({success: true,  message: 'User Logged', user: user});
 			}
 			else {
-				res.json({success: false, message: 'Check your username or passowrd', user: null, logged : logged});
+				res.status(412).json({success: false, message: 'Check your username or passowrd', user: null});
 			}
 		}
 	});
 };
 
-function updateUser (req, res){
-	
+//TODO: Implement this functionality, it can be tested until exist a loggued user functionality on the application.
+function updateUser (req, res){	
 	var query = { _id: req.params.userId },
 		update = {	name: req.body.name, 
 					password: req.body.password, 
 					country: req.body.country, 
 					province: req.body.province, 
-					city: req.body.city},
-		options = {multi: false};
-
+					city: req.body.city 
+				},
+		options = { multi: false };
 	UserModel.update(query, update, options, function(err, numAffected){
 		if(err){
 			res.send(err);
 		}
 		else{
-			var userUpdated = false;
 			if(numAffected.nModified === 1) {
-				userUpdated = true;
+				res.json({success: true, message:'User updated', update: update });
 			}
-			res.json({message:'User updated', userUpdated: userUpdated});
+			else {
+				res.status(412).json({success: false, message:'The user couldn\'t be updated', update: null});
+			}			
 		}
 	});
-}
+};
 
+//TODO: This will not actually delete a user, it will a disable flag
+//TODO: Implement disable flag on User
 function deleteUser(req, res){
 	res.send('this will delete the user ' + req.params.userId);
-}
+};
 
 function logReq (req, res, next){
 	console.log(req.method, req.url);

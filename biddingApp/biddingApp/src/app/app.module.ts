@@ -2,14 +2,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LogInPage } from '../pages/log-in/log-in';
-import { SignInPage } from '../pages/sign-in/sign-in'
+import { SignInPage } from '../pages/sign-in/sign-in';
+import { MainPage } from '../pages/main/main';
+import { LoadPage } from '../pages/load/load';
+import { PublicationPage } from '../pages/publication/publication';
 
-import { SignInService } from '../pages/sign-in/sign-in.service'
+import { LogInService } from '../pages/log-in/log-in.service'; 
+import { SignInService } from '../pages/sign-in/sign-in.service';
+import { HomeService } from '../pages/home/home.service';
+import { MainService } from '../pages/main/main.service';
+import { TaxonomyService } from "../commons/taxonomy.service";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,7 +28,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     ListPage,
     LogInPage,
-    SignInPage
+    SignInPage,
+    MainPage,
+    LoadPage,
+    PublicationPage,
+    FileSelectDirective,
+    FileDropDirective
   ],
   imports: [
     BrowserModule,
@@ -33,13 +46,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     ListPage,
     LogInPage,
-    SignInPage
+    SignInPage,
+    MainPage,
+    LoadPage,
+    PublicationPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SignInService
+    SignInService,
+    LogInService,
+    HomeService,
+    MainService,
+    TaxonomyService
   ]
 })
 export class AppModule {}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, URLSearchParams, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { User } from '../../models/user.model';
@@ -24,8 +24,8 @@ export class SignInService {
 
         return this.http.post('http://localhost:8080/user/', params)
             .map((res: Response) => {
-                new User(res.json().user)
+               return new User(res.json().user)
             })
-            .catch((err: any) => Observable.throw('Server Error'));
+            .catch((err: any) =>  Observable.throw(err));
     }
 }
