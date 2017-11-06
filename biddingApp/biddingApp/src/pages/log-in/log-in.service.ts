@@ -18,8 +18,8 @@ export class LogInService {
         params.set('password', user.password);
 
         return this.http.post('http://localhost:8080/user/login', params)
-            .map((res: Response) => {
-               return res.json();
+            .map((res: Response) => {                
+                return res.json();
             })
             .catch((err: any) => Observable.throw(err));
     }

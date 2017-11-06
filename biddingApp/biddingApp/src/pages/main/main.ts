@@ -3,10 +3,10 @@ import { NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MainService } from './main.service';
+import { WebStorageService } from '../../commons/webStorage.service';
 
 import { User } from '../../models/user.model';
 
-import { HomePage } from '../home/home';
 import { LoadPage } from '../load/load';
 
 @Component({
@@ -18,26 +18,25 @@ export class MainPage {
   public user: User;
   public sortby: any; 
   public pubsArr: any;
+  public storedUser: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mainService: MainService) {
-  }
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public mainService: MainService,
+    public webStorageService: WebStorageService
+  ) {}
 
   ionViewDidLoad() {    
   }
 
   ngOnInit(){
-    this.user = new User(this.navParams.data);
+    this.user = new User(this.webStorageService.retrieve('currentUser'));
     this.initializeFilters();    
     if(this.user.isLogged){
-      console.log('IS LOGGED');
-      
-    }
-    else {
-      console.log('NOT LOGGED');
-      //this.navCtrl.push(HomePage);
+      console.log('IS LOGGED');      
     }
     this.getRandomPubs();
-    console.warn(this.user);
   };
 
   public initializeFilters() {

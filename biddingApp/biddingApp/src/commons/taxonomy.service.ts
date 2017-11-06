@@ -30,4 +30,8 @@ export class TaxonomyService {
     public get getTypes(){
         return this.taxonomyData.types;
     }
+
+    public get getLocations(){
+        return this.taxonomyData.locations;
+    }
 }

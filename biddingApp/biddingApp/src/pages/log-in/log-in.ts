@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { SignInPage } from '../sign-in/sign-in';
+import { MainPage } from '../main/main';
 
 import { LogInService } from './log-in.service';
+import { WebStorageService } from '../../commons/webStorage.service';
 
 @Component({
   selector: 'page-log-in',
@@ -13,11 +14,15 @@ export class LogInPage {
   public userLoginModel: Object;
   public newUser: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public logInService: LogInService) {
-  }
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public logInService: LogInService,
+    private webStorageService: WebStorageService
+  ) {}
 
   ngOnInit(){
-    this.userLoginModel = {username: null, password: null}
+    this.userLoginModel = {username: 'testing', password: 'testing'}
   };
 
   ionViewDidLoad() {
@@ -27,7 +32,10 @@ export class LogInPage {
   public login() {
     this.logInService.logIn(this.userLoginModel).subscribe(
       (res: any) => {        
-        this.goToSignin();        
+        if(res.success){
+          this.webStorageService.create('currentUser', res.user[0]);
+          this.goToSignin();
+        }          
       },
       (err) => {
         //TODO: Here should promt the error to the user in the UI.
@@ -38,6 +46,6 @@ export class LogInPage {
   }
 
   public goToSignin() {
-		this.navCtrl.push(SignInPage);
+		this.navCtrl.push(MainPage);
 	}
 }

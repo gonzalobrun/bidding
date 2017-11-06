@@ -13,6 +13,7 @@ import { PublicationPage } from '../pages/publication/publication';
 
 import { TaxonomyService } from "../commons/taxonomy.service";
 
+
 @Component({
   templateUrl: 'app.html'
 })

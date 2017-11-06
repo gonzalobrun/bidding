@@ -17,9 +17,9 @@ export class Publication {
     public creationDate: Date;
     public owner: {
         username: string;
-        id: number;
+        id: string;
     };
-    public categories: Array<number>;
+    public categories: Array<any>;
     public comments: Array<object>;
     public imgURL: Array<string>;
     public offerers: Array<object>;

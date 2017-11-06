@@ -18,6 +18,8 @@ import { SignInService } from '../pages/sign-in/sign-in.service';
 import { HomeService } from '../pages/home/home.service';
 import { MainService } from '../pages/main/main.service';
 import { TaxonomyService } from "../commons/taxonomy.service";
+import { WebStorageService } from "../commons/webStorage.service";
+import { LoadService } from '../pages/load/load.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -59,7 +61,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LogInService,
     HomeService,
     MainService,
-    TaxonomyService
+    TaxonomyService,
+    WebStorageService,
+    LoadService
   ]
 })
 export class AppModule {}

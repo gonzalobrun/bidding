@@ -5,7 +5,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user.model';
 
 import { SignInService } from './sign-in.service';
-import { LogInService } from '../log-in/log-in.service'; 
+import { LogInService } from '../log-in/log-in.service';
+import { TaxonomyService } from '../../commons/taxonomy.service';
+import { WebStorageService } from '../../commons/webStorage.service';
 
 import { MainPage } from '../main/main';
 import { LogInPage } from '../log-in/log-in';
@@ -18,11 +20,23 @@ export class SignInPage {
 
   public user: User;
   public signInForm: any;
+  public countries: any = [];
+  public provinces: any = [];
+  public cities: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public signInService: SignInService, public logInService: LogInService) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public signInService: SignInService, 
+    public logInService: LogInService,
+    public taxonomyService: TaxonomyService,
+    private webStorageService: WebStorageService
+  ) {
   }
 
   ngOnInit(){
+      this.countries = [{ id: 1, name: 'Argentina'}];
+      this.provinces = this.taxonomyService.getLocations;      
       this.user = User.BuildEmpty();
       this.buildForm();
   };
@@ -43,7 +57,7 @@ export class SignInPage {
       ]),  
       'password': new FormControl(this.user.password, [
         Validators.required,
-        Validators.minLength(6)
+        Validators.minLength(4)
       ]),  
       'city': new FormControl(this.user.city, [
         Validators.required
@@ -54,12 +68,13 @@ export class SignInPage {
       'country': new FormControl(this.user.country, [
         Validators.required
       ]),    
-    });    
+    });
+    
+    this.onChanges();
   }  
 
   //TODO: Take the services to variables, it should be unsubscribe on ngOnDestroy()
   public register() {
-    let userfromResponse: User;
     this.signInService.signIn(this.signInForm.value).subscribe(
       (res: any) => {        
         let logInObj: any = {
@@ -68,14 +83,14 @@ export class SignInPage {
         };        
         this.logInService.logIn(logInObj).subscribe(
           (res) => {
-            userfromResponse = new User(res.user[0]);
+            this.webStorageService.create('currentUser', res.user[0]);
           },
           (err) => {
             console.log(err);
             this.navCtrl.push(LogInPage, err);
           },
           () => {
-            this.navCtrl.push(MainPage, userfromResponse);
+            this.navCtrl.push(MainPage);
           }
         );
       },
@@ -87,5 +102,11 @@ export class SignInPage {
     );
   }
 
+  public onChanges(): void {
+    this.signInForm.get('province').valueChanges.subscribe(val => {
+      let province = this.taxonomyService.getLocations.filter((p: any) => p.id === val);
+      this.cities = province[0].ciudades;
+    });
+  }
 
 }
