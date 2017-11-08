@@ -15,27 +15,20 @@
         <h2 class="title">Bidding</h2>
       </ion-col>
 
-      <ion-col col-2>
+      <ion-col col-2 *ngIf="!user.isLogged">
         <button ion-button block (click)="goToLogin()">Login</button>
       </ion-col>
 
-      <ion-col col-2>
+      <ion-col col-2 *ngIf="!user.isLogged">
         <button ion-button outline block (click)="goToSignin()">Sign in</button>
       </ion-col>
-    </ion-row>
 
-    <ion-row>
-      <ion-col col-3>
-        <button ion-button outline block disabled (click)="goToPub()">Publication</button>
+      <ion-col col-2 *ngIf="user.isLogged">
+        <h4>Hello {{user.name}}!</h4>
       </ion-col>
-      <ion-col col-3>
-        <button ion-button outline block disabled (click)="goToMain()">MainPage</button>
-      </ion-col>
-      <ion-col col-3>
-        <button ion-button outline block disabled (click)="goToLoad()">Load Pub</button>
-      </ion-col>
-      <ion-col col-3>
-        <button ion-button outline block>EMPTY</button>
+
+      <ion-col col-2 *ngIf="user.isLogged">
+        <button ion-button outline block (click)="goToMain()">Search</button>
       </ion-col>
     </ion-row>
 

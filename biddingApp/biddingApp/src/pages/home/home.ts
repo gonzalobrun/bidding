@@ -8,6 +8,10 @@ import { LoadPage } from '../load/load';
 import { PublicationPage } from '../publication/publication';
 
 import { HomeService } from './home.service';
+import { WebStorageService } from '../../commons/webStorage.service';
+
+//import { Publication } from '../../models/publication.model';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'page-home',
@@ -16,12 +20,18 @@ import { HomeService } from './home.service';
 
 export class HomePage {
 
-	pubsArr: any[]; 
+	public user: User;
+	public pubsArr: any[];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public homeService: HomeService) {	
-	}
+	constructor(
+		public navCtrl: NavController, 
+		public navParams: NavParams, 
+		public homeService: HomeService, 
+		public webStorageService: WebStorageService
+	) {}
 
 	ngOnInit() {
+		this.user = this.webStorageService.retrieve('currentUser') ? new User(this.webStorageService.retrieve('currentUser')) : User.BuildEmpty();
 		this.getRandomPubs();  	
 	}
 
@@ -33,16 +43,8 @@ export class HomePage {
 		this.navCtrl.push(SignInPage);
 	};
 
-	public goToPub() {
-		this.navCtrl.push(PublicationPage);
-	};
-	
 	public goToMain() {
 		this.navCtrl.push(MainPage);
-	};
-
-	public goToLoad() {
-		this.navCtrl.push(LoadPage);
 	};
 
 	public getRandomPubs() {
