@@ -8,6 +8,7 @@ import { WebStorageService } from '../../commons/webStorage.service';
 import { User } from '../../models/user.model';
 
 import { LoadPage } from '../load/load';
+import { PublicationPage } from '../publication/publication';
 
 @Component({
   selector: 'page-main',
@@ -27,7 +28,7 @@ export class MainPage {
     public webStorageService: WebStorageService
   ) {}
 
-  ionViewDidLoad() {    
+  ionViewDidLoad() {
   }
 
   ngOnInit(){
@@ -54,8 +55,8 @@ export class MainPage {
   };
   
   public openPub(pub: any) {
-		console.log(pub);
-  }
+		this.navCtrl.push(PublicationPage, { pub });
+	}
   
   public goToLoad() {
 		this.navCtrl.push(LoadPage);

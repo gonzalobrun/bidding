@@ -7,19 +7,22 @@ function createPub (req, res){
 
 	var pub = new Publication();
 
-	var owner = {};
-	owner.id = req.body.owner.id;
-	owner.username = req.body.owner.username;
+	// var owner = {};
+	// owner.id = 
+	// owner.username = req.body.owner.username;
 
-	var location = {};
-	location.city = req.body.location.city;
-	location.country = req.body.location.country;
-	location.province = req.body.location.province;
+	// var location = {};
+	// location.city = req.body.location.city;
+	// location.country = req.body.location.country;
+	// location.province = req.body.location.province;
 
-	pub.owner = owner;
+	pub.owner.id = req.body.ownerId;
+	pub.owner.username = req.body.ownerUsername;
 	pub.creationDate = new Date;
 	pub.countdownStarted = false;
-	pub.location = location;
+	pub.location.country = req.body.country;
+	pub.location.province = req.body.province;
+	pub.location.city = req.body.city;
 	pub.type = req.body.type;
 	pub.status = req.body.status
 	pub.description = req.body.description;
@@ -27,10 +30,10 @@ function createPub (req, res){
 	pub.expirationDate = new Date(req.body.expirationDate);
 	pub.expired = false;
 	pub.minimunPrice = req.body.minimunPrice;
-	pub.offerers.concat = [];
-	pub.imgURL.concat = req.body.imgURL;
-	pub.comments.concat = [];
-	pub.categories.concat = req.body.categories;
+	pub.offerers = [];
+	pub.imgURL = req.body.imgURL.split(",");
+	pub.comments = [];
+	pub.categories = req.body.categories.split(",");
 	pub.likesCount = 0;
 
 	pub.save(function(err, pub) {

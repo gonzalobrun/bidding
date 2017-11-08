@@ -56,6 +56,6 @@ export class HomePage {
 	};
 
 	public openPub(pub: any) {
-		console.log(pub);
+		this.navCtrl.push(PublicationPage, { pub });
 	}
 }

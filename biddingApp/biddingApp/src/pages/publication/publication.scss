@@ -1,3 +1,50 @@
 page-publication {
 
+    .view-wrapper {
+        display: flex;
+    }
+
+    .pub-section {
+        width: 80%;
+        border-left: solid 1px #dedede;
+        margin-left: 20px;
+        padding-left: 20px;    
+    }
+
+    .filters-section {
+        width: 20%;
+    }
+
+    .user-icon {
+        position: absolute;
+        right: 30px;
+        top: 10px;
+        font-size: 30px;
+        transition: color 0.3s ease;        
+        
+        &:hover {
+            color: #488aff;
+        }
+    }
+
+    .subtitle {
+        font-size: 30px;
+        margin-bottom: 23px;
+        padding-bottom: 7px;
+        border-bottom: solid 1px #dedede
+    }
+
+    .title-section {
+        width: 100%;
+        display:block;
+    }
+
+    .info-section {
+        width: 30%;
+    }
+
+    .pucture-section {
+        width: 40%;
+    }
+
 }

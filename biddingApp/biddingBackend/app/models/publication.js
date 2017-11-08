@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 
 var PublicationSchema = new Schema({
 	owner : { 
-        type: Object, 
-        required: true
+        id: { type: String, required: true },
+        username: { type: String, required: true }
     },
     creationDate : { 
         type: Date, 
@@ -13,8 +13,9 @@ var PublicationSchema = new Schema({
     },
     countdownStarted : Boolean,
     location : { 
-        type: Object, 
-        required: true
+        country: {type: String, required: true},
+        province: {type: String, required: true},
+        city: {type: String, required: true}
     },
     type : { 
         type: Number, 

@@ -1,18 +1,78 @@
-<!--
-  Generated template for the PublicationPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>publication</ion-title>
+    <ion-title>Publication</ion-title>
+    <div class="user-icon">
+      <ion-icon name="contact"></ion-icon>
+    </div> 
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <section class="title-section">
+        <h4 class="subtitle">{{pub.title}}</h4>
+      </section>
+  <div class="view-wrapper">
+    
+    <section class="info-section">
+      <ion-list>
+        <ion-label stacked>Description</ion-label>
+        <span>{{pub.description}}</span>
+      </ion-list>
 
+      <ion-list>
+        <ion-label stacked>Product Status</ion-label>
+        <span>{{pub.status}}</span>
+      </ion-list>
+
+      <ion-list>
+        <ion-label stacked>Location:</ion-label>
+        <span>{{pub.location.country}}, </span>
+        <span>{{pub.location.province}}, </span>
+        <span>{{pub.location.city}}</span>
+      </ion-list>
+
+      <ion-list>
+        <ion-label stacked>Comments</ion-label>
+        <div *ngFor="let coment of pub.comments">
+          <span>comment?.username</span>
+          <span>comment?.comment</span>
+        </div>        
+      </ion-list>
+    </section>
+
+    <section class="info-section">
+      <ion-list *ngIf="pub.isAuction">
+        <ion-label stacked>Minimun Price</ion-label>
+        <span>{{pub.minimunPrice | currency:'USD':true:'2.2-4'}}</span>
+      </ion-list>
+
+      <ion-list *ngIf="pub.isAuction">
+        <ion-label stacked>Highest Offer</ion-label>
+        <span>Search the highest offer on the offerers array</span>
+      </ion-list>
+
+      <ion-list *ngIf="pub.isDonation">
+        <ion-label stacked>Applyers Count</ion-label>
+        <span>Set the lenght of the offerers array</span>
+      </ion-list>
+
+      <ion-list>
+        <ion-label stacked>Expires in</ion-label>
+        <span>{{ countDown | async }}</span>
+      </ion-list>
+      
+      <ion-list>
+        <ion-label stacked>Description</ion-label>
+        <span>Description</span>
+      </ion-list>
+    </section>
+
+    <section class="picture-section">
+
+    </section>
+    
+  </div>
 </ion-content>

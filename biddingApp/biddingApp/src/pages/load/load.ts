@@ -105,6 +105,9 @@ export class LoadPage {
 
   public publish(){
     debugger;
+
+    // let _user: any = { id: this.user._id, username: this.user.username  }
+
     this.publication.categories = this.loadPubForm.get('categories').value;
     this.publication.location.city = this.loadPubForm.get('city').value;
     this.publication.location.country = this.loadPubForm.get('country').value;
@@ -112,7 +115,8 @@ export class LoadPage {
     //this.publication.imgURL = this.loadPubForm.get('imgURL').value;
     this.publication.location.province = this.loadPubForm.get('province').value;
     this.publication.minimunPrice = this.loadPubForm.get('minimunPrice').value;
-    this.publication.owner = { username: this.user.username, id: this.user._id}
+    this.publication.owner.id = this.user._id;
+    this.publication.owner.username = this.user.username;
     this.publication.status = this.loadPubForm.get('status').value;
     this.publication.expirationDate = this.currentDate;
     this.publication.title = this.loadPubForm.get('title').value;

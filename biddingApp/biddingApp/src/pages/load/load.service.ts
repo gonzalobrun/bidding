@@ -16,14 +16,15 @@ export class LoadService {
         let params: URLSearchParams = new URLSearchParams();
 
         params.set('categories', pub.categories.toLocaleString());
-        // params.set('city', pub.location.city)
-        // params.set('country', pub.location.country.toString());
+        params.set('city', pub.location.city)
+        params.set('country', pub.location.country.toString());
         params.set('description', pub.description);
         params.set('expirationDate', pub.expirationDate.toString());
         params.set('imgURL', pub.imgURL.toLocaleString());
-        params.set('minimunPrice', pub.minimunPrice.toString());
-        params.set('owner', pub.owner.toString());
-        // params.set('province', pub.location.province.toString());
+        params.set('minimunPrice', pub.minimunPrice ? pub.minimunPrice.toString() : null);
+        params.set('ownerId', pub.owner.id);
+        params.set('ownerUsername', pub.owner.username);
+        params.set('province', pub.location.province.toString());
         params.set('status', pub.status.toString());
         params.set('title', pub.title);
         params.set('type', pub.type.toString());

@@ -28,7 +28,7 @@ export class Publication {
     constructor(pubDataObj: any) {
         this._id = pubDataObj._id;
         this.likesCount = pubDataObj.likesCount;
-        this.minimunPrice = pubDataObj.minimunPrice;
+        this.minimunPrice = pubDataObj.minimunPrice || null;
         this.expired = pubDataObj.expired;
         this.expirationDate = pubDataObj.expirationDate;
         this.title = pubDataObj.title;
@@ -74,5 +74,17 @@ export class Publication {
         }
         
         return new Publication(defaults);
-    }    
+    };
+    
+    public get isExpired(): boolean {
+        return this.expired;
+    };
+
+    public get isDonation(): boolean {
+        return (this.type === 2);
+    };
+
+    public get isAuction(): boolean {
+        return (this.type != 2);
+    };
 }  
