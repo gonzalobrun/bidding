@@ -43,8 +43,7 @@ export class LoadPage {
   ngOnInit(){
     this.user = new User(this.webStorageService.retrieve('currentUser'));
     this.publication = Publication.BuildEmpty();
-    console.log(this.publication)
-    this.currentDate = moment().add(10, 'days').format().split("T")[0];
+    this.currentDate = moment().add(1, 'days').format().split("T")[0];
     this.getTaxonomyData();
     this.buildForm();    
   };
@@ -104,9 +103,6 @@ export class LoadPage {
   } 
 
   public publish(){
-    debugger;
-
-    // let _user: any = { id: this.user._id, username: this.user.username  }
 
     this.publication.categories = this.loadPubForm.get('categories').value;
     this.publication.location.city = this.loadPubForm.get('city').value;
@@ -122,7 +118,6 @@ export class LoadPage {
     this.publication.title = this.loadPubForm.get('title').value;
     this.publication.type = this.loadPubForm.get('type').value;
     
-    console.log(this.publication);
     this.loadService.createPub(this.publication).subscribe(
       (res: any) => console.log(res),
       (err) => console.log(err),

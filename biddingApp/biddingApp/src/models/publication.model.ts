@@ -22,7 +22,7 @@ export class Publication {
     public categories: Array<any>;
     public comments: Array<object>;
     public imgURL: Array<string>;
-    public offerers: Array<object>;
+    public offerers: Array<any>;
 
     // Constructor 
     constructor(pubDataObj: any) {

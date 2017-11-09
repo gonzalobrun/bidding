@@ -34,44 +34,73 @@
         <span>{{pub.location.city}}</span>
       </ion-list>
 
-      <ion-list>
+      <ion-list *ngIf="pub.comments.length">
         <ion-label stacked>Comments</ion-label>
-        <div *ngFor="let coment of pub.comments">
-          <span>comment?.username</span>
-          <span>comment?.comment</span>
+        <div *ngFor="let comment of pub.comments">
+          <span>{{comment.username}}</span>
+          <span>{{comment.commentText}}</span>
         </div>        
       </ion-list>
+
+      <ion-list>
+        <ion-item>
+          <ion-label stacked>Add Comment</ion-label>
+          <ion-input type="text" [(ngModel)]="commentText"></ion-input>
+        </ion-item>
+        <button ion-button block outline (click)="addComment()" [disabled]="!commentText.length">Add</button>
+      </ion-list>
+
     </section>
 
     <section class="info-section">
       <ion-list *ngIf="pub.isAuction">
         <ion-label stacked>Minimun Price</ion-label>
-        <span>{{pub.minimunPrice | currency:'USD':true:'2.2-4'}}</span>
+        <span>{{ pub.minimunPrice | currency:'USD':true:'2.2-4' }}</span>
       </ion-list>
 
       <ion-list *ngIf="pub.isAuction">
         <ion-label stacked>Highest Offer</ion-label>
-        <span>Search the highest offer on the offerers array</span>
+        <span *ngIf="pub.offerers.length">{{ higestOffer | currency:'USD':true:'2.2-4' }}</span>
+        <span *ngIf="!pub.offerers.length">Nobody's offered yet!</span>
       </ion-list>
 
       <ion-list *ngIf="pub.isDonation">
         <ion-label stacked>Applyers Count</ion-label>
-        <span>Set the lenght of the offerers array</span>
+        <span>{{pub.offerers.length}}</span>
       </ion-list>
 
       <ion-list>
         <ion-label stacked>Expires in</ion-label>
         <span>{{ countDown | async }}</span>
       </ion-list>
-      
-      <ion-list>
-        <ion-label stacked>Description</ion-label>
-        <span>Description</span>
+
+      <ion-list *ngIf="pub.isDonation">
+        <button ion-button block (click)="apply()">Apply</button>
       </ion-list>
+
+      <ion-list *ngIf="pub.isAuction">
+        <ion-item>
+          <ion-label stacked>Amount</ion-label>
+          <ion-input type="number" min="{{pub.minimunPrice}}" [(ngModel)]="offerAmount"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngIf="pub.isAuction">
+        <button ion-button block (click)="offer()">Offer</button>
+      </ion-list>
+      
     </section>
 
     <section class="picture-section">
 
+      <div class="picture-view">
+        <img [src]="imgView">
+      </div>
+
+      <div *ngFor="let img of pub.imgURL" class="mini-view">
+          <img [src]="img" (click)="showImg(img)">
+      </div>
+        
     </section>
     
   </div>
