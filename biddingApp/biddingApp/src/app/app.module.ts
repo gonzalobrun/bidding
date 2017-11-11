@@ -20,6 +20,7 @@ import { MainService } from '../pages/main/main.service';
 import { TaxonomyService } from "../commons/taxonomy.service";
 import { WebStorageService } from "../commons/webStorage.service";
 import { LoadService } from '../pages/load/load.service';
+import { PublicationService } from '../pages/publication/publication.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -63,7 +64,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MainService,
     TaxonomyService,
     WebStorageService,
-    LoadService
+    LoadService,
+    PublicationService
   ]
 })
 export class AppModule {}

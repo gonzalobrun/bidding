@@ -20,7 +20,7 @@ export class Publication {
         id: string;
     };
     public categories: Array<any>;
-    public comments: Array<object>;
+    public comments: Array<any>;
     public imgURL: Array<string>;
     public offerers: Array<any>;
 

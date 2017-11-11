@@ -39,9 +39,20 @@ var PublicationSchema = new Schema({
     },
     expired: Boolean,
     minimunPrice: Number,
-    offerers: [],
+    offerers: [
+        {
+            userId : String,
+            username : String,
+            offer : Number
+        }
+    ],
     imgURL : [String],
-    comments : [],
+    comments : [
+        {
+            username: String,
+            commentText: String
+        }
+    ],
     categories : [],
     likesCount : Number
 });

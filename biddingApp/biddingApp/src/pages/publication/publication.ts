@@ -8,6 +8,7 @@ import { User } from '../../models/user.model';
 
 import { TaxonomyService } from '../../commons/taxonomy.service';
 import { WebStorageService } from '../../commons/webStorage.service';
+import { PublicationService } from './publication.service';
 
 @Component({
   selector: 'page-publication',
@@ -21,14 +22,15 @@ export class PublicationPage {
   public imgView: any;
   public expDate: any;
   public offerAmount: any;
-  public commentText: string= '';
+  public commentText: string = '';
   public higestOffer: any;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,  
     public taxonomyService: TaxonomyService, 
-    public webStorageService: WebStorageService
+    public webStorageService: WebStorageService,
+    public publicationService: PublicationService
   ) {}
 
   ngOnInit(){
@@ -38,6 +40,8 @@ export class PublicationPage {
     this.imgView = this.pub.imgURL[0];
     this.offerAmount = this.pub.minimunPrice;
     this.setCountdown();
+    console.log(this.pub);
+    this.findHighestoffer()
   }
 
   ionViewDidLoad() {
@@ -59,30 +63,49 @@ export class PublicationPage {
       username : this.user.username,
       offer : this.offerAmount
     }
+    
     this.pub.offerers.push(offerer);
   }
+  
+  //TODO: I know, this two functions above and under are very similar. Refactor it!
 
   public offer() {
     let offerer = {
-      id : this.user._id,
+      pubId: this.pub._id,
+      userId : this.user._id,
       username : this.user.username,
-      offer : this.offerAmount
+      offerAmount : this.offerAmount
     }
-    this.pub.offerers.push(offerer); 
-    this.findHighestoffer();
-    this.offerAmount = null;
+    this.publicationService.addOfferer(offerer).subscribe(
+      (res: any) => console.log(res),
+      (err) => console.log(err),
+      () => {
+        this.pub.offerers.push(offerer); 
+        this.findHighestoffer();
+        this.offerAmount = null;
+        console.log('OFFERER ADDED')
+      }
+    )  
   }
 
   public addComment() {
     let comment = {
+      pubId: this.pub._id,
       username: this.user.username || 'Anonymous',
       commentText: this.commentText
     }
-    this.pub.comments.push(comment);
-    this.commentText = '';
+    this.publicationService.addComment(comment).subscribe(
+      (res: any) => console.log(res),
+      (err) => console.log(err),
+      () => {
+        this.pub.comments.push(comment);
+        this.commentText = '';
+        console.log('COMMENT ADDED')
+      }
+    )    
   }
   
   public findHighestoffer() {
-    this.higestOffer = Math.max.apply(Math,this.pub.offerers.map(function(o){return o.offer;}))
+    this.higestOffer = Math.max.apply(Math,this.pub.offerers.map(function(o){return o.offerAmount;}))    
   }
 }

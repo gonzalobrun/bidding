@@ -29,5 +29,9 @@ module.exports = function(app) {
 
 	publicationRoutes.post('/filter', [publication.logReq, publication.getWithFilters]);
 
+	publicationRoutes.post('/addComment/:pubId', [publication.logReq, publication.addComment] );
+
+	publicationRoutes.post('/addOfferer/:pubId', [publication.logReq, publication.addOfferer] );
+
 	app.use('/pub', publicationRoutes);
 }

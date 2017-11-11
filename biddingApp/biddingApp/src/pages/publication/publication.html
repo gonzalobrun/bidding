@@ -86,7 +86,7 @@
       </ion-list>
 
       <ion-list *ngIf="pub.isAuction">
-        <button ion-button block (click)="offer()">Offer</button>
+        <button ion-button block (click)="offer()" [disabled]="!offerAmount.length">Offer</button>
       </ion-list>
       
     </section>

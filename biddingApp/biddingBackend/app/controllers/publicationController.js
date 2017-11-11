@@ -7,15 +7,6 @@ function createPub (req, res){
 
 	var pub = new Publication();
 
-	// var owner = {};
-	// owner.id = 
-	// owner.username = req.body.owner.username;
-
-	// var location = {};
-	// location.city = req.body.location.city;
-	// location.country = req.body.location.country;
-	// location.province = req.body.location.province;
-
 	pub.owner.id = req.body.ownerId;
 	pub.owner.username = req.body.ownerUsername;
 	pub.creationDate = new Date;
@@ -81,10 +72,106 @@ function logReq (req, res, next){
 	next();
 }
 
+function updatePub (req, res){	
+
+	// var query = { _id: req.params.pubId },		
+	// update = {
+	// 	owner: {
+	// 		id = req.body.ownerId,
+	// 		username = req.body.ownerUsername,
+	// 	},			
+	// 	countdownStarted = req.params.countdownStarted,
+	// 	location: {
+	// 		country = req.body.country,
+	// 		province = req.body.province,
+	// 		city = req.body.city,
+	// 	},			
+	// 	type = req.body.type,
+	// 	status = req.body.status,
+	// 	description = req.body.description,
+	// 	title = req.body.title,
+	// 	expirationDate = req.body.expirationDate,
+	// 	expired = false,
+	// 	minimunPrice = req.body.minimunPrice,
+	// 	offerers = req.params.offerers,
+	// 	imgURL = req.body.imgURL.split(","),
+	// 	comments = req.params.comments,
+	// 	categories = req.body.categories.split(","),
+	// 	likesCount = 0,
+	// }
+
+	// options = { multi: false };
+	
+	// UserModel.update(query, update, options, function(err, numAffected){
+	// 	if(err){
+	// 		res.send(err);
+	// 	}
+	// 	else{
+	// 		if(numAffected.nModified === 1) {
+	// 			res.json({success: true, message:'User updated', update: update });
+	// 		}
+	// 		else {
+	// 			res.status(412).json({success: false, message:'The user couldn\'t be updated', update: null});
+	// 		}			
+	// 	}
+	// });
+};
+
+	function addComment (req, res){	
+	
+		var query = { _id: req.params.pubId };
+		var comment = {
+			username: req.body.username,
+            commentText: req.body.comment
+		}		
+
+		PublicationModel.findByIdAndUpdate(
+			query,
+			{$push: {"comments": comment}},
+			{safe: true, upsert: true, new : true},
+			function(err, update) {
+				if(err){
+					res.send(err)
+				}
+				else {
+					res.json({success: true, message:'Comment Added', update: update });
+				}
+				
+			}
+		);
+	};
+
+	function addOfferer (req, res){	
+		
+			var query = { _id: req.params.pubId };
+			var offerer = {
+				userId : req.body.userId,
+				username : req.body.username,
+				offer : req.body.offerAmount
+			  }		
+	
+			PublicationModel.findByIdAndUpdate(
+				query,
+				{$push: {"offerers": offerer}},
+				{safe: true, upsert: true, new : true},
+				function(err, update) {
+					if(err){
+						res.send(err)
+					}
+					else {
+						res.json({success: true, message:'Offerer Added', update: update });
+					}
+					
+				}
+			);
+		};
+
 module.exports = {
 	randomPub : randomPub,
 	getById : getById,
 	getWithFilters : getWithFilters,
 	logReq : logReq,
-	createPub : createPub
+	createPub : createPub,
+	addComment : addComment,
+	addOfferer: addOfferer
 };

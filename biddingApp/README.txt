@@ -14,5 +14,8 @@ mongod
 
 C:\Users\Development\Documents\Bidding\biddingApp\biddingBackend
 
+Watching files changes and log request on the console 
+
+nodemon server.js
+
 node server.js
-to keep files watching nodemon server.js
