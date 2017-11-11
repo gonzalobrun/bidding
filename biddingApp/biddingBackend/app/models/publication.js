@@ -43,7 +43,7 @@ var PublicationSchema = new Schema({
         {
             userId : String,
             username : String,
-            offer : Number
+            offerAmount : Number
         }
     ],
     imgURL : [String],

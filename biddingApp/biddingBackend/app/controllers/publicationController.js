@@ -147,7 +147,7 @@ function updatePub (req, res){
 			var offerer = {
 				userId : req.body.userId,
 				username : req.body.username,
-				offer : req.body.offerAmount
+				offerAmount : req.body.offerAmount
 			  }		
 	
 			PublicationModel.findByIdAndUpdate(
