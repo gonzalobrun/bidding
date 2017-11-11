@@ -59,12 +59,21 @@ export class PublicationPage {
 
   public apply() {
     let offerer = {
-      id : this.user._id,
+      pubId: this.pub._id,
+      userId : this.user._id,
       username : this.user.username,
-      offer : this.offerAmount
+      offerAmount : 0
     }
-    
-    this.pub.offerers.push(offerer);
+    this.publicationService.addOfferer(offerer).subscribe(
+      (res: any) => console.log(res),
+      (err) => console.log(err),
+      () => {
+        this.pub.offerers.push(offerer); 
+        this.findHighestoffer();
+        this.offerAmount = undefined;
+        console.log('OFFERER ADDED')
+      }
+    )
   }
   
   //TODO: I know, this two functions above and under are very similar. Refactor it!
@@ -82,7 +91,7 @@ export class PublicationPage {
       () => {
         this.pub.offerers.push(offerer); 
         this.findHighestoffer();
-        this.offerAmount = null;
+        this.offerAmount = undefined;
         console.log('OFFERER ADDED')
       }
     )  
