@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
-import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -12,6 +11,7 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 import { MainPage } from '../pages/main/main';
 import { LoadPage } from '../pages/load/load';
 import { PublicationPage } from '../pages/publication/publication';
+import { UserPage } from '../pages/user/user';
 
 import { LogInService } from '../pages/log-in/log-in.service'; 
 import { SignInService } from '../pages/sign-in/sign-in.service';
@@ -35,8 +35,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MainPage,
     LoadPage,
     PublicationPage,
-    FileSelectDirective,
-    FileDropDirective
+    UserPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +51,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignInPage,
     MainPage,
     LoadPage,
-    PublicationPage
+    PublicationPage,
+    UserPage
   ],
   providers: [
     StatusBar,

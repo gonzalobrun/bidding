@@ -10,9 +10,9 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 import { MainPage } from '../pages/main/main';
 import { LoadPage } from '../pages/load/load';
 import { PublicationPage } from '../pages/publication/publication';
+import { UserPage } from '../pages/user/user';
 
 import { TaxonomyService } from "../commons/taxonomy.service";
-
 
 @Component({
   templateUrl: 'app.html'
@@ -37,7 +37,8 @@ export class MyApp {
       { title: 'SignIn', component: SignInPage},
       { title: 'Load', component: LoadPage},
       { title: 'Publicaton', component: PublicationPage },
-      { title: 'MainPage', component: MainPage }
+      { title: 'MainPage', component: MainPage },
+      { title: 'UerPage', component: UserPage}
     ];
 
   }

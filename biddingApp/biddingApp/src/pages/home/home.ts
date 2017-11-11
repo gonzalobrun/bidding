@@ -4,7 +4,6 @@ import { LogInPage } from '../log-in/log-in';
 import { SignInPage } from '../sign-in/sign-in';
 
 import { MainPage } from '../main/main';
-import { LoadPage } from '../load/load';
 import { PublicationPage } from '../publication/publication';
 
 import { HomeService } from './home.service';

@@ -9,6 +9,8 @@ import { TaxonomyService } from '../../commons/taxonomy.service';
 import { WebStorageService } from '../../commons/webStorage.service';
 import { LoadService } from './load.service';
 
+import{ UserPage } from '../../pages/user/user';
+
 import { Publication } from '../../models/publication.model';
 import { User } from '../../models/user.model';
 
@@ -144,4 +146,9 @@ export class LoadPage {
   public showImg(imgUrl){
     this.mainImg = imgUrl;
   }
+
+  public goToUser() {
+		this.navCtrl.push(UserPage);
+  };
+  
 }

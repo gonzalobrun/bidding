@@ -3,7 +3,7 @@
   <ion-navbar>
     <ion-title>Publication</ion-title>
     <div class="user-icon">
-      <ion-icon name="contact"></ion-icon>
+      <ion-icon name="contact" (click)="goToUser()" *ngIf="user.isLogged"></ion-icon>
     </div> 
   </ion-navbar>
 
@@ -86,7 +86,8 @@
       </ion-list>
 
       <ion-list *ngIf="pub.isAuction">
-        <button ion-button block (click)="offer()">Offer</button>
+        <span *ngIf="!user.isLogged">You need to have an account to offer.</span>
+        <button ion-button block (click)="offer()" [disabled]="!user.isLogged" >Offer</button>
       </ion-list>
       
     </section>

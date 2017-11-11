@@ -6,6 +6,7 @@ import { MainService } from './main.service';
 import { WebStorageService } from '../../commons/webStorage.service';
 
 import { User } from '../../models/user.model';
+import{ UserPage } from '../../pages/user/user';
 
 import { LoadPage } from '../load/load';
 import { PublicationPage } from '../publication/publication';
@@ -60,6 +61,11 @@ export class MainPage {
   
   public goToLoad() {
 		this.navCtrl.push(LoadPage);
-	};
+  };
+  
+  
+  public goToUser() {
+		this.navCtrl.push(UserPage);
+  };
 
 }

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
-import * as moment from 'moment';
+//import * as moment from 'moment';
 
 import { Publication } from '../../models/publication.model';
 import { User } from '../../models/user.model';
+import{ UserPage } from '../../pages/user/user';
 
 import { TaxonomyService } from '../../commons/taxonomy.service';
 import { WebStorageService } from '../../commons/webStorage.service';
@@ -40,7 +41,6 @@ export class PublicationPage {
     this.imgView = this.pub.imgURL[0];
     this.offerAmount = this.pub.minimunPrice;
     this.setCountdown();
-    console.log(this.pub);
     this.findHighestoffer()
   }
 
@@ -117,4 +117,9 @@ export class PublicationPage {
   public findHighestoffer() {
     this.higestOffer = Math.max.apply(Math,this.pub.offerers.map(function(o){return o.offerAmount;}))    
   }
+
+  public goToUser() {
+		this.navCtrl.push(UserPage);
+  };
+
 }

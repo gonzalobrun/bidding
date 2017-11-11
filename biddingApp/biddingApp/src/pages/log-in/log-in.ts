@@ -47,5 +47,5 @@ export class LogInPage {
 
   public goToSignin() {
 		this.navCtrl.push(MainPage);
-	}
+  }
 }
