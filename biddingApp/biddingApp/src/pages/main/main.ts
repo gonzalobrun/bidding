@@ -118,6 +118,7 @@ export class MainPage {
       this.cities = province[0].ciudades;
       this.filtersForm.get('city').setValue(null);
     });
+    
     this.filtersForm.valueChanges.subscribe(val => {
       console.log(this.filtersForm.value);      
     });
