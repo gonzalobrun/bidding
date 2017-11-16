@@ -14,7 +14,23 @@ page-main {
 
     .filters-section{
         width: 20%;
+
+        .filter-container{
+            margin: 10px 0;
+        }
+
+        .filter-label{
+            margin-top: 30px;
+        }
+
+        .toggle-label{
+            color: #999;
+        }
+
     }
+
+    
+
 
     .add-icon{
         position: absolute;
@@ -67,5 +83,12 @@ page-main {
         .select-text {
             margin-left: -16px;
         }
+    }
+
+    .item-md.item-toggle {
+        .item-inner{
+            border-bottom: solid 1px #dedede !important;
+        }
+        
     }
 }

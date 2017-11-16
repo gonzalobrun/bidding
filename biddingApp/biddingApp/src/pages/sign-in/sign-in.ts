@@ -19,7 +19,7 @@ import { LogInPage } from '../log-in/log-in';
 export class SignInPage {
 
   public user: User;
-  public signInForm: any;
+  public signInForm: FormGroup;
   public countries: any = [];
   public provinces: any = [];
   public cities: any = [];

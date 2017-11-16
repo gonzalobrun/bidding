@@ -12,6 +12,7 @@ export class User {
         this.name = userDataObj.name;
         this.username = userDataObj.username;
         this.password = userDataObj.password || null;
+        this.province = userDataObj.province;
         this.country = userDataObj.country;
         this.city = userDataObj.city;
     }

@@ -46,6 +46,10 @@ function updateUser (req, res){
 					city: req.body.city 
 				},
 		options = { multi: false };
+		if(req.body.password === undefined){
+			delete update.password;
+		}
+
 	UserModel.update(query, update, options, function(err, numAffected){
 		if(err){
 			res.send(err);

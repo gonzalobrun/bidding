@@ -17,7 +17,7 @@ module.exports = function(app){
 
 	userRoutes.post('/login', [user.logReq, user.logUser]);
 
-	userRoutes.put('/:userId', [user.logReq, user.updateUser]);
+	userRoutes.post('/:userId', [user.logReq, user.updateUser]);
 
 	userRoutes.delete('/:userId', [user.logReq, user.deleteUser]);
 	

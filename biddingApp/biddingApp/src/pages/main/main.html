@@ -13,66 +13,74 @@
 <ion-content padding>
   <div class="view-wrapper">
     <section class="filters-section">
+      <form [formGroup]="filtersForm">
+
       <h4 class="subtitle">Filters</h4>
+
       <div class="filter-container">
-        <h5>Type</h5>
-        <ion-list>
-          <ion-item>
-            <ion-label>Gift</ion-label>
-            <ion-checkbox checked="true"></ion-checkbox>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Auction</ion-label>
-            <ion-checkbox checked="true"></ion-checkbox>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Service</ion-label>
-            <ion-checkbox checked="true"></ion-checkbox>
-          </ion-item>
-        </ion-list>
+        <h4 class="filter-label">Types</h4>
+        <ion-item>
+          <ion-label>Type</ion-label>
+          <ion-select multiple="true" required id="types" formControlName="type">
+            <!-- <ion-option [value]="-1">All</ion-option> -->
+            <ion-option *ngFor="let type of types" [value]="type.id">{{ type.description }}</ion-option>
+          </ion-select>
+        </ion-item>
       </div>
 
       <div class="filter-container">
-        <h5>Sort By</h5>
+        <h4 class="filter-label">Sort By</h4>
         <ion-list>
           <ion-item>
-            <ion-select [(ngModel)]="sortby">
-              <ion-option value="name">Name</ion-option>
-              <ion-option value="price">Price</ion-option>
-              <ion-option value="date">Date</ion-option>
-              <ion-option value="expiration">Expiration</ion-option>
+            <ion-label>Sort By</ion-label>
+            <ion-select required id="sortBy" formControlName="sortBy">
+              <ion-option *ngFor="let sortBy of sortByArr" [value]="sortBy.id">{{ sortBy.description }}</ion-option>
             </ion-select>
           </ion-item>
 
           <ion-item>
-            <ion-label>Descending</ion-label>
-            <ion-toggle checked="false"></ion-toggle>
+            <ion-label class="toggle-label">Descending</ion-label>
+            <ion-toggle formControlName="sortByAsc" (click)="toggleSort()"></ion-toggle>
           </ion-item>
         </ion-list>
       </div>
 
       <div class="filter-container">
-          <h5>Categories</h5>
-          <ion-list>
-            <ion-item>
-              <ion-label>Home/Office</ion-label>
-              <ion-checkbox checked="true"></ion-checkbox>
-            </ion-item>
-    
-            <ion-item>
-              <ion-label>Tv, Audio, Video</ion-label>
-              <ion-checkbox checked="true"></ion-checkbox>
-            </ion-item>
-    
-            <ion-item>
-              <ion-label>Technology, Smartphones</ion-label>
-              <ion-checkbox checked="true"></ion-checkbox>
-            </ion-item>
-          </ion-list>
-        </div>
+        <h4 class="filter-label">Categories</h4>
+        <ion-item>
+          <ion-label>Categories</ion-label>
+          <ion-select multiple="true" required id="categories" formControlName="categories">
+              <!-- <ion-option [value]="-1">All</ion-option> -->
+            <ion-option *ngFor="let cat of categories" [value]="cat.id">{{cat.description}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
 
+      <div class="filter-container">
+        <h4 class="filter-label">Location</h4>
+        <ion-item>
+          <ion-label>Country</ion-label>
+          <ion-select required id="country" formControlName="country">
+            <ion-option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Province</ion-label>
+          <ion-select required id="province" formControlName="province">
+            <ion-option *ngFor="let province of provinces" [value]="province.id">{{ province.nombre }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>City</ion-label>
+          <ion-select required id="city" formControlName="city">
+            <ion-option *ngFor="let city of cities" [value]="city.id">{{ city.nombre }}</ion-option>
+          </ion-select>
+        </ion-item>
+    </div>
+
+    </form>
     </section>
 
     <section class="pub-section">
