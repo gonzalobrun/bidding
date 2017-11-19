@@ -64,7 +64,39 @@ function getById (req, res) {
 }
 
 function getWithFilters (req, res) {
-	res.send('show all the posts for the applied filters');
+	// find each person with a last name matching 'Ghost'
+	var queryObj = null;
+
+	if(req.body.city === undefined){
+		queryObj = { 
+			'categories': { $in: req.body.categories.split(',') },
+			'location.country': req.body.country,
+			'location.province': req.body.province,
+			'type': { $in: req.body.type.split(',') },
+			'status': { $in: req.body.status.split(',') }
+			}
+	}	
+	else {
+		queryObj = {
+			'categories': { $in: req.body.categories.split(',') },
+			'location.country': req.body.country,
+			'location.province': req.body.province,
+			'location.city': req.body.city,
+			'type': { $in: req.body.type.split(',') },
+			'status': { $in: req.body.status.split(',') }
+		}
+	}
+	
+	var query = PublicationModel.find(queryObj);
+
+	query.exec(function (err, pub) {
+		if(err){
+			res.send(err)
+		}
+		else {
+			res.json({success: true, message:'Filters Applied', pubs: pub });
+		}	
+	})
 }
 
 function logReq (req, res, next){
@@ -117,31 +149,31 @@ function updatePub (req, res){
 	// });
 };
 
-	function addComment (req, res){	
-	
-		var query = { _id: req.params.pubId };
-		var comment = {
-			username: req.body.username,
-            commentText: req.body.comment
-		}		
+function addComment (req, res){	
 
-		PublicationModel.findByIdAndUpdate(
-			query,
-			{$push: {"comments": comment}},
-			{safe: true, upsert: true, new : true},
-			function(err, update) {
-				if(err){
-					res.send(err)
-				}
-				else {
-					res.json({success: true, message:'Comment Added', update: update });
-				}
-				
+	var query = { _id: req.params.pubId };
+	var comment = {
+		username: req.body.username,
+		commentText: req.body.comment
+	}		
+
+	PublicationModel.findByIdAndUpdate(
+		query,
+		{$push: {"comments": comment}},
+		{safe: true, upsert: true, new : true},
+		function(err, update) {
+			if(err){
+				res.send(err)
 			}
-		);
-	};
+			else {
+				res.json({success: true, message:'Comment Added', update: update });
+			}
+			
+		}
+	);
+};
 
-	function addOfferer (req, res){	
+function addOfferer (req, res){	
 		
 			var query = { _id: req.params.pubId };
 			var offerer = {
@@ -166,6 +198,7 @@ function updatePub (req, res){
 			);
 		};
 
+
 module.exports = {
 	randomPub : randomPub,
 	getById : getById,
@@ -173,5 +206,6 @@ module.exports = {
 	logReq : logReq,
 	createPub : createPub,
 	addComment : addComment,
-	addOfferer: addOfferer
+	addOfferer: addOfferer,
+	getWithFilters: getWithFilters
 };

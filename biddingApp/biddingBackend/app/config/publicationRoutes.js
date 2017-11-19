@@ -23,11 +23,11 @@ module.exports = function(app) {
 
 	publicationRoutes.post('/', [publication.logReq, publication.createPub])
 
- 	publicationRoutes.get('/random', [publication.logReq, publication.randomPub]);
+	publicationRoutes.get('/random', [publication.logReq, publication.randomPub]);
+	 
+	publicationRoutes.post('/getWithFilters', [publication.logReq, publication.getWithFilters]);
 
 	publicationRoutes.get('/:pubId',[publication.logReq, publication.getById]);
-
-	publicationRoutes.post('/filter', [publication.logReq, publication.getWithFilters]);
 
 	publicationRoutes.post('/addComment/:pubId', [publication.logReq, publication.addComment] );
 

@@ -47,6 +47,7 @@ export class LoadPage {
     this.publication = Publication.BuildEmpty();
     this.currentDate = moment().add(1, 'days').format().split("T")[0];
     this.getTaxonomyData();
+    this.setUserData();
     this.buildForm();    
   };
 
@@ -62,8 +63,7 @@ export class LoadPage {
     //console.log('ionViewDidLoad LoadPage');
   }
 
-  public buildForm() {
-    
+  public buildForm() {   
 
     this.loadPubForm = new FormGroup({
       'title': new FormControl(this.publication.title, [
@@ -102,7 +102,15 @@ export class LoadPage {
       ])
     });
     this.onChanges();
-  } 
+  }
+
+  private setUserData(){
+    this.publication.location.country = this.user.country;
+    this.publication.location.province = this.user.province;
+    let province = this.taxonomyService.getLocations.filter((p: any) => p.id == this.publication.location.province);
+    this.cities = province[0].ciudades;
+    this.publication.location.city = this.user.city;
+  }
 
   public publish(){
 

@@ -37,6 +37,7 @@ export class MainPage {
 
   //Filters Varables
   public typeForm: any = [1, 2, 3];
+  public statusForm: any = [1, 2];
   public sortByForm: any = 1;
   public sortByAscForm: boolean = false;
   public categoriesForm: any = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -59,8 +60,7 @@ export class MainPage {
     this.user = new User(this.webStorageService.retrieve('currentUser'));
     this.initializeFilters();     
     this.buildForm();
-    this.getRandomPubs();
-
+    this.getWithFilters();
   };
 
   public getTaxonomyData(){
@@ -80,8 +80,8 @@ export class MainPage {
     this.cityForm = this.user.city;
   }
 
-  public getRandomPubs() {
-		this.mainService.getRandomPubs().subscribe(
+  public getWithFilters() {
+		this.mainService.getWithFilters(this.filtersForm.value).subscribe(
 			(res) => {
 				this.pubsArr = res.pubs;				
 			},
@@ -93,6 +93,8 @@ export class MainPage {
   public buildForm() {
     this.filtersForm = new FormGroup({
       'type': new FormControl(this.typeForm, [
+      ]),
+      'status': new FormControl(this.statusForm, [
       ]),
       'sortBy': new FormControl(this.sortByForm, [
       ]),
@@ -120,7 +122,7 @@ export class MainPage {
     });
     
     this.filtersForm.valueChanges.subscribe(val => {
-      console.log(this.filtersForm.value);      
+      this.getWithFilters();  
     });
   }
 
