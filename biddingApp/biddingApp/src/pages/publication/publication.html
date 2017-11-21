@@ -69,13 +69,18 @@
         <span>{{pub.offerers.length}}</span>
       </ion-list>
 
-      <ion-list>
+      <ion-list *ngIf="!pub.isExpired">
         <ion-label stacked>Expires in</ion-label>
         <span>{{ message }}</span>
       </ion-list>
 
+      <ion-list *ngIf="pub.isExpired">
+        <ion-label stacked>Expires in</ion-label>
+        <span>Expired</span>
+      </ion-list>
+
       <ion-list *ngIf="pub.isDonation">
-        <button ion-button block (click)="apply()">Apply</button>
+        <button ion-button block (click)="apply()" [disabled]="!user.isLogged">Apply</button>
       </ion-list>
 
       <ion-list *ngIf="pub.isAuction">

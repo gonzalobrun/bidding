@@ -52,6 +52,9 @@ export class PublicationPage {
     this.future = new Date(this.pub.expirationDate);
     this.$counter = Observable.interval(1000).map((x) => {
         this.diff = Math.floor((this.future.getTime() - new Date().getTime()) / 1000);
+        if(this.diff < 0){
+          this.pub.expired = true;
+        }
         return x;
     });
 

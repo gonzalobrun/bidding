@@ -125,7 +125,7 @@ export class LoadPage {
     this.publication.owner.id = this.user._id;
     this.publication.owner.username = this.user.username;
     this.publication.status = this.loadPubForm.get('status').value;
-    this.publication.expirationDate = moment().add(10, 'minutes').format();
+    this.publication.expirationDate = moment().add(2, 'minutes').format();
     this.publication.title = this.loadPubForm.get('title').value;
     this.publication.type = this.loadPubForm.get('type').value;
     
@@ -134,7 +134,7 @@ export class LoadPage {
       (err) => console.log(err),
       () => console.log('Publicated')
     );
-    
+
   }
 
   public onChanges(): void {
