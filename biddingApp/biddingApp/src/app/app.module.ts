@@ -12,6 +12,7 @@ import { MainPage } from '../pages/main/main';
 import { LoadPage } from '../pages/load/load';
 import { PublicationPage } from '../pages/publication/publication';
 import { UserPage } from '../pages/user/user';
+import { EditPubPage } from '../pages/edit-pub/edit-pub';
 
 import { LogInService } from '../pages/log-in/log-in.service'; 
 import { SignInService } from '../pages/sign-in/sign-in.service';
@@ -36,7 +37,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MainPage,
     LoadPage,
     PublicationPage,
-    UserPage
+    UserPage,
+    EditPubPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MainPage,
     LoadPage,
     PublicationPage,
-    UserPage
+    UserPage,
+    EditPubPage
   ],
   providers: [
     StatusBar,

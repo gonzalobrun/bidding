@@ -11,6 +11,7 @@ import { MainPage } from '../pages/main/main';
 import { LoadPage } from '../pages/load/load';
 import { PublicationPage } from '../pages/publication/publication';
 import { UserPage } from '../pages/user/user';
+import { EditPubPage } from '../pages/edit-pub/edit-pub';
 
 import { TaxonomyService } from "../commons/taxonomy.service";
 
@@ -38,7 +39,8 @@ export class MyApp {
       { title: 'Load', component: LoadPage},
       { title: 'Publicaton', component: PublicationPage },
       { title: 'MainPage', component: MainPage },
-      { title: 'UerPage', component: UserPage}
+      { title: 'UerPage', component: UserPage},
+      { title: 'EditPubPage', component: EditPubPage }
     ];
 
   }
@@ -67,5 +69,6 @@ export class MyApp {
 			(err) => console.log(err),
 			() => console.log('GET TAXONOMY')
 		)
-	};
+  };
+  
 }

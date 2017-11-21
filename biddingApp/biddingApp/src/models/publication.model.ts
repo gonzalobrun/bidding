@@ -3,7 +3,7 @@ export class Publication {
     public likesCount: number;
     public minimunPrice: number;
     public expired: boolean;
-    public expirationDate: Date;
+    public expirationDate: string;
     public title: string;
     public description: string;
     public status: number;
@@ -14,7 +14,7 @@ export class Publication {
         province: string;
     };
     public countdownStarted: boolean;
-    public creationDate: Date;
+    public creationDate: string;
     public owner: {
         username: string;
         id: string;

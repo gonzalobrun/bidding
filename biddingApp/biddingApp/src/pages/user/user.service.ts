@@ -3,6 +3,7 @@ import { Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { User } from '../../models/user.model';
+import { Publication } from '../../models/publication.model';
 
 @Injectable()
 export class UserService {
@@ -28,6 +29,20 @@ export class UserService {
         return this.http.post(fullUrl, params)
             .map((res: Response) => {
                return new User(res.json().user)
+            })
+            .catch((err: any) =>  Observable.throw(err));
+    }
+
+    getByUser(user: User): Observable<any> {
+
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('userId', user._id);
+        
+        let url = "http://localhost:8080/pub/getByUser";
+        
+        return this.http.post(url, params)
+            .map((res: Response) => {
+                return res.json().pubs;
             })
             .catch((err: any) =>  Observable.throw(err));
     }

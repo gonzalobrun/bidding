@@ -19,6 +19,7 @@ export class LoadService {
         params.set('city', pub.location.city)
         params.set('country', pub.location.country.toString());
         params.set('description', pub.description);
+        params.set('creationDate', pub.creationDate.toString());
         params.set('expirationDate', pub.expirationDate.toString());
         params.set('imgURL', pub.imgURL.toLocaleString());
         params.set('minimunPrice', pub.minimunPrice ? pub.minimunPrice.toString() : null);

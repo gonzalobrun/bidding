@@ -9,7 +9,7 @@ function createPub (req, res){
 
 	pub.owner.id = req.body.ownerId;
 	pub.owner.username = req.body.ownerUsername;
-	pub.creationDate = new Date;
+	pub.creationDate = new Date(req.body.creationDate);
 	pub.countdownStarted = false;
 	pub.location.country = req.body.country;
 	pub.location.province = req.body.province;
@@ -60,6 +60,18 @@ function getById (req, res) {
 		else{
 			res.json({message: 'Single Pub by ID', pub: pub})
 		}
+	});
+}
+
+function getByUser (req, res) {
+	
+	PublicationModel.find({'owner.id': req.body.userId}, function(err, pub){
+		if(err){
+			res.send(err)
+		}
+		else {
+			res.json({success: true, message:'User\'s Pub', pubs: pub });
+		}	
 	});
 }
 
@@ -207,5 +219,6 @@ module.exports = {
 	createPub : createPub,
 	addComment : addComment,
 	addOfferer: addOfferer,
-	getWithFilters: getWithFilters
+	getWithFilters: getWithFilters,
+	getByUser: getByUser
 };

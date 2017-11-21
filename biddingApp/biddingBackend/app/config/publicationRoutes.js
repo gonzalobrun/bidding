@@ -9,6 +9,7 @@ publicationRoutes.param('id', function(req, res, next, password){
 	req.password = password;
 
 	next();
+
 }); 
 
 publicationRoutes.param('filter', function(req, res, next, filters){
@@ -17,6 +18,7 @@ publicationRoutes.param('filter', function(req, res, next, filters){
 	req.filters = filters;
 
 	next();
+	
 });
 
 module.exports = function(app) {
@@ -26,6 +28,8 @@ module.exports = function(app) {
 	publicationRoutes.get('/random', [publication.logReq, publication.randomPub]);
 	 
 	publicationRoutes.post('/getWithFilters', [publication.logReq, publication.getWithFilters]);
+
+	publicationRoutes.post('/getByUser', [publication.logReq, publication.getByUser]);
 
 	publicationRoutes.get('/:pubId',[publication.logReq, publication.getById]);
 

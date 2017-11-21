@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EditPubPage } from '../edit-pub/edit-pub';
 
 import { User } from '../../models/user.model';
 
@@ -19,6 +20,7 @@ export class UserPage {
   public countries: any = [];
   public provinces: any = [];
   public cities: any = [];
+  public pubsArr: any = [];
 
   public userCountry: any;
   public userProvince: any;
@@ -34,7 +36,7 @@ export class UserPage {
 
   ngOnInit(){    
     this.user = this.user = new User(this.webStorageService.retrieve('currentUser'));
-
+    this.getbyUser();
     this.matchLocations();
     this.buildForm();
 };
@@ -43,14 +45,15 @@ export class UserPage {
     //console.log('ionViewDidLoad UserPage');
   }
 
-  buildForm() {
-    
+  buildForm() {    
 
     this.editUserForm = new FormGroup({
       '_id': new FormControl(this.user._id, [
       ]),
       'name': new FormControl(this.user.name, [
       ]), 
+      'username': new FormControl({ value: this.user.username, disabled: true }, [
+      ]),
       'password': new FormControl(this.user.password, [
       ]),  
       'country': new FormControl(this.user.country, [
@@ -102,7 +105,24 @@ export class UserPage {
     this.userService.update(this.editUserForm.value).subscribe(
       (res) => console.log(res),
       (err) => console.log(err),
-      () => console.log('tu vieja')
+      () => console.log('USER UPDATED')
     )
   }
+
+  private getbyUser() {
+    this.userService.getByUser(this.user).subscribe(
+      (res) => {this.pubsArr = res},
+      (err) => console.log(err),
+      () => console.log('GET USER\'S PUB')
+    )
+  }
+
+  public goToDetails(pub: any) {
+    this.navCtrl.push(EditPubPage, { pub });
+  }
+
+  public openPub(pub){
+    console.log(pub);
+  }
+
 }

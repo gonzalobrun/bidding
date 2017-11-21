@@ -17,6 +17,11 @@
             <ion-label floating>Name</ion-label>
             <ion-input type="text" required id="name" formControlName="name"></ion-input>
           </ion-item>
+
+          <ion-item>
+            <ion-label floating>Username</ion-label>
+            <ion-input type="text" required id="username" formControlName="username"></ion-input>
+          </ion-item>
     
           <ion-item>
             <ion-label floating>Password</ion-label>
@@ -54,8 +59,18 @@
 
   <div class="publications-section">
     <h4 class="subtitle">Your Publications</h4>
-    
-  </div>
-
-  
+    <div  class="card-block" *ngFor="let pub of pubsArr">
+      <ion-card (click)="goToDetails(pub)">
+      <!--  <img src="../content/img/relax.jpg"> -->
+        <ion-card-content>
+          <ion-card-title>
+            {{pub.title}}
+            </ion-card-title>
+          <p>
+            {{pub.description}}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>  
 </ion-content>

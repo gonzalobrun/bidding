@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 
 import * as moment from 'moment';
 
 import { TaxonomyService } from '../../commons/taxonomy.service';
 import { WebStorageService } from '../../commons/webStorage.service';
-import { LoadService } from './load.service';
 
 import{ UserPage } from '../../pages/user/user';
 
@@ -15,10 +13,10 @@ import { Publication } from '../../models/publication.model';
 import { User } from '../../models/user.model';
 
 @Component({
-  selector: 'page-load',
-  templateUrl: 'load.html',
+  selector: 'page-edit-pub',
+  templateUrl: 'edit-pub.html',
 })
-export class LoadPage {
+export class EditPubPage {
 
   public publication: Publication;
   public user: User;
@@ -36,19 +34,21 @@ export class LoadPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public loadService: LoadService,
     public taxonomyService: TaxonomyService, 
-    public webStorageService: WebStorageService,
-    public domSanitizer: DomSanitizer
-  ) {}
+    public webStorageService: WebStorageService) {
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad EditPubPage');
+  }
 
   ngOnInit(){
     this.user = new User(this.webStorageService.retrieve('currentUser'));
-    this.publication = Publication.BuildEmpty();
-    this.currentDate = moment().add(1, 'minutes').format().split("T")[0];
+    this.publication = new Publication(this.navParams.get("pub"));
+    this.currentDate = moment().add(1, 'days').format().split("T")[0];
     this.getTaxonomyData();
     this.setUserData();
-    this.buildForm();    
+    this.buildForm();
   };
 
   public getTaxonomyData(){
@@ -57,10 +57,6 @@ export class LoadPage {
     this.types = this.taxonomyService.getTypes;
     this.countries = [{ id: 1, name: 'Argentina'}];
     this.provinces = this.taxonomyService.getLocations;    
-  }
-
-  ionViewDidLoad() {
-    //console.log('ionViewDidLoad LoadPage');
   }
 
   public buildForm() {   
@@ -112,30 +108,28 @@ export class LoadPage {
     this.publication.location.city = this.user.city;
   }
 
-  public publish(){
+  // public publish(){
 
-    this.publication.categories = this.loadPubForm.get('categories').value;
-    this.publication.location.city = this.loadPubForm.get('city').value;
-    this.publication.location.country = this.loadPubForm.get('country').value;
-    this.publication.description = this.loadPubForm.get('description').value;
-    this.publication.creationDate = moment().format();
-    //this.publication.imgURL = this.loadPubForm.get('imgURL').value;
-    this.publication.location.province = this.loadPubForm.get('province').value;
-    this.publication.minimunPrice = this.loadPubForm.get('minimunPrice').value;
-    this.publication.owner.id = this.user._id;
-    this.publication.owner.username = this.user.username;
-    this.publication.status = this.loadPubForm.get('status').value;
-    this.publication.expirationDate = moment().add(10, 'minutes').format();
-    this.publication.title = this.loadPubForm.get('title').value;
-    this.publication.type = this.loadPubForm.get('type').value;
+  //   this.publication.categories = this.loadPubForm.get('categories').value;
+  //   this.publication.location.city = this.loadPubForm.get('city').value;
+  //   this.publication.location.country = this.loadPubForm.get('country').value;
+  //   this.publication.description = this.loadPubForm.get('description').value;
+  //   //this.publication.imgURL = this.loadPubForm.get('imgURL').value;
+  //   this.publication.location.province = this.loadPubForm.get('province').value;
+  //   this.publication.minimunPrice = this.loadPubForm.get('minimunPrice').value;
+  //   this.publication.owner.id = this.user._id;
+  //   this.publication.owner.username = this.user.username;
+  //   this.publication.status = this.loadPubForm.get('status').value;
+  //   this.publication.expirationDate = this.currentDate;
+  //   this.publication.title = this.loadPubForm.get('title').value;
+  //   this.publication.type = this.loadPubForm.get('type').value;
     
-    this.loadService.createPub(this.publication).subscribe(
-      (res: any) => console.log(res),
-      (err) => console.log(err),
-      () => console.log('Publicated')
-    );
-    
-  }
+  //   this.loadService.createPub(this.publication).subscribe(
+  //     (res: any) => console.log(res),
+  //     (err) => console.log(err),
+  //     () => console.log('Publicated')
+  //   );
+  // }
 
   public onChanges(): void {
     this.loadPubForm.get('province').valueChanges.subscribe(val => {
@@ -160,5 +154,5 @@ export class LoadPage {
   public goToUser() {
 		this.navCtrl.push(UserPage);
   };
-  
+
 }

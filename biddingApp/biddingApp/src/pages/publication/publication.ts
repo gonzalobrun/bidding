@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs/Rx';
 //import * as moment from 'moment';
 
 import { Publication } from '../../models/publication.model';
@@ -26,6 +26,14 @@ export class PublicationPage {
   public commentText: string = '';
   public higestOffer: any;
 
+  //------------
+  private future: Date;
+  private futureString: string;
+  private diff: number;
+  private $counter: Observable<number>;
+  private subscription: Subscription;
+  private message: string;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,  
@@ -37,21 +45,51 @@ export class PublicationPage {
   ngOnInit(){
     this.user = this.webStorageService.retrieve('currentUser') ? new User(this.webStorageService.retrieve('currentUser')) : User.BuildEmpty();
     this.pub = new Publication(this.navParams.get("pub"));
-    this.expDate = new Date(this.pub.expirationDate);
     this.imgView = this.pub.imgURL[0];
     this.offerAmount = this.pub.minimunPrice;
-    this.setCountdown();
-    this.findHighestoffer()
+    this.findHighestoffer();
+    //----------------------------------------------------------------------------------------------
+    this.future = new Date(this.pub.expirationDate);
+    this.$counter = Observable.interval(1000).map((x) => {
+        this.diff = Math.floor((this.future.getTime() - new Date().getTime()) / 1000);
+        return x;
+    });
+
+    this.subscription = this.$counter.subscribe((x) => this.message = this.dhms(this.diff));
   }
 
   ionViewDidLoad() {
   }
 
-  public setCountdown() {
-    this.countDown = Observable.timer(0,1000)
-    .take(this.expDate)
-    .map(()=> --this.expDate);
+  dhms(t) {
+    var days, hours, minutes, seconds;
+    days = Math.floor(t / 86400);
+    t -= days * 86400;
+    hours = Math.floor(t / 3600) % 24;
+    t -= hours * 3600;
+    minutes = Math.floor(t / 60) % 60;
+    t -= minutes * 60;
+    seconds = t % 60;
+
+    return [
+        days + 'd',
+        hours + 'h',
+        minutes + 'm',
+        seconds + 's'
+    ].join(' ');
   }
+
+
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe();
+  }
+
+
+  // public setCountdown() {
+  //   this.countDown = Observable.timer(0,1000)
+  //   .take(this.expDate)
+  //   .map(()=> --this.expDate);
+  // }
 
   public showImg(img) {
     this.imgView = img;
