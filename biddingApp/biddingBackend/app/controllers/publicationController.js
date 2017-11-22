@@ -42,6 +42,9 @@ function createPub (req, res){
 function randomPub (req, res) {
 	//TODO: This should get 9 publications randomly, actually is being sorted randomly, and split it on the UI.
 	PublicationModel.find(function(err, pub){
+
+		evaluatePublications(pub);
+
 		if(err) {
 			res.send(err);
 		}
@@ -56,6 +59,9 @@ function getById (req, res) {
 	//res.send('Im the pub ' + req.params.id + '!');
 
 	PublicationModel.findById({_id: req.params.pubId}, function(err, pub){
+		
+		evaluatePublications(pub);
+
 		if(err) {
 			res.send(err);
 		}
@@ -68,12 +74,30 @@ function getById (req, res) {
 function getByUser (req, res) {
 	
 	PublicationModel.find({'owner.id': req.body.userId}, function(err, pub){
+
+		evaluatePublications(pub);
+
 		if(err){
 			res.send(err)
 		}
 		else {
 			res.json({success: true, message:'User\'s Pub', pubs: pub });
 		}	
+	});
+}
+
+function setWinner(pub) {
+	var query = { _id: pub._id },
+	update = { 'expired': true,
+				'winner.id' : pub.winner.id,
+				'winner.username': pub.winner.username
+	},
+	options = { multi: false };
+
+	PublicationModel.update(query, update, options, function(err, numAffected){
+		if(err){
+			res.send(err);
+		}
 	});
 }
 
@@ -104,6 +128,9 @@ function getWithFilters (req, res) {
 	var query = PublicationModel.find(queryObj);
 
 	query.exec(function (err, pub) {
+
+		evaluatePublications(pub);
+
 		if(err){
 			res.send(err)
 		}
@@ -111,6 +138,42 @@ function getWithFilters (req, res) {
 			res.json({success: true, message:'Filters Applied', pubs: pub });
 		}	
 	})
+};
+
+function evaluatePublications(pub){
+
+	pub.forEach(function(e){
+		
+		var expDate = new Date(e.expirationDate);
+		var currentDate = new Date();
+		var diffDate = (expDate - currentDate);
+		
+		if((diffDate < 0) && (e.winner.id === null)) {
+			if(e.type === 2) {
+				if(e.offerers.length){
+					var randomWinner = e.offerers[Math.floor(Math.random()*e.offerers.length)];
+					e.winner.id = randomWinner.userId; 
+					e.winner.username = randomWinner.username;
+					setWinner(e);
+				}				
+			}
+			else {
+				if(e.offerers.length){
+					var highestOffer = Math.max.apply(Math,e.offerers.map(function(o){
+						return o.offerAmount;
+					}));
+
+					var highestOfferer = e.offerers.filter(function(of) {
+						return of.offerAmount === highestOffer;
+					});
+
+					e.winner.id = highestOfferer[0].userId; 
+					e.winner.username = highestOfferer[0].username;						
+					setWinner(e);
+				}
+			}
+		}		
+	});
 }
 
 function setExpired(req, res) {
@@ -127,6 +190,7 @@ function setExpired(req, res) {
 				res.json({success: true, message:'Pub set as expired succesfully', update: update });
 			}
 			else {
+				console.log(numAffected.nModified);
 				res.status(412).json({success: false, message:'The publication couldn\'t be set as expired', update: null});
 			}			
 		}
