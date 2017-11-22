@@ -3,7 +3,6 @@ import { Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { User } from '../../models/user.model';
-import { Publication } from '../../models/publication.model';
 
 @Injectable()
 export class UserService {

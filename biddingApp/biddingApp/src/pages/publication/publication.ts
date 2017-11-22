@@ -26,9 +26,7 @@ export class PublicationPage {
   public commentText: string = '';
   public higestOffer: any;
 
-  //------------
   private future: Date;
-  private futureString: string;
   private diff: number;
   private $counter: Observable<number>;
   private subscription: Subscription;
@@ -48,17 +46,29 @@ export class PublicationPage {
     this.imgView = this.pub.imgURL[0];
     this.offerAmount = this.pub.minimunPrice;
     this.findHighestoffer();
-    //----------------------------------------------------------------------------------------------
     this.future = new Date(this.pub.expirationDate);
-    this.$counter = Observable.interval(1000).map((x) => {
+    if(!this.pub.isExpired) {
+      this.$counter = Observable.interval(1000).map((x) => {
         this.diff = Math.floor((this.future.getTime() - new Date().getTime()) / 1000);
+        //-----------Try To Move it to the get
         if(this.diff < 0){
           this.pub.expired = true;
+          this.subscription.unsubscribe();
+          this.publicationService.setExpired(this.pub._id).subscribe(
+            (res) => console.log(res),
+            (err) => console.log(err),
+            () => console.log('PUB EXPIRED')
+          );
         }
+        //-------------
         return x;
-    });
+      });
 
-    this.subscription = this.$counter.subscribe((x) => this.message = this.dhms(this.diff));
+      this.subscription = this.$counter.subscribe((x) => this.message = this.dhms(this.diff));
+    }    
+    
+    
+    
   }
 
   ionViewDidLoad() {
@@ -84,15 +94,11 @@ export class PublicationPage {
 
 
   ngOnDestroy(): void {
+    if(!this.pub.isExpired){
       this.subscription.unsubscribe();
+    }
+      
   }
-
-
-  // public setCountdown() {
-  //   this.countDown = Observable.timer(0,1000)
-  //   .take(this.expDate)
-  //   .map(()=> --this.expDate);
-  // }
 
   public showImg(img) {
     this.imgView = img;
@@ -162,5 +168,9 @@ export class PublicationPage {
   public goToUser() {
 		this.navCtrl.push(UserPage);
   };
+
+  private assignWinner() {
+    
+  }
 
 }

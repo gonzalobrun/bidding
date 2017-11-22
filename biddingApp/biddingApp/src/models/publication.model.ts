@@ -23,6 +23,10 @@ export class Publication {
     public comments: Array<any>;
     public imgURL: Array<string>;
     public offerers: Array<any>;
+    public winner: {
+        id: string,
+        username: string
+    }
 
     // Constructor 
     constructor(pubDataObj: any) {
@@ -43,6 +47,7 @@ export class Publication {
         this.comments = pubDataObj.comments;
         this.imgURL = pubDataObj.imgURL;
         this.offerers = pubDataObj.offerers;
+        this.winner = pubDataObj.winner;
     }
 
     public static BuildEmpty(): Publication {
@@ -70,7 +75,11 @@ export class Publication {
             categories: [],
             comments: [],
             imgURL: [],
-            offerers: []
+            offerers: [],
+            winner: {
+                id: null,
+                username: null
+            }
         }
         
         return new Publication(defaults);

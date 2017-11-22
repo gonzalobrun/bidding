@@ -26,6 +26,8 @@ function createPub (req, res){
 	pub.comments = [];
 	pub.categories = req.body.categories.split(",");
 	pub.likesCount = 0;
+	pub.winner.id = null;
+	pub.winner.username = null;
 
 	pub.save(function(err, pub) {
 		if(err){			
@@ -111,6 +113,26 @@ function getWithFilters (req, res) {
 	})
 }
 
+function setExpired(req, res) {
+	var query = { _id: req.body.pubId },
+	update = { expired: true },
+	options = { multi: false };
+
+	PublicationModel.update(query, update, options, function(err, numAffected){
+		if(err){
+			res.send(err);
+		}
+		else{
+			if(numAffected.nModified === 1) {
+				res.json({success: true, message:'Pub set as expired succesfully', update: update });
+			}
+			else {
+				res.status(412).json({success: false, message:'The publication couldn\'t be set as expired', update: null});
+			}			
+		}
+	});
+}
+
 function logReq (req, res, next){
 	console.log(req.method, req.url);
 	next();
@@ -187,28 +209,28 @@ function addComment (req, res){
 
 function addOfferer (req, res){	
 		
-			var query = { _id: req.params.pubId };
-			var offerer = {
-				userId : req.body.userId,
-				username : req.body.username,
-				offerAmount : req.body.offerAmount
-			  }		
-	
-			PublicationModel.findByIdAndUpdate(
-				query,
-				{$push: {"offerers": offerer}},
-				{safe: true, upsert: true, new : true},
-				function(err, update) {
-					if(err){
-						res.send(err)
-					}
-					else {
-						res.json({success: true, message:'Offerer Added', update: update });
-					}
-					
-				}
-			);
-		};
+	var query = { _id: req.params.pubId };
+	var offerer = {
+		userId : req.body.userId,
+		username : req.body.username,
+		offerAmount : req.body.offerAmount
+		}		
+
+	PublicationModel.findByIdAndUpdate(
+		query,
+		{$push: {"offerers": offerer}},
+		{safe: true, upsert: true, new : true},
+		function(err, update) {
+			if(err){
+				res.send(err)
+			}
+			else {
+				res.json({success: true, message:'Offerer Added', update: update });
+			}
+			
+		}
+	);
+};
 
 
 module.exports = {
@@ -220,5 +242,6 @@ module.exports = {
 	addComment : addComment,
 	addOfferer: addOfferer,
 	getWithFilters: getWithFilters,
-	getByUser: getByUser
+	getByUser: getByUser,
+	setExpired: setExpired
 };

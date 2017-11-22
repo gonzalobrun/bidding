@@ -54,7 +54,11 @@ var PublicationSchema = new Schema({
         }
     ],
     categories : [],
-    likesCount : Number
+    likesCount : Number,
+    winner: {
+        id: String,
+        username: String
+    }
 });
 
 module.exports = mongoose.model('Publications', PublicationSchema);

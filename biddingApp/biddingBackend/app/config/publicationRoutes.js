@@ -37,5 +37,7 @@ module.exports = function(app) {
 
 	publicationRoutes.post('/addOfferer/:pubId', [publication.logReq, publication.addOfferer] );
 
+	publicationRoutes.post('/setExpired', [publication.logReq, publication.setExpired]);
+
 	app.use('/pub', publicationRoutes);
 }

@@ -134,7 +134,6 @@ export class LoadPage {
       (err) => console.log(err),
       () => console.log('Publicated')
     );
-
   }
 
   public onChanges(): void {

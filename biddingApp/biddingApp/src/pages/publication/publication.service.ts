@@ -42,4 +42,17 @@ export class PublicationService {
             })
             .catch((err: any) =>  Observable.throw(err));
     }
+
+    setExpired(pubId: any): Observable<any> {
+
+        let params: URLSearchParams = new URLSearchParams();
+        let url = "http://localhost:8080/pub/setExpired";
+        params.set('pubId', pubId);
+        
+        return this.http.post(url, params)
+            .map((res: Response) => {
+                return res.json()
+            })
+            .catch((err: any) =>  Observable.throw(err));
+    }
 }

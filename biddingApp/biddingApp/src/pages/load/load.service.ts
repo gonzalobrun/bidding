@@ -29,7 +29,7 @@ export class LoadService {
         params.set('status', pub.status.toString());
         params.set('title', pub.title);
         params.set('type', pub.type.toString());
-        params.set('location', pub.location.toString())
+        params.set('location', pub.location.toString());
 
         return this.http.post('http://localhost:8080/pub', params)
             .map((res: Response) => {
