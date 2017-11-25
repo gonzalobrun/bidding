@@ -11,6 +11,8 @@ var UserSchema = new Schema({
 			unique: true
 		}
 	},
+	email: String,
+	phone: String,
 	password: { 
 		type: String, 
 		required: true, 
@@ -27,7 +29,14 @@ var UserSchema = new Schema({
 	city: { 
 		type: String, 
 		required: true
-	}
+	},
+	notifications: [
+        {
+			message : String,
+			read: Boolean,
+			publicationId: String
+        }
+    ],
 });
 
 module.exports = mongoose.model('Users', UserSchema);

@@ -54,7 +54,13 @@ export class SignInPage {
       'username': new FormControl(this.user.username, [
         Validators.required,
         Validators.minLength(3)
-      ]),  
+      ]),      
+      'email': new FormControl(this.user.email, [
+        Validators.required
+      ]),
+      'phone': new FormControl(this.user.phone, [
+        Validators.required
+      ]),
       'password': new FormControl(this.user.password, [
         Validators.required,
         Validators.minLength(4)

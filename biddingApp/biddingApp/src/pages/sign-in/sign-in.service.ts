@@ -20,7 +20,9 @@ export class SignInService {
         params.set('password', user.password);
         params.set('city', user.city);
         params.set('province', user.province);
-        params.set('country', user.country);   
+        params.set('country', user.country);
+        params.set('email', user.email);
+        params.set('phone', user.phone);   
 
         return this.http.post('http://localhost:8080/user/', params)
             .map((res: Response) => {

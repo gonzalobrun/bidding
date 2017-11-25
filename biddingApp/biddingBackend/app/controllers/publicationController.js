@@ -3,6 +3,9 @@ var mongoose = require('mongoose');
 var Publication = require('../models/publication');
 var PublicationModel = mongoose.model('Publications');
 
+var User = require('../models/user');
+var UserModel = mongoose.model('Users');
+
 function createPub (req, res){
 
 	var pub = new Publication();
@@ -43,7 +46,9 @@ function randomPub (req, res) {
 	//TODO: This should get 9 publications randomly, actually is being sorted randomly, and split it on the UI.
 	PublicationModel.find(function(err, pub){
 
-		evaluatePublications(pub);
+		if(pub.length){
+			evaluatePublications(pub);
+		}
 
 		if(err) {
 			res.send(err);
@@ -60,7 +65,9 @@ function getById (req, res) {
 
 	PublicationModel.findById({_id: req.params.pubId}, function(err, pub){
 		
-		evaluatePublications(pub);
+		if(pub.length){
+			evaluatePublications(pub);
+		}
 
 		if(err) {
 			res.send(err);
@@ -75,7 +82,9 @@ function getByUser (req, res) {
 	
 	PublicationModel.find({'owner.id': req.body.userId}, function(err, pub){
 
-		evaluatePublications(pub);
+		if(pub.length){
+			evaluatePublications(pub);
+		}
 
 		if(err){
 			res.send(err)
@@ -102,7 +111,6 @@ function setWinner(pub) {
 }
 
 function getWithFilters (req, res) {
-	// find each person with a last name matching 'Ghost'
 	var queryObj = null;
 
 	if(req.body.city === undefined){
@@ -129,7 +137,9 @@ function getWithFilters (req, res) {
 
 	query.exec(function (err, pub) {
 
-		evaluatePublications(pub);
+		if(pub.length){
+			evaluatePublications(pub);
+		}
 
 		if(err){
 			res.send(err)
@@ -155,7 +165,9 @@ function evaluatePublications(pub){
 					e.winner.id = randomWinner.userId; 
 					e.winner.username = randomWinner.username;
 					setWinner(e);
-				}				
+					setOwnerNotification(e);
+					setWinnerNotification(e);
+				}
 			}
 			else {
 				if(e.offerers.length){
@@ -170,11 +182,55 @@ function evaluatePublications(pub){
 					e.winner.id = highestOfferer[0].userId; 
 					e.winner.username = highestOfferer[0].username;						
 					setWinner(e);
+					setOwnerNotification(e);
+					setWinnerNotification(e);
 				}
 			}
 		}		
 	});
 }
+
+function setOwnerNotification(pub) {
+
+	var query = { _id: pub.owner.id };
+	var notification = {
+		message: 'The user ' + pub.winner.username + ' won your publication ' + pub.title + '!',
+		read: false,
+		publicationId: pub._id
+	}
+
+	UserModel.findByIdAndUpdate(
+		query,
+		{$push: {"notifications": notification}},
+		{safe: true, upsert: true, new : true},
+		function(err, update) {
+			if(err){
+				res.send(err)
+			}
+		}
+	);
+}
+
+function setWinnerNotification(pub) {
+	
+		var query = { _id: pub.winner.id };
+		var notification = {
+			message: 'You win the publication' + pub.title + ' from the user ' + pub.owner.username +'!',
+			read: false,
+			publicationId: pub._id
+		}
+	
+		UserModel.findByIdAndUpdate(
+			query,
+			{$push: {"notifications": notification}},
+			{safe: true, upsert: true, new : true},
+			function(err, update) {
+				if(err){
+					res.send(err)
+				}
+			}
+		);
+	}
 
 function setExpired(req, res) {
 	var query = { _id: req.body.pubId },
