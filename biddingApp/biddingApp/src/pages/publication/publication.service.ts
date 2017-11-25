@@ -10,6 +10,20 @@ export class PublicationService {
         private http: Http
     ){}
 
+    
+    getById(pubId: any): Observable<any> {
+
+        let url = "http://localhost:8080/pub/";
+        let _pubId = pubId;
+        let fullUrl = url.concat(_pubId)
+
+        return this.http.get(fullUrl)
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch((err: any) => Observable.throw(err));
+    }
+    
     addComment(comment: any): Observable<any> {
 
         let params: URLSearchParams = new URLSearchParams();

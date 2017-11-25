@@ -8,8 +8,10 @@ import * as moment from 'moment';
 import { TaxonomyService } from '../../commons/taxonomy.service';
 import { WebStorageService } from '../../commons/webStorage.service';
 import { LoadService } from './load.service';
+import { NotificationsComponent } from '../../widgets/notifications.component';
 
 import{ UserPage } from '../../pages/user/user';
+import { MainPage } from '../../pages/main/main';
 
 import { Publication } from '../../models/publication.model';
 import { User } from '../../models/user.model';
@@ -29,8 +31,7 @@ export class LoadPage {
   public countries: any = [];
   public provinces: any = [];
   public cities: any = [];
-  public mainImg: string;  
-  public currentDate: any;
+  public mainImg: string; 
   public sanitizedUrls: any = [];
 
   constructor(
@@ -45,7 +46,6 @@ export class LoadPage {
   ngOnInit(){
     this.user = new User(this.webStorageService.retrieve('currentUser'));
     this.publication = Publication.BuildEmpty();
-    this.currentDate = moment().add(1, 'minutes').format().split("T")[0];
     this.getTaxonomyData();
     this.setUserData();
     this.buildForm();    
@@ -84,13 +84,7 @@ export class LoadPage {
       ]),  
       'status': new FormControl(this.publication.status, [
         Validators.required
-      ]),
-      // 'expirationDate': new FormControl(this.currentDate, [
-      //   Validators.required
-      // ]),
-      // 'imgURL': new FormControl(this.publication.imgURL, [
-      //   Validators.required
-      // ]),  
+      ]), 
       'city': new FormControl(this.publication.location.city, [
         Validators.required
       ]),  
@@ -125,12 +119,14 @@ export class LoadPage {
     this.publication.owner.id = this.user._id;
     this.publication.owner.username = this.user.username;
     this.publication.status = this.loadPubForm.get('status').value;
-    this.publication.expirationDate = moment().add(10, 'minutes').format();
+    this.publication.expirationDate = moment().add(1, 'minutes').format();
     this.publication.title = this.loadPubForm.get('title').value;
     this.publication.type = this.loadPubForm.get('type').value;
     
     this.loadService.createPub(this.publication).subscribe(
-      (res: any) => console.log(res),
+      (res: any) => {
+        this.navCtrl.push(MainPage);
+      },
       (err) => console.log(err),
       () => console.log('Publicated')
     );

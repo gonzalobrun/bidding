@@ -1,0 +1,22 @@
+
+<ion-icon (click)="openModal(template)" name="notifications" [ngClass]="unreadNotifications ? 'turned-on' : 'turned-off'" ></ion-icon>
+
+
+<ng-template #template>
+ <div class="modal-header">
+   <h4 class="modal-title pull-left">Notifications</h4>
+   <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+     <span aria-hidden="true">&times;</span>
+   </button>
+ </div>
+
+ <div class="modal-body">
+   <div *ngFor="let notification of notificationsArr" 
+   class="notification" 
+   [ngClass]="notification.read ? 'read' : 'unread'"
+   (click)="setAsRead(notification._id)">
+    {{ notification.message }}
+   </div>
+ </div>
+ 
+</ng-template>

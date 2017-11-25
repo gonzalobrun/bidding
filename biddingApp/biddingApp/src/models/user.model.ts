@@ -20,7 +20,7 @@ export class User {
         this.email = userDataObj.email;
         this.country = userDataObj.country;
         this.city = userDataObj.city;
-        this.notifications = userDataObj;
+        this.notifications = userDataObj.notifications;
     }
 
     public static BuildEmpty(): User {

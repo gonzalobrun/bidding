@@ -2,10 +2,11 @@ var express = require('express');
 var app = express();
 var port = process.env.PORT || 8080;
 var path = require('path');
-
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
+
+
 
 
 //I should import the models once. 
@@ -44,5 +45,5 @@ app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
 
-app.listen(port);
+app.listen(port, "0.0.0.0");
 console.log('Magic happens on port ' + port);

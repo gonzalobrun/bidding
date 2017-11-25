@@ -235,7 +235,7 @@ function setWinnerNotification(pub) {
 function setExpired(req, res) {
 	var query = { _id: req.body.pubId },
 	update = { expired: true },
-	options = { multi: false };
+	options = { multi: false,  new : true };
 
 	PublicationModel.update(query, update, options, function(err, numAffected){
 		if(err){

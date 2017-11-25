@@ -18,6 +18,7 @@ import { PublicationService } from './publication.service';
 export class PublicationPage {
   
   public user: User;
+  public pubId: any;
   public pub: Publication;
   public countDown: any;  
   public imgView: any;
@@ -43,32 +44,38 @@ export class PublicationPage {
   ngOnInit(){
     this.user = this.webStorageService.retrieve('currentUser') ? new User(this.webStorageService.retrieve('currentUser')) : User.BuildEmpty();
     this.pub = new Publication(this.navParams.get("pub"));
+    this.getById(this.pub._id);    
     this.imgView = this.pub.imgURL[0];
     this.offerAmount = this.pub.minimunPrice;
     this.findHighestoffer();
     this.future = new Date(this.pub.expirationDate);
+
     if(!this.pub.isExpired) {
+      let count = 0;
       this.$counter = Observable.interval(1000).map((x) => {
         this.diff = Math.floor((this.future.getTime() - new Date().getTime()) / 1000);
         //-----------Try To Move it to the get
-        if(this.diff < 0){
-          this.pub.expired = true;
+        if(this.diff < 0 && this.diff != undefined){
+          this.pub.expired = true; 
           this.subscription.unsubscribe();
           this.publicationService.setExpired(this.pub._id).subscribe(
-            (res) => console.log(res),
+            (res) => {
+              this.pub.expired = res.update.expired;
+            },
             (err) => console.log(err),
             () => console.log('PUB EXPIRED')
           );
         }
+        count++;
+        if(count > 5){
+          this.getById(this.pub._id);
+          count = 0;
+        }
         //-------------
         return x;
-      });
-
+      });  
       this.subscription = this.$counter.subscribe((x) => this.message = this.dhms(this.diff));
-    }    
-    
-    
-    
+    }     
   }
 
   ionViewDidLoad() {
@@ -169,8 +176,17 @@ export class PublicationPage {
 		this.navCtrl.push(UserPage);
   };
 
-  private assignWinner() {
-    
-  }
+  public getById(pubId: any) {
+		this.publicationService.getById(pubId).subscribe(
+			(res) => {
+        this.pub = new Publication(res.pub);  
+        this.findHighestoffer();      				
+			},
+			(err) => console.log(err),
+			() => console.log('GET RANDOM')
+		)
+  };
+  
+  
 
 }

@@ -76,10 +76,51 @@ function logReq (req, res, next){
 	next();
 };
 
+function checkNotifications(req, res){
+	UserModel.findById({_id : req.params._id}, function(err, user){
+		if(err){
+			res.send(err);
+		}
+		else{
+			res.json({success: true, message:'User\'s notifications', notifications: user.notifications });					
+		}
+	})
+};
+
+function setAsRead(req, res) {
+
+	// var parsedUserId = ObjectId.fromString( req.body.userId.toString() );
+	// var parsedNotifId = ObjectId.fromString( req.body.notificationId.toString());
+
+	// console.log('USER:    --->' + parsedUserId);
+	// console.log('NOTIF:    --->' + parsedNotifId);
+
+	var query = { _id: req.body.userId, 'notifications._id': req.body.notificationId },
+	update = {'$set': {	'notifications.$.read': true }},
+	options = { multi: false,  new : true };
+
+	UserModel.update(query, update, options, function(err, numAffected){
+		if(err){
+			res.send(err);
+		}
+		else{
+			if(numAffected.nModified === 1) {
+				res.json({success: true, message:'Notification set as read succesfully', update: update });
+			}
+			else {
+				console.log(numAffected.nModified);
+				res.status(412).json({success: false, message:'The notification couldn\'t be set as read', update: null});
+			}			
+		}
+	});
+}
+
 module.exports = {
 	createUser : createUser,
 	logUser : logUser,
 	updateUser : updateUser,
 	deleteUser : deleteUser,
-	logReq: logReq
+	logReq: logReq,
+	checkNotifications: checkNotifications,
+	setAsRead: setAsRead
 };

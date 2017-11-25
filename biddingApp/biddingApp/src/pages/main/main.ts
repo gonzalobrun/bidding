@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MainService } from './main.service';
 import { TaxonomyService } from '../../commons/taxonomy.service';
 import { WebStorageService } from '../../commons/webStorage.service';
+import { NotificationsComponent } from '../../widgets/notifications.component';
 
 import { User } from '../../models/user.model';
 import{ UserPage } from '../../pages/user/user';

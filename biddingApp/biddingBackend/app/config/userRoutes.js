@@ -17,9 +17,15 @@ module.exports = function(app){
 
 	userRoutes.post('/login', [user.logReq, user.logUser]);
 
+	userRoutes.post('/setAsRead', [user.logReq, user.setAsRead]);
+
 	userRoutes.post('/:userId', [user.logReq, user.updateUser]);
 
 	userRoutes.delete('/:userId', [user.logReq, user.deleteUser]);
+
+	userRoutes.get('/checkNotifications/:_id', [user.logReq, user.checkNotifications]);
+
+	
 	
 	app.use('/user', userRoutes);
 }
