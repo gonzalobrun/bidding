@@ -43,7 +43,7 @@ export class NotificationsComponent {
     private checkNotifications(userId: any){
         this.notificationsService.checkNotifications(userId).subscribe(
             (res) => {
-                this.user.notifications = res.notifications;
+                this.user.notifications = res.notifications.reverse();
                 this.setNotifications();
             },
             (err) => console.log(err),

@@ -47,16 +47,18 @@
               <ion-label floating>Description</ion-label>
               <ion-input type="text" required id="description" formControlName="description"></ion-input>
             </ion-item>
-      
+
             <ion-item>
+              <ion-label>Type</ion-label>
+              <ion-select required id="type" formControlName="type">
+                <ion-option *ngFor="let type of types" [value]="type.id">{{type.description}}</ion-option>
+              </ion-select>
+            </ion-item>
+      
+            <ion-item *ngIf="showMinimunPrice">
               <ion-label floating>Minimun Price</ion-label>
               <ion-input type="number" required id="minimunPrice" formControlName="minimunPrice"></ion-input>
             </ion-item>
-
-            <!-- <ion-item>
-              <ion-label>Expiration Date</ion-label>
-              <ion-datetime displayFormat="DD MMM YYYY" formControlName="expirationDate"></ion-datetime>
-            </ion-item> -->
             
             <ion-item>
               <ion-label>Categories</ion-label>
@@ -65,13 +67,6 @@
               </ion-select>
             </ion-item>
       
-            <ion-item>
-              <ion-label>Type</ion-label>
-              <ion-select required id="type" formControlName="type">
-                <ion-option *ngFor="let type of types" [value]="type.id">{{type.description}}</ion-option>
-              </ion-select>
-            </ion-item>
-
             <ion-item>
               <ion-label>Status</ion-label>
               <ion-select required id="status" formControlName="status">

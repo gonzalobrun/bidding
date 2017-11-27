@@ -233,11 +233,22 @@ function setWinnerNotification(pub) {
 	}
 
 function setExpired(req, res) {
+
+	PublicationModel.findById({_id: req.body.pubId}, function(err, pub){
+		
+		if(pub.length){
+			evaluatePublications(pub);
+		}
+
+	});
+
 	var query = { _id: req.body.pubId },
 	update = { expired: true },
 	options = { multi: false,  new : true };
-
+	
 	PublicationModel.update(query, update, options, function(err, numAffected){
+		
+
 		if(err){
 			res.send(err);
 		}

@@ -58,6 +58,26 @@ page-publication {
             height: 100%;
         }
     }
+    .notification-icon{
+        position: absolute;
+        right: 130px;
+        top: 10px;
+        font-size: 30px;
+        transition: color 0.3s ease;        
+
+        &:hover {
+            color: #488aff;
+        }
+
+        &.turned-on {
+            color: #000;
+            animation: notification 1s infinite;
+        }
+    
+        &.turned-off {
+            color: #000;
+        }
+    }
 
     .mini-view{
         margin: 15px;

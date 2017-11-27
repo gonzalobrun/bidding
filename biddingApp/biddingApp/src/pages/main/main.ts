@@ -30,16 +30,15 @@ export class MainPage {
   public provinces: any;
   public cities: any;
   public sortByArr: any = [
-    {id: 1, description: 'Date'},
-    {id: 2, description:'Price'},
-    {id: 3, description:'Creation Date'},
-    {id: 4, description:'Expiration Date'}
+    {id: 1, description: 'Date', valueAccessor: 'creationDate'},
+    {id: 2, description:'Price',  valueAccessor: 'minimunPrice'},
+    {id: 4, description:'Expiration Date', valueAccessor: 'expirationDate'}
   ];
 
   //Filters Varables
   public typeForm: any = [1, 2, 3];
   public statusForm: any = [1, 2];
-  public sortByForm: any = 1;
+  public sortByForm: any = 'creationDate';
   public sortByAscForm: boolean = false;
   public categoriesForm: any = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   public countryForm: any;
@@ -84,10 +83,11 @@ export class MainPage {
   public getWithFilters() {
 		this.mainService.getWithFilters(this.filtersForm.value).subscribe(
 			(res) => {
-				this.pubsArr = res.pubs;				
+        this.pubsArr = res.pubs;
+        			
 			},
 			(err) => console.log(err),
-			() => console.log('GET RANDOM')
+			() => this.sortValue(this.filtersForm.get('sortBy').value)	
 		)
   };
 
@@ -120,20 +120,26 @@ export class MainPage {
       let province = this.taxonomyService.getLocations.filter((p: any) => p.id === val);
       this.cities = province[0].ciudades;
       this.filtersForm.get('city').setValue(null);
+      this.sortValue(this.filtersForm.get('sortBy').value); 
     });
     
     this.filtersForm.valueChanges.subscribe(val => {
-      this.getWithFilters();  
+      this.getWithFilters();
+      this.sortValue(this.filtersForm.get('sortBy').value);      
     });
-  }
+
+    this.filtersForm.get('sortBy').valueChanges.subscribe(val => {
+      this.sortValue(this.filtersForm.get('sortBy').value);
+    });
+  };
 
   public toggleSort() {    
-    return !this.sortByAscForm;
-  }
+    return this.pubsArr.reverse();
+  };
   
   public openPub(pub: any) {
 		this.navCtrl.push(PublicationPage, { pub });
-	}
+	};
   
   public goToLoad() {
 		this.navCtrl.push(LoadPage);
@@ -143,4 +149,9 @@ export class MainPage {
 		this.navCtrl.push(UserPage);
   };
 
+  public sortValue(description: any){    
+    this.pubsArr = this.pubsArr.sort(function(a: any, b: any){
+      return a[description] - b[description]
+    });
+  }
 }

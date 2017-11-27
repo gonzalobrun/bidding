@@ -33,6 +33,7 @@ export class LoadPage {
   public cities: any = [];
   public mainImg: string; 
   public sanitizedUrls: any = [];
+  public showMinimunPrice: any = true;
 
   constructor(
     public navCtrl: NavController, 
@@ -119,7 +120,7 @@ export class LoadPage {
     this.publication.owner.id = this.user._id;
     this.publication.owner.username = this.user.username;
     this.publication.status = this.loadPubForm.get('status').value;
-    this.publication.expirationDate = moment().add(1, 'minutes').format();
+    this.publication.expirationDate = moment().add(10, 'minutes').format();
     this.publication.title = this.loadPubForm.get('title').value;
     this.publication.type = this.loadPubForm.get('type').value;
     
@@ -134,8 +135,19 @@ export class LoadPage {
 
   public onChanges(): void {
     this.loadPubForm.get('province').valueChanges.subscribe(val => {
+      this.loadPubForm.get('city').setValue(null);
       let province = this.taxonomyService.getLocations.filter((p: any) => p.id === val);
       this.cities = province[0].ciudades;
+    });
+
+    this.loadPubForm.get('type').valueChanges.subscribe(val => {
+      if(val != 2) {
+        this.showMinimunPrice = true;
+      }
+      else {
+        this.loadPubForm.get('minimunPrice').setValue(0);
+        this.showMinimunPrice = false;
+      }
     });
   }
 
@@ -155,5 +167,7 @@ export class LoadPage {
   public goToUser() {
 		this.navCtrl.push(UserPage);
   };
+
+  
   
 }

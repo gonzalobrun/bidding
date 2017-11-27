@@ -48,13 +48,13 @@
           <ion-item>
             <ion-label>Sort By</ion-label>
             <ion-select required id="sortBy" formControlName="sortBy">
-              <ion-option *ngFor="let sortBy of sortByArr" [value]="sortBy.id">{{ sortBy.description }}</ion-option>
+              <ion-option *ngFor="let sortBy of sortByArr" [value]="sortBy.valueAccessor">{{ sortBy.description }}</ion-option>
             </ion-select>
           </ion-item>
 
           <ion-item>
             <ion-label class="toggle-label">Descending</ion-label>
-            <ion-toggle formControlName="sortByAsc" (click)="toggleSort()"></ion-toggle>
+            <ion-toggle (click)="toggleSort()"></ion-toggle>
           </ion-item>
         </ion-list>
       </div>

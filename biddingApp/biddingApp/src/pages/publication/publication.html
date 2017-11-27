@@ -2,6 +2,9 @@
 
   <ion-navbar>
     <ion-title>Publication</ion-title>
+    <div class="notification-icon">
+      <notifications></notifications>
+    </div>
     <div class="user-icon">
       <ion-icon name="contact" (click)="goToUser()" *ngIf="user.isLogged"></ion-icon>
     </div> 
@@ -24,14 +27,14 @@
 
       <ion-list>
         <ion-label stacked>Product Status</ion-label>
-        <span>{{pub.status}}</span>
+        <span>{{statusView}}</span>
       </ion-list>
 
       <ion-list>
         <ion-label stacked>Location:</ion-label>
-        <span>{{pub.location.country}}, </span>
-        <span>{{pub.location.province}}, </span>
-        <span>{{pub.location.city}}</span>
+        <span>{{cityView}}, </span>
+        <span>{{provinceView}}, </span>
+        <span>{{countryView}}</span>
       </ion-list>
 
       <ion-list *ngIf="pub.comments.length">

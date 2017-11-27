@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
 import { Publication } from '../../models/publication.model';
 import { User } from '../../models/user.model';
 import{ UserPage } from '../../pages/user/user';
+import { NotificationsComponent } from '../../widgets/notifications.component';
 
 import { TaxonomyService } from '../../commons/taxonomy.service';
 import { WebStorageService } from '../../commons/webStorage.service';
@@ -27,6 +28,11 @@ export class PublicationPage {
   public commentText: string = '';
   public higestOffer: any;
 
+  public countryView: any
+  public provinceView: any;
+  public cityView: any;
+  public statusView: any;
+  
   private future: Date;
   private diff: number;
   private $counter: Observable<number>;
@@ -48,6 +54,7 @@ export class PublicationPage {
     this.imgView = this.pub.imgURL[0];
     this.offerAmount = this.pub.minimunPrice;
     this.findHighestoffer();
+    this.matchTaxonomyData();
     this.future = new Date(this.pub.expirationDate);
 
     if(!this.pub.isExpired) {
@@ -187,6 +194,21 @@ export class PublicationPage {
 		)
   };
   
+  private matchTaxonomyData(){
+    this.countryView = 'Argentina';
+    let _provinceView = this.taxonomyService.getLocations.find((p: any) => {
+      return p.id == this.pub.location.province;
+    });
+    this.provinceView = _provinceView.nombre;
+    let _cityView = _provinceView.ciudades.find((c: any) => {
+      return c.id == this.pub.location.city;
+    });
+    this.cityView = _cityView ? _cityView.nombre : '';
+    let _status = this.taxonomyService.getStatus.find((s: any) => {
+      return s.id == this.pub.status;
+    })
+    this.statusView = _status.description;
+  }
   
 
 }
