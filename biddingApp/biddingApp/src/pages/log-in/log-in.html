@@ -4,9 +4,13 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+  <div class="title-wrapper">
+    <h2 class="title">BIDDING</h2>
+  </div>
+  <div class="view-wrapper">
   <form>
+      <h4 class="subtitle">Log In</h4>
     <ion-list>
               
       <ion-item>
@@ -18,13 +22,12 @@
         <ion-label floating>Password</ion-label>
         <ion-input type="password" required [(ngModel)]="userLoginModel.password" name="password" id="password" #password="ngModel"></ion-input>
       </ion-item>
-
-      <ion-item>
-          <button ion-button (click)="login()" [disabled]="!(username.valid && password.valid)">Login</button>
-          <button ion-button outline (click)="goToSignin()">Register</button>
-      </ion-item>
-
     </ion-list>
+    <div class="button-section">
+        <button ion-button block medium button-padding (click)="login()" [disabled]="!(username.valid && password.valid)">Login</button>
+        <button ion-button block outline medium button-padding (click)="goToSignin()">Register</button>
+    </div>
   </form>
+</div>
 
 </ion-content>

@@ -65,14 +65,12 @@ function getById (req, res) {
 
 	PublicationModel.findById({_id: req.params.pubId}, function(err, pub){
 		
-		if(pub.length){
-			evaluatePublications(pub);
-		}
-
 		if(err) {
 			res.send(err);
 		}
 		else{
+			var pubArr = [pub]
+			evaluatePublications(pubArr);
 			res.json({message: 'Single Pub by ID', pub: pub})
 		}
 	});
@@ -215,7 +213,7 @@ function setWinnerNotification(pub) {
 	
 		var query = { _id: pub.winner.id };
 		var notification = {
-			message: 'You win the publication' + pub.title + ' from the user ' + pub.owner.username +'!',
+			message: 'You win the publication ' + pub.title + ' from the user ' + pub.owner.username +'!',
 			read: false,
 			publicationId: pub._id
 		}
@@ -235,11 +233,10 @@ function setWinnerNotification(pub) {
 function setExpired(req, res) {
 
 	PublicationModel.findById({_id: req.body.pubId}, function(err, pub){
-		
-		if(pub.length){
-			evaluatePublications(pub);
+		if(!err){
+			var pubArr = [pub];
+			evaluatePublications(pubArr);
 		}
-
 	});
 
 	var query = { _id: req.body.pubId },

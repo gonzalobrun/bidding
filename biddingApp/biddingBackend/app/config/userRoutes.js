@@ -24,8 +24,6 @@ module.exports = function(app){
 	userRoutes.delete('/:userId', [user.logReq, user.deleteUser]);
 
 	userRoutes.get('/checkNotifications/:_id', [user.logReq, user.checkNotifications]);
-
-	
 	
 	app.use('/user', userRoutes);
 }

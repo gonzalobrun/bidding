@@ -4,7 +4,11 @@
   </ion-navbar>
 </ion-header>
   
-<ion-content padding>
+<ion-content>
+    <div class="title-wrapper">
+      <h2 class="title">BIDDING</h2>
+    </div>
+    <div class="view-wrapper">
 
   <form [formGroup]="signInForm">
     <ion-list>
@@ -54,11 +58,9 @@
           <ion-option *ngFor="let city of cities" [value]="city.id">{{ city.nombre }}</ion-option>
         </ion-select>
       </ion-item>
-
-      <ion-item>
-          <button ion-button outline (click)="register()" [disabled]="!signInForm.valid" >Register</button>
-      </ion-item>
-
     </ion-list>
+      <button ion-button block (click)="register()" [disabled]="!signInForm.valid" >Register</button>
+    
   </form>  
+</div>
 </ion-content>

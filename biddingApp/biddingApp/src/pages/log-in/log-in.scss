@@ -1,3 +1,47 @@
 page-log-in {
 
+
+    .view-wrapper{
+        margin: auto;
+        margin-top:15px;
+        padding: 30px 15px 30px;;
+        width: 500px;
+        background-color: #fefefe;
+        -webkit-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        -moz-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+    }
+
+    .title{
+        font-size: 60px;
+        color: #488aff;
+    }
+
+    .subtitle{
+        font-size: 30px;
+        margin-bottom: 23px;
+        padding-bottom: 7px;
+        border-bottom: solid 1px #dedede;
+        color: #488aff;
+    }
+
+    .button-section{
+        margin: 10px 0;
+    }
+
+    .button-padding{
+        margin-bottom: 15px;
+    }
+
+    .title-wrapper{
+        margin: auto;
+        margin-top:30px;
+        width: 500px;
+        text-align: center;
+        background-color: #fefefe;
+        -webkit-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        -moz-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+    }
+    
 }

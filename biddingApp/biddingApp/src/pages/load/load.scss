@@ -3,14 +3,25 @@ page-load {
     //TODO: Duplicated class on main.scss
     .view-wrapper{
         display: flex;
+        align-items: stretch;   
+        background-color: #fefefe;
+        border: none;
+        margin: 15px;
+		-webkit-box-shadow: 1px 1px 7px 2px rgba(230,230,230,1);
+		-moz-box-shadow: 1px 1px 7px 2px rgba(230,230,230,1);
+		box-shadow: 1px 1px 7px 2px rgba(230,230,230,1);
     }
 
     .img-section{
-        width: 40%;
+        width: 50%;
+        padding: 15px;
+        margin: 15px;
     }
 
     .form-section{
-        width: 60%;
+        width: 50%;
+        padding: 15px;
+        margin: 15px;
     }
 
     //TODO: This code is duplicated on main.scss
@@ -44,7 +55,13 @@ page-load {
         font-size: 30px;
         margin-bottom: 23px;
         padding-bottom: 7px;
-        border-bottom: solid 1px #dedede
+        border-bottom: solid 1px #dedede;
+        color: #488aff;
     }
     
+    .item-md.item-toggle {
+        .item-inner{
+            border-bottom: solid 1px #dedede !important;
+        }
+    }
 }

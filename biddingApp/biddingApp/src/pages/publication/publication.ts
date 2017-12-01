@@ -24,7 +24,7 @@ export class PublicationPage {
   public countDown: any;  
   public imgView: any;
   public expDate: any;
-  public offerAmount: any;
+  public offerAmount: any = null;
   public commentText: string = '';
   public higestOffer: any;
 
@@ -68,16 +68,13 @@ export class PublicationPage {
           this.publicationService.setExpired(this.pub._id).subscribe(
             (res) => {
               this.pub.expired = res.update.expired;
+              this.getById(this.pub._id);
             },
             (err) => console.log(err),
             () => console.log('PUB EXPIRED')
           );
         }
-        count++;
-        if(count > 5){
-          this.getById(this.pub._id);
-          count = 0;
-        }
+        
         //-------------
         return x;
       });  
@@ -131,7 +128,7 @@ export class PublicationPage {
       () => {
         this.pub.offerers.push(offerer); 
         this.findHighestoffer();
-        this.offerAmount = undefined;
+        this.offerAmount = null;
         console.log('OFFERER ADDED')
       }
     )
@@ -152,7 +149,7 @@ export class PublicationPage {
       () => {
         this.pub.offerers.push(offerer); 
         this.findHighestoffer();
-        this.offerAmount = undefined;
+        this.offerAmount = null;
         console.log('OFFERER ADDED')
       }
     )  
@@ -210,5 +207,27 @@ export class PublicationPage {
     this.statusView = _status.description;
   }
   
+  public disabledOffer(){
+    //if(this.pub.isAuction){
+      if(this.user.isLogged && !this.pub.isExpired && (this.offerAmount != null)){
+        return false;
+      }
+      else{
+        return true;
+      }
+    //}
+  }
+
+  public disabledApply(){
+    //if(this.pub.isAuction){
+      if(this.user.isLogged && !this.pub.isExpired){
+        return false;
+      }
+      else{
+        return true;
+      }
+    //}
+  }
+
 
 }

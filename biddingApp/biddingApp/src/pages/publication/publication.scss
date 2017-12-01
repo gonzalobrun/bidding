@@ -1,7 +1,30 @@
 page-publication {
 
     .view-wrapper {
+        background-color: #fefefe;
+        border: none;
+        padding: 30px;
+        margin: 15px;
+		-webkit-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        -moz-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        font-size: 18px;
+    }
+
+    .info-weapper{
         display: flex;
+        align-items: stretch;
+    }
+
+    .title-wrapper{
+        background-color: #fefefe;
+        border: none;
+        padding: 15px 40px;
+        margin: 15px;
+        -webkit-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        -moz-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+    
     }
 
     .pub-section {
@@ -27,21 +50,37 @@ page-publication {
         }
     }
 
-    .subtitle {
+    .subtitle{
         font-size: 30px;
         margin-bottom: 23px;
         padding-bottom: 7px;
-        border-bottom: solid 1px #dedede
-    }
-
-    .title-section {
-        width: 100%;
-        display:block;
+        border-bottom: solid 1px #dedede;
+        color: #488aff;
     }
 
     .info-section {
         width: 30%;
         margin: 15px;
+
+        .item-data{
+
+            margin: 20px 0;
+
+            .data-label{
+                display:block;
+                font-size: 16px;
+                color: #666;
+            }
+            .data-value{
+                display:block;
+                font-size: 20px;
+
+                &.countdown{
+                    font-weight: 600;
+                    animation: blinkTime 1s ease 0s alternate infinite;
+                }
+            }
+        }
     }
 
     .picture-section {
@@ -92,4 +131,154 @@ page-publication {
         padding: 0;
     }
 
+    .comments-wrapper{
+        display: flex;
+        align-items: stretch;
+        flex-wrap: wrap;
+        flex-direction: column;
+        background-color: #fefefe;
+        border: none;
+        padding: 30px;
+        margin: 15px;
+		-webkit-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        -moz-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        font-size: 18px;
+        justify-content: space-between;
+
+        .comments{
+            display: block;
+            .comment{
+                margin-bottom: 10px;
+                .user-comment{
+                    display: block;
+                    font-size: 14px;
+                    color: #666;
+                }
+                .text-comment{
+                    display: block;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+
+    .apply-wrapper{
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        background-color: #fefefe;
+        border: none;
+        padding: 30px;
+        margin: 15px;
+		-webkit-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        -moz-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        font-size: 18px;
+
+        .apply-section{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+
+            .offerers-count{
+                min-width: 150px;
+                line-height: 60px;
+                .amount{
+                    font-size: 28px;
+                    font-weight: 600;
+                    animation: blink 1s infinite;
+                }
+            }
+            .apply-button{
+                min-width: 150px;
+                line-height: 60px;
+
+
+            }
+            .title{
+                font-size: 28px;
+                color: rgb(102, 102, 102);
+
+            }
+        }
+
+        .offer-section{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            .higher-offer{
+
+                min-width: 150px;
+                line-height: 60px;
+
+                .amount{
+                    font-size: 28px;
+                    font-weight: 600;
+                    animation: blink 1s infinite;
+                }
+            }
+            .amount-section{
+                min-width: 150px;
+                line-height: 60px;
+
+                .input{
+                    display: inline;
+
+                    input{
+                        border:none;
+                        font-size: 28px;
+                        text-align: right;
+                        color: rgb(0, 173, 0);
+                        font-weight: 800;
+                        background-color: transparent;
+                        border-bottom: solid 1px #ccc
+                    }
+                }
+
+            }
+            .offer-button{
+                min-width: 150px;
+
+            }
+            .title{
+                font-size: 28px; 
+                color: rgb(102, 102, 102);
+            }
+        }
+    }
+}
+
+@keyframes blink {
+    0% {
+        color: rgb(138, 0, 0);
+    }
+    50%{
+        color: rgb(226, 0, 0);
+    }
+    100% {
+        color: rgb(138, 0, 0);
+    }
+}
+
+@keyframes blinkTime {
+    0% {
+        color: rgb(255, 255, 255);
+    }
+    20%{
+        color: rgb(226, 0, 0);
+    }
+    40% {
+        color: rgb(255, 255, 255);
+    }
+    60% {
+        color: rgb(226, 0, 0);
+    }
+    80% {
+        color: rgb(255, 255, 255);
+    }
+    100% {
+        color: rgb(226, 0, 0);
+    }
 }
