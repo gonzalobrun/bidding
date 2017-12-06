@@ -2,9 +2,14 @@
 var mongoose = require('mongoose');
 var Publication = require('../models/publication');
 var PublicationModel = mongoose.model('Publications');
+// var multer  = require('multer');
+// var upload = multer({ dest: 'upload/' });
+var fs = require('fs');
 
 var User = require('../models/user');
 var UserModel = mongoose.model('Users');
+
+
 
 function createPub (req, res){
 
@@ -360,6 +365,21 @@ function addOfferer (req, res){
 	);
 };
 
+function saveImg (req, res){
+	// When using the "single"
+	// data come in "req.file" regardless of the attribute "name".
+	var tmp_path = req.file.path;
+
+	/** The original name of the uploaded file
+		stored in the variable "originalname". **/
+	var target_path = 'upload/' + req.file.originalname;
+	/** A better way to copy the uploaded file. **/
+	var src = fs.createReadStream(tmp_path);
+	var dest = fs.createWriteStream(target_path);
+	src.pipe(dest);
+	src.on('end', function() { res.send('complete'); });
+	src.on('error', function(err) { res.send('error'); });
+}
 
 module.exports = {
 	randomPub : randomPub,
@@ -371,5 +391,6 @@ module.exports = {
 	addOfferer: addOfferer,
 	getWithFilters: getWithFilters,
 	getByUser: getByUser,
-	setExpired: setExpired
+	setExpired: setExpired,
+	saveImg: saveImg
 };

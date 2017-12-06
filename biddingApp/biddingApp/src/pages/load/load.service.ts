@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, URLSearchParams } from '@angular/http';
+import { Http, Response, URLSearchParams, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { Publication } from '../../models/publication.model';
+import { RequestOptionsArgs } from '@angular/http';
 
 @Injectable()
 export class LoadService {
@@ -36,5 +37,32 @@ export class LoadService {
                return new Publication(res.json().pub)
             })
             .catch((err: any) =>  Observable.throw(err));
+    }
+
+    saveImg(file) {
+        
+        if(file) {
+            
+            let formData:FormData = new FormData();
+            formData.append('file', file, file.name);
+    
+            
+            let myH = new Headers();
+            /** No need to include Content-Type in Angular 4 */
+            //_headers.append('Content-Type', 'multipart/form-data');
+            //_headers.append('Accept', 'application/json');
+
+            let optionsArgs:RequestOptionsArgs = {headers: myH};
+            
+    
+            let options = new RequestOptions(optionsArgs);
+            this.http.post('http://localhost:8080/pub/saveImg', formData, options)
+              .map(res => res.json())
+              .catch(error => Observable.throw(error))
+              .subscribe(
+                  data => console.log('success'),
+                  error => console.log(error)
+              )
+        }
     }
 }

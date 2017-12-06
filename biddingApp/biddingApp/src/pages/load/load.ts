@@ -152,12 +152,19 @@ export class LoadPage {
   }
 
   public fileAdd(event) {
-    const url = "C:/Users/Development/Desktop/storage/pub_pictures/";
+    // const url = "C:/Users/Development/Desktop/storage/pub_pictures/";
+    // let fileList: FileList = event.target.files;
+    // Array.from(fileList).forEach(file => {
+    //   let imgUrl = url + file.name;
+    //   this.publication.imgURL.push(imgUrl);
+    // });
+
     let fileList: FileList = event.target.files;
-    Array.from(fileList).forEach(file => {
-      let imgUrl = url + file.name;
-      this.publication.imgURL.push(imgUrl);
-    });
+    if(fileList.length > 0) {
+        let file: File = fileList[0];
+        this.loadService.saveImg(file);
+    }
+
   }
 
   public showImg(imgUrl){
@@ -167,7 +174,4 @@ export class LoadPage {
   public goToUser() {
 		this.navCtrl.push(UserPage);
   };
-
-  
-  
 }

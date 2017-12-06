@@ -98,7 +98,8 @@
               <h4 class="subtitle">Images</h4>
             <ion-item>
                 <ion-label color="primary" stacked>Browse</ion-label>
-                <ion-input type="file"  (change)="fileAdd($event)" placeholder="Upload file" accept="image/*" multiple></ion-input>
+                <ion-input type="file" name="file" (change)="fileAdd($event)" placeholder="Upload file" accept="image/*" multiple></ion-input>
+              
             </ion-item>
             <div class="img-viewer-section">
         

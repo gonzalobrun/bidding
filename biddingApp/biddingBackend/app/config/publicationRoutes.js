@@ -1,6 +1,8 @@
 var express = require('express');
 var publicationRoutes = express.Router();
 var publication = require('../controllers/publicationController');
+var multer  = require('multer');
+var upload = multer({ dest: 'upload/'});
 
 //MIDDLEWARES
 publicationRoutes.param('id', function(req, res, next, password){
@@ -38,6 +40,8 @@ module.exports = function(app) {
 	publicationRoutes.post('/addOfferer/:pubId', [publication.logReq, publication.addOfferer] );
 
 	publicationRoutes.post('/setExpired', [publication.logReq, publication.setExpired]);
+
+	publicationRoutes.post('/saveImg', upload.single('file'), [publication.logReq, publication.saveImg]);
 
 	app.use('/pub', publicationRoutes);
 }

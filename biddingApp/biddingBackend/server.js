@@ -7,8 +7,6 @@ var morgan = require('morgan');
 var mongoose = require('mongoose');
 
 
-
-
 //I should import the models once. 
 //var User = require('./app/models/user');
 var userRoutes = require('./app/config/userRoutes');
@@ -33,6 +31,9 @@ app.use(function(req, res, next) {
 	next();
 });
 app.use(morgan('dev'));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 userRoutes(app);
 publicationRoutes(app);
