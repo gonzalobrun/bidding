@@ -3,8 +3,6 @@ import { Http, Response, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-import { User } from '../models/user.model';
-
 @Injectable()
 export class NotificationsService {
 

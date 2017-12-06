@@ -8,7 +8,6 @@ import * as moment from 'moment';
 import { TaxonomyService } from '../../commons/taxonomy.service';
 import { WebStorageService } from '../../commons/webStorage.service';
 import { LoadService } from './load.service';
-import { NotificationsComponent } from '../../widgets/notifications.component';
 
 import{ UserPage } from '../../pages/user/user';
 import { MainPage } from '../../pages/main/main';

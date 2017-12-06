@@ -2,8 +2,6 @@
 var mongoose = require('mongoose');
 var Publication = require('../models/publication');
 var PublicationModel = mongoose.model('Publications');
-// var multer  = require('multer');
-// var upload = multer({ dest: 'upload/' });
 var fs = require('fs');
 
 var User = require('../models/user');
@@ -369,7 +367,7 @@ function saveImg (req, res){
 	// When using the "single"
 	// data come in "req.file" regardless of the attribute "name".
 	var tmp_path = req.file.path;
-
+	console.log(req.file);
 	/** The original name of the uploaded file
 		stored in the variable "originalname". **/
 	var target_path = 'upload/' + req.file.originalname;

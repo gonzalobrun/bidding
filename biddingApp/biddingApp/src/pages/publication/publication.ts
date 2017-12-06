@@ -6,7 +6,6 @@ import { Observable, Subscription } from 'rxjs/Rx';
 import { Publication } from '../../models/publication.model';
 import { User } from '../../models/user.model';
 import{ UserPage } from '../../pages/user/user';
-import { NotificationsComponent } from '../../widgets/notifications.component';
 
 import { TaxonomyService } from '../../commons/taxonomy.service';
 import { WebStorageService } from '../../commons/webStorage.service';
@@ -58,7 +57,6 @@ export class PublicationPage {
     this.future = new Date(this.pub.expirationDate);
 
     if(!this.pub.isExpired) {
-      let count = 0;
       this.$counter = Observable.interval(1000).map((x) => {
         this.diff = Math.floor((this.future.getTime() - new Date().getTime()) / 1000);
         //-----------Try To Move it to the get
