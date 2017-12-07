@@ -12,7 +12,7 @@ export class LoadService {
         private http: Http
     ){}
 
-    createPub(pub: Publication): Observable<Publication> {
+    createPub(pub: Publication, file: File): Observable<Publication> {
 
         let params: URLSearchParams = new URLSearchParams();
 
@@ -32,6 +32,8 @@ export class LoadService {
         params.set('type', pub.type.toString());
         params.set('location', pub.location.toString());
 
+        //this.saveImg(file, pub._id);
+
         return this.http.post('http://localhost:8080/pub', params)
             .map((res: Response) => {
                return new Publication(res.json().pub)
@@ -39,13 +41,15 @@ export class LoadService {
             .catch((err: any) =>  Observable.throw(err));
     }
 
-    saveImg(file) {
+    saveImg(file, pubId) {
         
         if(file) {
+            let url = 'http://localhost:8080/pub/saveImg/';
+            let _pubId = pubId;
+            let fullUrl = url.concat(_pubId)
             
             let formData:FormData = new FormData();
-            formData.append('file', file, file.name);
-    
+            formData.append('file', file, file.name);    
             
             let myH = new Headers();
             /** No need to include Content-Type in Angular 4 */
@@ -56,7 +60,7 @@ export class LoadService {
             
     
             let options = new RequestOptions(optionsArgs);
-            this.http.post('http://localhost:8080/pub/saveImg', formData, options)
+            this.http.post(fullUrl, formData, options)
               .map(res => res.json())
               .catch(error => Observable.throw(error))
               .subscribe(

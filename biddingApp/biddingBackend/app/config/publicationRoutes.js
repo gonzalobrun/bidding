@@ -41,7 +41,7 @@ module.exports = function(app) {
 
 	publicationRoutes.post('/setExpired', [publication.logReq, publication.setExpired]);
 
-	publicationRoutes.post('/saveImg', upload.single('file'), [publication.logReq, publication.saveImg]);
+	publicationRoutes.post('/saveImg/:pubId', upload.single('file'), [publication.logReq, publication.saveImg]);
 
 	app.use('/pub', publicationRoutes);
 }

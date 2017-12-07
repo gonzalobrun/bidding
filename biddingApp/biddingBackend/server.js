@@ -32,6 +32,8 @@ app.use(function(req, res, next) {
 });
 app.use(morgan('dev'));
 
+app.use('/upload',express.static(path.join(__dirname, '/upload')));
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -40,7 +42,7 @@ publicationRoutes(app);
 taxonomyRoutes(app)
 
 app.use(function(req, res){
-	res.status(500).send('Internal Server Error');
+	res.status(500).send('Internal Server Error...');
 });
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})

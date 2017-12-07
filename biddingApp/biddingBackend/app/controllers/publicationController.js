@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Publication = require('../models/publication');
 var PublicationModel = mongoose.model('Publications');
 var fs = require('fs');
-
+var path = require('path');
 var User = require('../models/user');
 var UserModel = mongoose.model('Users');
 
@@ -367,16 +367,37 @@ function saveImg (req, res){
 	// When using the "single"
 	// data come in "req.file" regardless of the attribute "name".
 	var tmp_path = req.file.path;
-	console.log(req.file);
 	/** The original name of the uploaded file
 		stored in the variable "originalname". **/
-	var target_path = 'upload/' + req.file.originalname;
+	var target_path = 'upload/' +  req.file.filename + path.extname(req.file.originalname);
 	/** A better way to copy the uploaded file. **/
 	var src = fs.createReadStream(tmp_path);
 	var dest = fs.createWriteStream(target_path);
+	var query = { _id: req.params.pubId },
+	update = { imgURL: [ 'http://localhost:8080/' + target_path] },
+	options = { multi: false,  new : true };
+
 	src.pipe(dest);
-	src.on('end', function() { res.send('complete'); });
-	src.on('error', function(err) { res.send('error'); });
+	//src.on('end', function() { res.send({ success: true, message: 'File Uploaded'}); });
+	src.on('error', function(err) { res.send({ success: false, message: err}); });
+
+	
+	
+	PublicationModel.update(query, update, options, function(err, numAffected){		
+
+		if(err){
+			res.send(err);
+		}
+		else{
+			// if(numAffected.nModified === 1) {
+			// 	res.json({success: true, message:'Img Loaded', update: update });
+			// }
+			// else {
+			// 	console.log(numAffected.nModified);
+			// 	res.status(412).json({success: false, message:'Somethings goes wrong', update: null});
+			// }			
+		}
+	});
 }
 
 module.exports = {

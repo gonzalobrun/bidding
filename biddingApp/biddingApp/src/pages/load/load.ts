@@ -33,6 +33,7 @@ export class LoadPage {
   public mainImg: string; 
   public sanitizedUrls: any = [];
   public showMinimunPrice: any = true;
+  public fileForLoad: File;
 
   constructor(
     public navCtrl: NavController, 
@@ -123,12 +124,14 @@ export class LoadPage {
     this.publication.title = this.loadPubForm.get('title').value;
     this.publication.type = this.loadPubForm.get('type').value;
     
-    this.loadService.createPub(this.publication).subscribe(
+    this.loadService.createPub(this.publication, this.fileForLoad).subscribe(
       (res: any) => {
-        this.navCtrl.push(MainPage);
+        this.loadService.saveImg(this.fileForLoad, res._id);
       },
       (err) => console.log(err),
-      () => console.log('Publicated')
+      () => {
+        this.navCtrl.push(MainPage);
+      }
     );
   }
 
@@ -151,17 +154,10 @@ export class LoadPage {
   }
 
   public fileAdd(event) {
-    // const url = "C:/Users/Development/Desktop/storage/pub_pictures/";
-    // let fileList: FileList = event.target.files;
-    // Array.from(fileList).forEach(file => {
-    //   let imgUrl = url + file.name;
-    //   this.publication.imgURL.push(imgUrl);
-    // });
 
     let fileList: FileList = event.target.files;
     if(fileList.length > 0) {
-        let file: File = fileList[0];
-        this.loadService.saveImg(file);
+        this.fileForLoad = fileList[0];
     }
 
   }

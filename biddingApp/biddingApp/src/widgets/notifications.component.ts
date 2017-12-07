@@ -6,7 +6,6 @@ import { WebStorageService } from '../commons/webStorage.service';
 import { User } from '../models/user.model';
 import { Observable } from 'rxjs/Observable';
 
-
 @Component({
   selector: 'notifications',
   templateUrl: './notifications.component.html'
@@ -54,7 +53,7 @@ export class NotificationsComponent {
     }
 
     private timerNotifications(){
-        this.timer = Observable.interval(10000);
+        this.timer = Observable.interval(500000);
         this.timer.subscribe(x =>{
           this.checkNotifications(this.user._id);
         });
