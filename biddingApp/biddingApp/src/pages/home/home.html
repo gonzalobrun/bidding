@@ -7,8 +7,9 @@
   </ion-navbar>
 </ion-header> -->
 
-<ion-content >
+<ion-content>
   <div class="view-wrapper">
+    
     <div class="principal-section">
       <div class="title-section">
         <h2 class="title">BIDDING</h2>
@@ -19,53 +20,27 @@
           <button *ngIf="!user.isLogged" ion-button outline block (click)="goToSignin()">Sign in</button>
           <button *ngIf="user.isLogged" ion-button block (click)="goToMain()">Search</button>
       </div>
-        <!-- <ion-grid>
-            <ion-row>
-              <ion-col col-8>
-                <h2 class="title">Bidding</h2>
-              </ion-col>
-        
-              <ion-col col-2 *ngIf="!user.isLogged">
-                <button ion-button block (click)="goToLogin()">Login</button>
-              </ion-col>
-        
-              <ion-col col-2 *ngIf="!user.isLogged">
-                <button ion-button outline block (click)="goToSignin()">Sign in</button>
-              </ion-col>
-        
-              <ion-col col-2 *ngIf="user.isLogged">
-                <h4>Hello {{user.name}}!</h4>
-              </ion-col>
-        
-              <ion-col col-2 *ngIf="user.isLogged">
-                <button ion-button outline block (click)="goToMain()">Search</button>
-              </ion-col>
-            </ion-row>
-        
-            <ion-row>
-              <ion-col col-12>
-               
-              </ion-col>
-            </ion-row>  
-          </ion-grid> -->
     </div>
     
     <div class="publications-section">
         <div  class="card-block" *ngFor="let pub of pubsArr">
-            <ion-card (click)="openPub(pub)">
-             <!--  <img src="../content/img/relax.jpg"> -->
-              <ion-card-content>
-                <ion-card-title>
+          <ion-card (click)="openPub(pub)">
+            <div class="picture-view">
+                <img [src]="pub.imgURL[0]"/>
+            </div>
+            
+            <ion-card-content>
+              <ion-card-title>
                   {{pub.title}}
-                  </ion-card-title>
-                <p>
+                </ion-card-title>
+              <p>
                   {{pub.description}}
-                </p>
-              </ion-card-content>
-            </ion-card>
-          </div>
+              </p>
+            </ion-card-content>
+          </ion-card>
+          
+        </div>
     </div>
-    
     
   </div>
 </ion-content>

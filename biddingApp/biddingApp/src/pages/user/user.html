@@ -6,13 +6,30 @@
 
 </ion-header>
 
-<ion-content padding> 
+<ion-content>
+
+  <div class="statistics-section">
+    <h4 class="subtitle">Your Statistics</h4>
+    <div class="chart-wrapper">
+      <div class="chart-container">
+        <h4 class="chart-title">Amount of Publications {{pubsArr.length}}</h4>
+        <price-chart [price]="priceData"></price-chart>
+      </div>
+      
+
+      <div class="chart-container">
+        <h4 class="chart-title">Types of Publications {{pubsArr.length}}</h4>
+        <donut-chart [types]="typesData"></donut-chart>
+      </div>
+    </div>
+  </div>
 
   <div class="user-section">
     <h4 class="subtitle">Profile</h4>
-    <form [formGroup]="editUserForm">
+    <div class="form-wrapper">
+      <form [formGroup]="editUserForm">
         <ion-list>
-            
+
           <ion-item>
             <ion-label floating>Name</ion-label>
             <ion-input type="text" required id="name" formControlName="name"></ion-input>
@@ -22,55 +39,57 @@
             <ion-label floating>Username</ion-label>
             <ion-input type="text" required id="username" formControlName="username"></ion-input>
           </ion-item>
-    
+
           <ion-item>
             <ion-label floating>Password</ion-label>
             <ion-input type="password" id="password" formControlName="password"></ion-input>
           </ion-item>
-    
+
           <ion-item>
             <ion-label floating>Country</ion-label>
             <ion-select required id="country" formControlName="country">
               <ion-option *ngFor="let country of countries" [(value)]="country.id">{{ country.name }}</ion-option>
             </ion-select>
           </ion-item>
-    
+
           <ion-item>
             <ion-label floating>Province</ion-label>
             <ion-select required id="province" formControlName="province">
               <ion-option *ngFor="let province of provinces" [(value)]="province.id">{{ province.nombre }}</ion-option>
             </ion-select>
           </ion-item>
-    
+
           <ion-item>
             <ion-label floating>City</ion-label>
             <ion-select required id="city" formControlName="city">
               <ion-option *ngFor="let city of cities" [(value)]="city.id">{{ city.nombre }}</ion-option>
             </ion-select>
           </ion-item>
-    
-          <ion-item>
-              <button ion-button outline (click)="save()" [disabled]="!editUserForm.valid">Save</button>
-          </ion-item>
-    
+
+          <div class="button-wrapper">
+            <button ion-button outline (click)="save()" [disabled]="!editUserForm.valid">Save</button>
+          </div>
+
         </ion-list>
-    </form>
+      </form>
+    </div>
   </div>
 
   <div class="publications-section">
     <h4 class="subtitle">Your Publications</h4>
-    <div  class="card-block" *ngFor="let pub of pubsArr">
+    <div class="card-block" *ngFor="let pub of pubsArr">
       <ion-card (click)="goToDetails(pub)">
-      <!--  <img src="../content/img/relax.jpg"> -->
+        <!--  <img src="../content/img/relax.jpg"> -->
         <ion-card-content>
           <ion-card-title>
             {{pub.title}}
-            </ion-card-title>
+          </ion-card-title>
           <p>
             {{pub.description}}
           </p>
         </ion-card-content>
       </ion-card>
     </div>
-  </div>  
+  </div>
+
 </ion-content>

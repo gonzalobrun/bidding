@@ -25,7 +25,7 @@ export class NotificationsComponent {
     ) {}
 
     ngOnInit(){
-        this.user = new User(this.webStorageService.retrieve('currentUser'));
+        this.user = this.webStorageService.retrieve('currentUser') ? new User(this.webStorageService.retrieve('currentUser')) : User.BuildEmpty();
         this.checkNotifications(this.user._id);
         this.timerNotifications()
         this.setNotifications();

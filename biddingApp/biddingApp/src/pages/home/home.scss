@@ -55,14 +55,23 @@ page-home {
 		display: inline-block;
 		
 		&:hover {
-            cursor: pointer;
+			cursor: pointer;
+			opacity: 0.7;
 		}
 		
+		.picture-view{
+			
+			img{
+				height: 250px;
+			}
+		}
 
         ion-card ion-card-content{
+			min-height: 150px;
             &:hover {
                 ion-card-title, p{
-                    color: #488aff;
+					color: #488aff;
+					opacity: .6;
                 }             
                 
             }

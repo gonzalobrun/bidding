@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EditPubPage } from '../edit-pub/edit-pub';
@@ -25,6 +25,8 @@ export class UserPage {
   public userCountry: any;
   public userProvince: any;
   public userCity: any;
+  public typesData: any = [];
+  public priceData = [{name: 'a', value: 1},{name: 'B', value: 2}]
 
   constructor(
     public navCtrl: NavController, 
@@ -111,7 +113,10 @@ export class UserPage {
 
   private getbyUser() {
     this.userService.getByUser(this.user).subscribe(
-      (res) => {this.pubsArr = res},
+      (res) => {
+        this.pubsArr = res;
+        this.countTypes();
+      },
       (err) => console.log(err),
       () => console.log('GET USER\'S PUB')
     )
@@ -123,6 +128,45 @@ export class UserPage {
 
   public openPub(pub){
     console.log(pub);
+  }
+
+  private countTypes(){
+
+    let auctionCount: number = 0;
+    let serviceAuctionCount: number = 0;
+    let giftCount: number = 0;
+
+    this.pubsArr.forEach(element => {
+      switch(element.type) { 
+        case 1: { 
+          auctionCount = auctionCount + 1;  
+           break; 
+        } 
+        case 2: { 
+          giftCount = giftCount + 1; 
+           break; 
+        } 
+        case 3: { 
+          serviceAuctionCount = serviceAuctionCount + 1; 
+          break; 
+       } 
+     } 
+     
+    });
+
+    this.typesData = [
+      {
+        name: 'Auction',
+        value: auctionCount
+      },{
+        name: 'Gift',
+        value: giftCount
+      },{
+        name: 'Service Auction',
+        value: serviceAuctionCount
+      }
+    ]
+
   }
 
 }

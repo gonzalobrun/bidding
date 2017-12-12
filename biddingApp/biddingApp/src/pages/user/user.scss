@@ -1,73 +1,76 @@
 page-user {
-    // .view-wrapper {
-    //     display: flex;
-    // }
 
-    .pub-section {
-        width: 80%;
-        border-left: solid 1px #dedede;
-        margin-left: 20px;
-        padding-left: 20px;    
-    }
-
-    .filters-section {
-        width: 20%;
-    }
-
-    .user-icon {
-        position: absolute;
-        right: 30px;
-        top: 10px;
-        font-size: 30px;
-        transition: color 0.3s ease;        
-        
-        &:hover {
-            color: #488aff;
-        }
-    }
-
-    .subtitle {
+    .subtitle{
         font-size: 30px;
         margin-bottom: 23px;
         padding-bottom: 7px;
-        border-bottom: solid 1px #dedede
+        border-bottom: solid 1px #dedede;
+        color: #488aff;
     }
 
-    .title-section {
-        width: 100%;
-        display:block;
+    .statistics-section {
+        background-color: #fefefe;
+        border: none;
+        padding: 30px;
+        margin: 15px;
+        -webkit-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        -moz-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        font-size: 18px;
+
+        .chart-wrapper{
+            display: flex;
+            justify-content: space-between;
+            .chart-container{
+                width: 33%;
+
+                .chart-title{
+                    font-size: 18px;
+                    text-align: center;
+                }
+            }
+        }
     }
 
     .user-section {
-        display: block;
+        background-color: #fefefe;
+        border: none;
+        padding: 30px;
         margin: 15px;
+        -webkit-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        -moz-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        font-size: 18px;
+
+        .form-wrapper{
+            display: flex;
+            align-items: stretch;
+            width: 100%;
+
+            form{
+                width: 100%;
+            }
+        }
     }
 
     .publications-section {
-        display: block;
+        background-color: #fefefe;
+        border: none;
+        padding: 30px;
         margin: 15px;
+        -webkit-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        -moz-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        font-size: 18px;
     }
 
-    .picture-view{
-        width: 100%;
-        margin: 15px;
-
-        img{
-            width: 100%;
-            height: 100%;
-        }
-    }
-
-    .mini-view{
-        margin: 15px;
-
-        img {
-            width: 40px;
-            height: 40px;
-        }
+    .button-wrapper{
+        text-align: right;
+        padding-top: 20px;
     }
 
     .item.item-md {
         padding: 0;
     }
+    
 }

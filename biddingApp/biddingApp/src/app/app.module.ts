@@ -6,6 +6,8 @@ import { PopoverModule } from 'ngx-bootstrap';
 import { ModalModule } from 'ngx-bootstrap';
 
 import { NotificationsComponent } from '../widgets/notifications.component';
+import { DonutChartComponent } from '../widgets/donut-chart/donut-chat.component';
+import { PriceChartComponent } from '../widgets/price-chart/price-chart.component';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -44,7 +46,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PublicationPage,
     UserPage,
     EditPubPage,
-    NotificationsComponent
+    NotificationsComponent,
+    DonutChartComponent,
+    PriceChartComponent
   ],
   imports: [
     BrowserModule,

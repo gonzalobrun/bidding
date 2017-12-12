@@ -106,7 +106,6 @@ export class PublicationPage {
     if(!this.pub.isExpired){
       this.subscription.unsubscribe();
     }
-      
   }
 
   public showImg(img) {

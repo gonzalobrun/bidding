@@ -11,6 +11,7 @@ import{ UserPage } from '../../pages/user/user';
 
 import { LoadPage } from '../load/load';
 import { PublicationPage } from '../publication/publication';
+import { Publication } from '../../models/publication.model';
 
 @Component({
   selector: 'page-main',
@@ -19,7 +20,7 @@ import { PublicationPage } from '../publication/publication';
 export class MainPage {
 
   public user: User;
-  public pubsArr: any;
+  public pubsArr: any = [];
   public storedUser: any;
   public filtersForm: FormGroup;
   public categories: any;
@@ -82,7 +83,10 @@ export class MainPage {
   public getWithFilters() {
 		this.mainService.getWithFilters(this.filtersForm.value).subscribe(
 			(res) => {
-        this.pubsArr = res.pubs;
+        res.pubs.forEach((p: any) => {
+          let _pub = new Publication(p)
+          this.pubsArr.push(_pub);
+        });
         			
 			},
 			(err) => console.log(err),

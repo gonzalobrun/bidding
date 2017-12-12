@@ -3,7 +3,7 @@
 
     <ion-title>Publication</ion-title>
 
-    <div class="notification-icon">
+    <div class="notification-icon"  *ngIf="user.isLogged">
       <notifications></notifications>
     </div>
 
@@ -15,6 +15,7 @@
 </ion-header>
 
 <ion-content>
+  
   <section class="apply-wrapper">
 
     <div class="apply-section" *ngIf="pub.isDonation">
@@ -102,9 +103,9 @@
           <img [src]="imgView">
         </div>
 
-        <div *ngFor="let img of pub.imgURL" class="mini-view">
+        <!-- <div *ngFor="let img of pub.imgURL" class="mini-view">
           <img [src]="img" (click)="showImg(img)">
-        </div>
+        </div> -->
 
       </section>
     </div>
@@ -116,7 +117,7 @@
     <div class="comments" *ngIf="pub.comments.length">
       
       <div class="comment" *ngFor="let comment of pub.comments">
-        <span class="user-comment">{{comment.username}}</span>
+        <span class="user-comment">{{comment.username}} says:</span>
         <span class="text-comment">{{comment.commentText}}</span>
       </div>
     </div>

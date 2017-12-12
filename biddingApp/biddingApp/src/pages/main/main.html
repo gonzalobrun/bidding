@@ -101,10 +101,13 @@
       <h4 class="subtitle">Results</h4>
       <div  class="card-block" *ngFor="let pub of pubsArr">
         <ion-card (click)="openPub(pub)">
-        <!--  <img src="../content/img/relax.jpg"> -->
+            <div class="picture-view">
+                <img [src]="pub.imgURL[0]"/>
+            </div>
           <ion-card-content>
             <ion-card-title>
-              {{pub.title}}
+              <span class="card-title">{{pub.title}}</span>
+              <span class="card-price" *ngIf="pub.isAuction" [ngClass]="pub.isExpired ? 'expired' : 'unexipired'">{{pub.minimunPrice | currency:'USD':true:'2.2-4' }}</span>
               </ion-card-title>
             <p>
               {{pub.description}}
