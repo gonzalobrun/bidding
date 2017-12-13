@@ -18,6 +18,8 @@ export class Publication {
     public owner: {
         username: string;
         id: string;
+        phone: string,
+        email: string
     };
     public categories: Array<any>;
     public comments: Array<any>;

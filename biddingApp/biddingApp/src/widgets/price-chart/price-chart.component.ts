@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input,  SimpleChanges } from '@angular/core';
 
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
@@ -9,9 +9,12 @@ import * as d3Axis from 'd3-axis';
     selector: 'price-chart',
     templateUrl: './price-chart.component.html'        
 })
-export class PriceChartComponent implements OnInit {
+export class PriceChartComponent implements OnInit, OnChanges {
 
     @Input() price: any; 
+
+    private SVGWidth: any = 450;
+    private SVGHeight: any = 250;
 
     private width: number;
     private height: number;
@@ -25,14 +28,25 @@ export class PriceChartComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
-    this.initSvg();
-    this.initAxis();
-    this.drawAxis();
-    this.drawBars();
+//     this.initSvg();
+//     this.initAxis();
+//     this.drawAxis();
+//     this.drawBars();
+    }
+
+    ngOnChanges(changes: SimpleChanges){
+        this.initSvg();
+        this.initAxis();
+        this.drawAxis();
+        this.drawBars();
     }
 
     private initSvg() {
-    this.svg = d3.select("#barchart-price");
+d3.select('#price-chart svg').remove();
+    this.svg = d3.select("#price-chart")
+    .append('svg')
+    .attr('width', this.SVGWidth)
+    .attr('height', this.SVGHeight);
     this.width = +this.svg.attr("width") - this.margin.left - this.margin.right;
     this.height = +this.svg.attr("height") - this.margin.top - this.margin.bottom;
     this.g = this.svg.append("g")
@@ -53,14 +67,14 @@ export class PriceChartComponent implements OnInit {
             .call(d3Axis.axisBottom(this.x));
     this.g.append("g")
             .attr("class", "axis axis--y")
-            .call(d3Axis.axisLeft(this.y).ticks(10, "%"))
+            .call(d3Axis.axisLeft(this.y).ticks(10))
             .append("text")
             .attr("class", "axis-title")
             .attr("transform", "rotate(-90)")
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("Frequency");
+            .text("Price");
     }
 
     private drawBars() {

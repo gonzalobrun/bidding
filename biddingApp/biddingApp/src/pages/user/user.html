@@ -11,14 +11,34 @@
   <div class="statistics-section">
     <h4 class="subtitle">Your Statistics</h4>
     <div class="chart-wrapper">
+
       <div class="chart-container">
-        <h4 class="chart-title">Amount of Publications {{pubsArr.length}}</h4>
+        <h4 class="chart-title">Amount of Auctions: {{auctionCount.length}}</h4>
         <price-chart [price]="priceData"></price-chart>
       </div>
       
+      <div class='other-information'>
+
+        <div>
+          <span>Open Publications: {{openPubs.length}}</span>
+        </div>
+
+        <div>
+          <span>Expired Publications: {{expiredCount.length}}</span>
+        </div>
+
+        <div>
+          <span>Successfully Transaction: {{successTransaction.length}}</span>
+        </div>
+
+        <div>
+          <span>Fail Transaction: {{failTransactions.length}}</span>
+        </div>
+
+      </div>
 
       <div class="chart-container">
-        <h4 class="chart-title">Types of Publications {{pubsArr.length}}</h4>
+        <h4 class="chart-title">Types of Publications: {{pubsArr.length}}</h4>
         <donut-chart [types]="typesData"></donut-chart>
       </div>
     </div>

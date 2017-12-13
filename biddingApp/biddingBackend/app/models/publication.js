@@ -5,7 +5,9 @@ var Schema = mongoose.Schema;
 var PublicationSchema = new Schema({
 	owner : { 
         id: { type: String, required: true },
-        username: { type: String, required: true }
+        username: { type: String, required: true },
+        phone: { type: String, required: true },
+        email: { type: String, required: true },
     },
     creationDate : { 
         type: Date, 
@@ -43,7 +45,9 @@ var PublicationSchema = new Schema({
         {
             userId : String,
             username : String,
-            offerAmount : Number
+            offerAmount : Number,
+            userPhone: String,
+            userEmail: String
         }
     ],
     imgURL : [String],
@@ -57,7 +61,9 @@ var PublicationSchema = new Schema({
     likesCount : Number,
     winner: {
         id: String,
-        username: String
+        username: String,
+        userPhone: String,
+        userEmail: String
     }
 });
 

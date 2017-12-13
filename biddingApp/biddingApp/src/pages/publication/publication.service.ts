@@ -49,6 +49,8 @@ export class PublicationService {
         params.set('userId', offerer.userId);
         params.set('username', offerer.username);
         params.set('offerAmount', offerer.offerAmount);
+        params.set('userPhone', offerer.userPhone);
+        params.set('userEmail', offerer.userEmail);
 
         return this.http.post(fullUrl, params)
             .map((res: Response) => {

@@ -34,7 +34,9 @@ var UserSchema = new Schema({
         {
 			message : String,
 			read: Boolean,
-			publicationId: String
+			publicationId: String,
+			userPhone: String,
+			userEmail: String
         }
     ],
 });

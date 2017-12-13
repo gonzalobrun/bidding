@@ -15,6 +15,8 @@ function createPub (req, res){
 
 	pub.owner.id = req.body.ownerId;
 	pub.owner.username = req.body.ownerUsername;
+	pub.owner.phone = req.body.ownerPhone;
+	pub.owner.email = req.body.ownerEmail;
 	pub.creationDate = new Date(req.body.creationDate);
 	pub.countdownStarted = false;
 	pub.location.country = req.body.country;
@@ -34,6 +36,8 @@ function createPub (req, res){
 	pub.likesCount = 0;
 	pub.winner.id = null;
 	pub.winner.username = null;
+	pub.winner.userPhone = null;
+	pub.winner.userEmail = null;
 
 	pub.save(function(err, pub) {
 		if(err){			
@@ -100,7 +104,9 @@ function setWinner(pub) {
 	var query = { _id: pub._id },
 	update = { 'expired': true,
 				'winner.id' : pub.winner.id,
-				'winner.username': pub.winner.username
+				'winner.username': pub.winner.username,
+				'winner.userEmail': pub.winner.userEmail,
+				'winner.userPhone' : pub.winner.userPhone
 	},
 	options = { multi: false };
 
@@ -165,6 +171,8 @@ function evaluatePublications(pub){
 					var randomWinner = e.offerers[Math.floor(Math.random()*e.offerers.length)];
 					e.winner.id = randomWinner.userId; 
 					e.winner.username = randomWinner.username;
+					e.winner.userPhone = randomWinner.userPhone;
+					e.winner.userEmail = randomWinner.userEmail;
 					setWinner(e);
 					setOwnerNotification(e);
 					setWinnerNotification(e);
@@ -181,7 +189,9 @@ function evaluatePublications(pub){
 					});
 
 					e.winner.id = highestOfferer[0].userId; 
-					e.winner.username = highestOfferer[0].username;						
+					e.winner.username = highestOfferer[0].username;	
+					e.winner.userPhone = highestOfferer[0].userPhone;
+					e.winner.userEmail = highestOfferer[0].userEmail;					
 					setWinner(e);
 					setOwnerNotification(e);
 					setWinnerNotification(e);
@@ -197,7 +207,9 @@ function setOwnerNotification(pub) {
 	var notification = {
 		message: 'The user ' + pub.winner.username + ' won your publication ' + pub.title + '!',
 		read: false,
-		publicationId: pub._id
+		publicationId: pub._id,
+		userPhone: pub.winner.userPhone,
+		userEmail: pub.winner.userEmail
 	}
 
 	UserModel.findByIdAndUpdate(
@@ -218,7 +230,9 @@ function setWinnerNotification(pub) {
 		var notification = {
 			message: 'You win the publication ' + pub.title + ' from the user ' + pub.owner.username +'!',
 			read: false,
-			publicationId: pub._id
+			publicationId: pub._id,
+			userPhone: pub.owner.phone,
+			userEmail: pub.owner.email
 		}
 	
 		UserModel.findByIdAndUpdate(
@@ -344,8 +358,10 @@ function addOfferer (req, res){
 	var offerer = {
 		userId : req.body.userId,
 		username : req.body.username,
-		offerAmount : req.body.offerAmount
-		}		
+		offerAmount : req.body.offerAmount,
+		userPhone: req.body.userPhone,
+		userEmail: req.body.userEmail
+	}		
 
 	PublicationModel.findByIdAndUpdate(
 		query,

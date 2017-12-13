@@ -15,7 +15,14 @@
    class="notification" 
    [ngClass]="notification.read ? 'read' : 'unread'"
    (click)="setAsRead(notification._id)">
-    {{ notification.message }}
+    <div class="message">
+        {{ notification.message }}
+    </div>
+    <div class="contact-information">
+      <span class="title">Contact Information:</span>
+      <span class="phone">Phone: {{notification.userPhone}}</span>
+      <span class="email">Email: {{notification.userEmail}}</span>
+    </div>
    </div>
  </div>
  

@@ -138,7 +138,9 @@ export class PublicationPage {
       pubId: this.pub._id,
       userId : this.user._id,
       username : this.user.username,
-      offerAmount : this.offerAmount
+      offerAmount : this.offerAmount,
+      userPhone: this.user.phone,
+      userEmail: this.user.email
     }
     this.publicationService.addOfferer(offerer).subscribe(
       (res: any) => console.log(res),

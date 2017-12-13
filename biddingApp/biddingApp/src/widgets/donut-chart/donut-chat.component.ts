@@ -16,6 +16,9 @@ export class DonutChartComponent {
     
     @Input() types: any;
 
+    private SVGWidth: any = 450;
+    private SVGHeight: any = 250;
+
     private width: number;
     private height: number;
 
@@ -42,11 +45,15 @@ export class DonutChartComponent {
     }
 
     private initSvg() {
-        this.svg = d3.select('#svg-container-donut');
+        d3.select('#donut-chart-container svg').remove();
+        this.svg = d3.select('#donut-chart-container')
+        .append('svg')
+        .attr('width', this.SVGWidth)
+        .attr('height', this.SVGHeight);
 
         this.width = +this.svg.attr('width');
         this.height = +this.svg.attr('height');
-        this.radius = Math.min(this.width, this.height) / 2;
+        this.radius = Math.min(this.width /2, this.height) / 2;
 
         this.color = d3Scale.scaleOrdinal()
             .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
@@ -59,7 +66,7 @@ export class DonutChartComponent {
             .sort(null)
             .value((d: any) => d.value);
         
-        this.svg = d3.select("svg")
+        this.svg = d3.select("#donut-chart-container svg")
             .append("g")
             .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")");
     }
@@ -78,7 +85,7 @@ export class DonutChartComponent {
         g.append("text")
             .attr("transform", d => "translate(" + this.arc.centroid(d) + ")")
             .attr("dy", ".35em")
-            .text(d => d.data.name);
+            .text(d => d.data.name + ' ('+ d.data.value +')');
     }
 
 

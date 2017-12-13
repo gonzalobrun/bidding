@@ -91,9 +91,10 @@
         </div>
 
         <div class="item-data" *ngIf="pub.isExpired">
-            <label clasS="data-label">Winner:</label>
-            <span class="data-value">{{pub.winner.username}}</span>
-          </div>
+          <label clasS="data-label">Winner:</label>
+          <span class="data-value" *ngIf="pub.offerers.length">{{pub.winner.username}}</span>
+          <span class="data-value" *ngIf="!pub.offerers.length">Anybody won this offer.</span>
+        </div>
         
       </section>
 

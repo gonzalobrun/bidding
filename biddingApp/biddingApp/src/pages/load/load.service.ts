@@ -26,6 +26,8 @@ export class LoadService {
         params.set('minimunPrice', pub.minimunPrice ? pub.minimunPrice.toString() : null);
         params.set('ownerId', pub.owner.id);
         params.set('ownerUsername', pub.owner.username);
+        params.set('ownerPhone', pub.owner.phone);
+        params.set('ownerEmail', pub.owner.email);
         params.set('province', pub.location.province.toString());
         params.set('status', pub.status.toString());
         params.set('title', pub.title);

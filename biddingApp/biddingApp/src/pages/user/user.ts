@@ -8,6 +8,7 @@ import { User } from '../../models/user.model';
 import { TaxonomyService } from '../../commons/taxonomy.service';
 import { WebStorageService } from '../../commons/webStorage.service'; 
 import { UserService } from './user.service';
+import { Publication } from '../../models/publication.model';
 
 @Component({
   selector: 'page-user',
@@ -21,12 +22,17 @@ export class UserPage {
   public provinces: any = [];
   public cities: any = [];
   public pubsArr: any = [];
+  public openPubs: any = [];
+  public expiredCount: any = [];
+  public successTransaction: any = [];
+  public failTransactions: any  = [];
 
   public userCountry: any;
   public userProvince: any;
   public userCity: any;
   public typesData: any = [];
-  public priceData = [{name: 'a', value: 1},{name: 'B', value: 2}]
+  public priceData = []
+  public auctionCount: any = [];
 
   constructor(
     public navCtrl: NavController, 
@@ -115,7 +121,10 @@ export class UserPage {
     this.userService.getByUser(this.user).subscribe(
       (res) => {
         this.pubsArr = res;
+        this.countAuctionPubs();
+        this.setCounters()
         this.countTypes();
+        this.updatePrice();
       },
       (err) => console.log(err),
       () => console.log('GET USER\'S PUB')
@@ -154,7 +163,7 @@ export class UserPage {
      
     });
 
-    this.typesData = [
+    let _donutData = [
       {
         name: 'Auction',
         value: auctionCount
@@ -167,6 +176,51 @@ export class UserPage {
       }
     ]
 
+    let data = _donutData.filter((d: any) => {
+      return d.value != 0;
+    })
+    this.typesData = data;
   }
 
+  private updatePrice(){
+      let _priceData: any = [];
+      this.pubsArr.forEach((p: Publication) => {
+        let d: any = {
+          name: p.title,
+          value: p.minimunPrice || 0
+        }
+        _priceData.push(d);
+      })
+      let data = _priceData.filter((p: any) => {
+        return (p.value != 0);
+      })
+      this.priceData = data;
+       
+  }
+
+  private countAuctionPubs(){
+    this.auctionCount = this.pubsArr.filter((element: Publication) => {
+      return element.type != 2;
+    });
+  }
+
+  private setCounters(){
+
+    this.openPubs = this.pubsArr.filter((p: Publication) => {
+      return p.expired === false;
+    })
+
+    this.expiredCount = this.pubsArr.filter((p: Publication) => {
+      return p.expired === true;
+    })
+
+    this.successTransaction = this.pubsArr.filter((p: Publication) => {
+      return p.offerers.length != 0;
+    })
+
+    this.failTransactions = this.pubsArr.filter((p: Publication) => {
+      return p.expired === true && p.offerers.length === 0;
+    })
+
+  }
 }
