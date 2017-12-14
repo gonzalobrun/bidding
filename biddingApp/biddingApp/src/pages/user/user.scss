@@ -23,11 +23,25 @@ page-user {
             justify-content: space-between;
             .chart-container{
                 .chart-title{
-                    font-size: 18px;
+                    font-size: 20px;
                     text-align: center;
                 }
             }
         }
+
+        .other-information{
+            .info-title{
+                font-size: 20px;
+                text-align: center;
+            }
+
+            .counter {
+                margin-bottom: 15px;
+                text-align:  center;
+            }
+        }
+
+
     }
 
     .user-section {

@@ -22,7 +22,8 @@ export class SignInService {
         params.set('province', user.province);
         params.set('country', user.country);
         params.set('email', user.email);
-        params.set('phone', user.phone);   
+        params.set('phone', user.phone);
+        params.set('isAdmin', user.isAdmin.toString())
 
         return this.http.post('http://localhost:8080/user/', params)
             .map((res: Response) => {

@@ -83,14 +83,17 @@ export class MainPage {
   public getWithFilters() {
 		this.mainService.getWithFilters(this.filtersForm.value).subscribe(
 			(res) => {
-        res.pubs.forEach((p: any) => {
+        this.pubsArr = [];
+        res.pubs.forEach((p: any) => {          
           let _pub = new Publication(p)
           this.pubsArr.push(_pub);
         });
         			
 			},
 			(err) => console.log(err),
-			() => this.sortValue(this.filtersForm.get('sortBy').value)	
+			() => {
+        this.sortValue(this.filtersForm.get('sortBy').value);        
+      }	
 		)
   };
 
@@ -128,12 +131,12 @@ export class MainPage {
     
     this.filtersForm.valueChanges.subscribe(val => {
       this.getWithFilters();
-      this.sortValue(this.filtersForm.get('sortBy').value);      
+      //this.sortValue(this.filtersForm.get('sortBy').value);      
     });
 
-    this.filtersForm.get('sortBy').valueChanges.subscribe(val => {
-      this.sortValue(this.filtersForm.get('sortBy').value);
-    });
+    // this.filtersForm.get('sortBy').valueChanges.subscribe(val => {
+    //   this.sortValue(this.filtersForm.get('sortBy').value);
+    // });
   };
 
   public toggleSort() {    
@@ -152,9 +155,11 @@ export class MainPage {
 		this.navCtrl.push(UserPage);
   };
 
-  public sortValue(description: any){    
-    this.pubsArr = this.pubsArr.sort(function(a: any, b: any){
-      return a[description] - b[description]
+  public sortValue(description: any){ 
+    let _pubsArr = [];
+    _pubsArr = this.pubsArr.sort(function(a: any, b: any){
+      return a[description] > b[description]      
     });
+    this.pubsArr = _pubsArr;
   }
 }

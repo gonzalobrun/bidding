@@ -38,7 +38,8 @@ var UserSchema = new Schema({
 			userPhone: String,
 			userEmail: String
         }
-    ],
+	],
+	isAdmin: Boolean
 });
 
 module.exports = mongoose.model('Users', UserSchema);

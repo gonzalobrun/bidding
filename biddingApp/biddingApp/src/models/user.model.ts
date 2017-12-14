@@ -9,6 +9,7 @@ export class User {
     public province: string;
     public city: string;
     public notifications: Array<any>;
+    public isAdmin: boolean;
 
     constructor(userDataObj) {
         this._id = userDataObj._id || null;
@@ -21,6 +22,7 @@ export class User {
         this.country = userDataObj.country;
         this.city = userDataObj.city;
         this.notifications = userDataObj.notifications;
+        this.isAdmin = userDataObj.isAdmin
     }
 
     public static BuildEmpty(): User {
@@ -33,7 +35,8 @@ export class User {
             email: null,
             country: null,
             city: null,
-            notifications: []
+            notifications: [],
+            isAdmin: false
         }
         
         return new User(defaults);
@@ -42,4 +45,5 @@ export class User {
     public get isLogged(): boolean {
         return !! this._id;
     }
+
 }

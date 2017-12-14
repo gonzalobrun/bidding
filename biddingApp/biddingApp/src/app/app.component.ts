@@ -12,6 +12,7 @@ import { LoadPage } from '../pages/load/load';
 import { PublicationPage } from '../pages/publication/publication';
 import { UserPage } from '../pages/user/user';
 import { EditPubPage } from '../pages/edit-pub/edit-pub';
+import { AdminPage } from '../pages/admin/admin';
 
 import { TaxonomyService } from "../commons/taxonomy.service";
 
@@ -40,7 +41,9 @@ export class MyApp {
       { title: 'Publicaton', component: PublicationPage },
       { title: 'MainPage', component: MainPage },
       { title: 'UerPage', component: UserPage},
-      { title: 'EditPubPage', component: EditPubPage }
+      { title: 'EditPubPage', component: EditPubPage },
+      { title: 'AdminPage', component: AdminPage }
+
     ];
 
   }

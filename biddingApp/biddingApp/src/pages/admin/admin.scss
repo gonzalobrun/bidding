@@ -1,0 +1,40 @@
+page-admin {
+	.view-wrapper{
+		
+	.principal-section{
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: 15px;
+		padding: 30px;
+		margin: 15px;
+		background-color: #fefefe;
+		color:#488aff;
+		border: none;
+		-webkit-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        -moz-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+
+		.title-section{
+			width: 80%;
+			display: inline-block;
+			.title{
+				font-size: 80px;
+				
+			}
+		}
+
+	}
+	
+	.publications-section{
+		padding: 15px;
+		margin: 15px;
+		background-color: #fefefe;
+		border: none;
+		-webkit-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        -moz-box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+        box-shadow: 2px 2px 9px 1px rgba(181,181,181,1);
+	
+	}
+}
+	
+}

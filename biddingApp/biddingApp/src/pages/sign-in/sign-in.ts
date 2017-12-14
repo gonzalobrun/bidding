@@ -73,7 +73,8 @@ export class SignInPage {
       ]),  
       'country': new FormControl(this.user.country, [
         Validators.required
-      ]),    
+      ]),
+      'isAdmin': new FormControl(false, []),
     });
     
     this.onChanges();

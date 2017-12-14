@@ -19,6 +19,8 @@ import { LoadPage } from '../pages/load/load';
 import { PublicationPage } from '../pages/publication/publication';
 import { UserPage } from '../pages/user/user';
 import { EditPubPage } from '../pages/edit-pub/edit-pub';
+import { AdminPage } from '../pages/admin/admin';
+
 
 import { LogInService } from '../pages/log-in/log-in.service'; 
 import { SignInService } from '../pages/sign-in/sign-in.service';
@@ -48,7 +50,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     EditPubPage,
     NotificationsComponent,
     DonutChartComponent,
-    PriceChartComponent
+    PriceChartComponent,
+    AdminPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoadPage,
     PublicationPage,
     UserPage,
-    EditPubPage
+    EditPubPage,
+    AdminPage
   ],
   providers: [
     StatusBar,

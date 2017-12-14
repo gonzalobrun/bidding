@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { LogInPage } from '../log-in/log-in';
 import { SignInPage } from '../sign-in/sign-in';
-
+import { AdminPage } from '../admin/admin';
 import { MainPage } from '../main/main';
 import { PublicationPage } from '../publication/publication';
 
@@ -43,7 +43,12 @@ export class HomePage {
 	};
 
 	public goToMain() {
-		this.navCtrl.push(MainPage);
+		if(this.user.isAdmin){
+            this.navCtrl.push(AdminPage);
+          }
+          else {
+            this.navCtrl.push(MainPage);
+          }		
 	};
 
 	public getRandomPubs() {
