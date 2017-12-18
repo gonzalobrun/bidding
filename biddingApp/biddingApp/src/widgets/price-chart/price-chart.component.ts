@@ -11,9 +11,10 @@ import * as d3Axis from 'd3-axis';
 })
 export class PriceChartComponent implements OnInit, OnChanges {
 
-    @Input() price: any; 
+    @Input() price: any;
+    @Input() pageSvgWidth: any; 
 
-    private SVGWidth: any = 450;
+    private SVGWidth: any = 500;
     private SVGHeight: any = 250;
 
     private width: number;
@@ -28,10 +29,7 @@ export class PriceChartComponent implements OnInit, OnChanges {
     constructor() {}
 
     ngOnInit() {
-//     this.initSvg();
-//     this.initAxis();
-//     this.drawAxis();
-//     this.drawBars();
+
     }
 
     ngOnChanges(changes: SimpleChanges){
@@ -74,7 +72,6 @@ d3.select('#price-chart svg').remove();
             .attr("y", 6)
             .attr("dy", "0.71em")
             .attr("text-anchor", "end")
-            .text("Price");
     }
 
     private drawBars() {

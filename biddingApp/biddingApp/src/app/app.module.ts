@@ -31,7 +31,8 @@ import { WebStorageService } from "../commons/webStorage.service";
 import { LoadService } from '../pages/load/load.service';
 import { PublicationService } from '../pages/publication/publication.service';
 import { UserService } from '../pages/user/user.service';
-import { NotificationsService } from '../widgets/notifications.service';
+import { NotificationsService } from '../widgets/notifications.service'
+import { AdminService } from '../pages/admin/admin.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -87,7 +88,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoadService,
     PublicationService,
     UserService,
-    NotificationsService
+    NotificationsService,
+    AdminService
   ]
 })
 export class AppModule {}

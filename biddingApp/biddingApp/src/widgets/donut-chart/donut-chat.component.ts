@@ -1,6 +1,4 @@
-import { Component, TemplateRef, Input, OnInit, OnChanges, ElementRef } from '@angular/core';
-import { WebStorageService } from '../../commons/webStorage.service';
-import { Publication } from '../../models/publication.model';
+import { Component, Input } from '@angular/core';
 
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
@@ -28,8 +26,6 @@ export class DonutChartComponent {
     private arc: any;
     private pie: any;
     private color: any;
-      
-    private g: any;
 
     constructor() {}
 

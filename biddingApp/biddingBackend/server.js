@@ -33,7 +33,6 @@ app.use(function(req, res, next) {
 app.use(morgan('dev'));
 
 app.use('/upload',express.static(path.join(__dirname, '/upload')));
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 

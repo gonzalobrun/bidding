@@ -24,7 +24,7 @@ export class LogInPage {
   ) {}
 
   ngOnInit(){
-    this.userLoginModel = {username: 'testing', password: 'testing'}
+    this.userLoginModel = {}
   };
 
   ionViewDidLoad() {

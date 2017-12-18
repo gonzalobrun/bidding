@@ -3,6 +3,20 @@ var mongoose = require('mongoose');
 var User = require('../models/user');
 var UserModel = mongoose.model('Users');
 
+function getUsers(req, res) {
+
+	UserModel.find(function(err, user){
+		
+		if(err) {
+			res.send(err);
+		}
+		else{
+			res.json({message: 'All Users', users: user})
+		}
+
+	});
+}
+
 function createUser (req, res) {
 	var user = new User(req.body);
 	user.save(function(err, user) {
@@ -122,5 +136,6 @@ module.exports = {
 	deleteUser : deleteUser,
 	logReq: logReq,
 	checkNotifications: checkNotifications,
-	setAsRead: setAsRead
+	setAsRead: setAsRead,
+	getUsers: getUsers
 };

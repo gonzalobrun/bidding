@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EditPubPage } from '../edit-pub/edit-pub';

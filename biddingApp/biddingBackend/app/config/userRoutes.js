@@ -15,6 +15,8 @@ module.exports = function(app){
 	
 	userRoutes.post('/', [user.logReq, user.createUser]);
 
+	userRoutes.get('/allUsers', [user.logReq, user.getUsers]);
+
 	userRoutes.post('/login', [user.logReq, user.logUser]);
 
 	userRoutes.post('/setAsRead', [user.logReq, user.setAsRead]);

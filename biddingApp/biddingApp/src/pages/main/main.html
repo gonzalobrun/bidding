@@ -34,7 +34,7 @@
       <div class="filter-container">
         <h4 class="filter-label">Status</h4>
         <ion-item>
-          <ion-label>Type</ion-label>
+          <ion-label>Status</ion-label>
           <ion-select multiple="true" required id="status" formControlName="status">
             <!-- <ion-option [value]="-1">All</ion-option> -->
             <ion-option *ngFor="let stat of status" [value]="stat.id">{{ stat.description }}</ion-option>

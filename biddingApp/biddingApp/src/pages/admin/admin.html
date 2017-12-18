@@ -4,13 +4,17 @@
       <div class="principal-section">
         <div class="title-section">
           <h2 class="title">Admin Page</h2>
-        </div>
-        <!-- <div class="buttons-section">
-            <h4 class="username" *ngIf="user.isLogged">Hello {{user.name}}!</h4>
-            <button *ngIf="!user.isLogged" ion-button block (click)="goToLogin()">Login</button>
-            <button *ngIf="!user.isLogged" ion-button outline block (click)="goToSignin()">Sign in</button>
-            <button *ngIf="user.isLogged" ion-button block (click)="goToMain()">Search</button>
-        </div> -->
+        </div>        
+      </div>
+
+      <div class="publications-section">
+          <div class="user-section">
+            <span>Active Users: </span>
+            <span>{{ usersCount }}</span>
+          </div>
+          <div class="user-section">
+            <price-chart [price]="fullBarchartData" [pageSvgWidth]="500"></price-chart>
+          </div>
       </div>
       
       <div class="publications-section">
