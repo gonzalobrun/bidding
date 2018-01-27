@@ -17,4 +17,12 @@ export class AdminService {
             })
             .catch((err: any) => Observable.throw(err));
     }
+
+    getAllPubs(): Observable<any> {
+        return this.http.get('http://localhost:8080/pub/random')
+            .map((res: Response) => {
+               return res.json();
+            })
+            .catch((err: any) => Observable.throw(err));
+    }
 }

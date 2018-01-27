@@ -8,17 +8,39 @@
       </div>
 
       <div class="publications-section">
-          <div class="user-section">
-            <span>Active Users: </span>
-            <span>{{ usersCount }}</span>
+          <h4 class="subtitle">Users</h4>
+          <div class="active-users">
+            <span>Active Users: {{ usersCount }}</span>
           </div>
-          <div class="user-section">
-            <price-chart [price]="fullBarchartData" [pageSvgWidth]="500"></price-chart>
+          <div class="active-users">
+            <price-chart [price]="fullBarchartData"></price-chart>
           </div>
       </div>
       
       <div class="publications-section">
-          
+          <h4 class="subtitle">Publications</h4>
+          <div class="counters">
+            <span>Total Publications: {{ pubsArr.length }}</span>
+            <span>Total Auctions: {{ totalAuction }}</span>
+            <span>Total Service Auctions: {{ totalServiceAuction }}</span>
+            <span>Total Donations: {{ totalDonations }}</span>
+          </div>
+          <div>
+            <h4 class="subtitle">Types</h4>
+            <donut-chart [types]="donutTypesData"></donut-chart>
+          </div>
+          <div>
+            <h4 class="subtitle">Auction</h4>
+            <type-province-chart [price]="auctionBarchartData"></type-province-chart>
+          </div>
+          <div>
+            <h4 class="subtitle">Service Auction</h4>
+            <auction-province-chart [price]="serviceAuctionBarchartData"></auction-province-chart>
+          </div>
+          <div>
+            <h4 class="subtitle">Donations</h4>
+            <service-province-chart [price]="donationsBarchartData"></service-province-chart>
+          </div>
       </div>
       
     </div>

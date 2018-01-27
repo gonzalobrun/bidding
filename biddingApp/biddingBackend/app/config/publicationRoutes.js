@@ -43,5 +43,7 @@ module.exports = function(app) {
 
 	publicationRoutes.post('/saveImg/:pubId', upload.single('file'), [publication.logReq, publication.saveImg]);
 
+	publicationRoutes.post('/update/:pubId', [publication.logReq, publication.updatePub]);
+
 	app.use('/pub', publicationRoutes);
 }

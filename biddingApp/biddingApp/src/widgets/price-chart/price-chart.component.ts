@@ -14,7 +14,7 @@ export class PriceChartComponent implements OnInit, OnChanges {
     @Input() price: any;
     @Input() pageSvgWidth: any; 
 
-    private SVGWidth: any = 500;
+    private SVGWidth: any = 1750;
     private SVGHeight: any = 250;
 
     private width: number;

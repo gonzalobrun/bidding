@@ -13,10 +13,10 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <div class="view-wrapper">
   
-    <section class="img-section">
+    <!-- <section class="img-section">
       <form [formGroup]="loadPubForm">
         <ion-item>
             <ion-label color="primary" stacked>Browse</ion-label>
@@ -32,7 +32,7 @@
         </div>            
       </form>
         
-    </section>
+    </section> -->
   
     <section class="form-section">
         <form [formGroup]="loadPubForm">
@@ -99,13 +99,15 @@
                   <ion-option *ngFor="let city of cities" [value]="city.id">{{ city.nombre }}</ion-option>
                 </ion-select>
               </ion-item>
-              
-              <ion-item>
-                  <button ion-button outline (click)="publish()" >LOAD</button>
-              </ion-item>
-        
+                      
             </ion-list>
+            <ion-list> 
+              <ion-item>
+                  <button ion-button block medium (click)="publish()" >SAVE</button>
+              </ion-item>  
+            </ion-list> 
           </form>
+          
     </section>
   
   </div> 

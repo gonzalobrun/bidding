@@ -8,6 +8,10 @@ import { ModalModule } from 'ngx-bootstrap';
 import { NotificationsComponent } from '../widgets/notifications.component';
 import { DonutChartComponent } from '../widgets/donut-chart/donut-chat.component';
 import { PriceChartComponent } from '../widgets/price-chart/price-chart.component';
+import { TypeProvinceChartComponent } from '../widgets/type-province-chart/type-province-chart.component';
+import { AuctionProvinceChartComponent } from '../widgets/auction-province-chart/auction-province-chart.component';
+import { ServiceProvinceChartComponent } from '../widgets/service-province-chart/service-province-chart.component';
+
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -33,6 +37,7 @@ import { PublicationService } from '../pages/publication/publication.service';
 import { UserService } from '../pages/user/user.service';
 import { NotificationsService } from '../widgets/notifications.service'
 import { AdminService } from '../pages/admin/admin.service';
+import { EditPubService } from '../pages/edit-pub/edit-pub.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -52,7 +57,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NotificationsComponent,
     DonutChartComponent,
     PriceChartComponent,
-    AdminPage
+    AdminPage,
+    TypeProvinceChartComponent,
+    AuctionProvinceChartComponent,
+    ServiceProvinceChartComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +97,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     PublicationService,
     UserService,
     NotificationsService,
-    AdminService
+    AdminService,
+    EditPubService
   ]
 })
 export class AppModule {}

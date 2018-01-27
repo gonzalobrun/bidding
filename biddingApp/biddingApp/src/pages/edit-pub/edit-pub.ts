@@ -11,6 +11,7 @@ import{ UserPage } from '../../pages/user/user';
 
 import { Publication } from '../../models/publication.model';
 import { User } from '../../models/user.model';
+import { EditPubService } from './edit-pub.service';
 
 @Component({
   selector: 'page-edit-pub',
@@ -35,7 +36,8 @@ export class EditPubPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public taxonomyService: TaxonomyService, 
-    public webStorageService: WebStorageService) {
+    public webStorageService: WebStorageService,
+    public editPubService: EditPubService) {
   }
 
   ionViewDidLoad() {
@@ -108,28 +110,30 @@ export class EditPubPage {
     this.publication.location.city = this.user.city;
   }
 
-  // public publish(){
+  public publish(){
 
-  //   this.publication.categories = this.loadPubForm.get('categories').value;
-  //   this.publication.location.city = this.loadPubForm.get('city').value;
-  //   this.publication.location.country = this.loadPubForm.get('country').value;
-  //   this.publication.description = this.loadPubForm.get('description').value;
-  //   //this.publication.imgURL = this.loadPubForm.get('imgURL').value;
-  //   this.publication.location.province = this.loadPubForm.get('province').value;
-  //   this.publication.minimunPrice = this.loadPubForm.get('minimunPrice').value;
-  //   this.publication.owner.id = this.user._id;
-  //   this.publication.owner.username = this.user.username;
-  //   this.publication.status = this.loadPubForm.get('status').value;
-  //   this.publication.expirationDate = this.currentDate;
-  //   this.publication.title = this.loadPubForm.get('title').value;
-  //   this.publication.type = this.loadPubForm.get('type').value;
+    this.publication.categories = this.loadPubForm.get('categories').value;
+    this.publication.location.city = this.loadPubForm.get('city').value;
+    this.publication.location.country = this.loadPubForm.get('country').value;
+    this.publication.description = this.loadPubForm.get('description').value;
+    this.publication.location.province = this.loadPubForm.get('province').value;
+    this.publication.minimunPrice = this.loadPubForm.get('minimunPrice').value;
+    this.publication.owner.id = this.user._id;
+    this.publication.owner.username = this.user.username;
+    this.publication.status = this.loadPubForm.get('status').value;
+    this.publication.expirationDate = this.currentDate;
+    this.publication.title = this.loadPubForm.get('title').value;
+    this.publication.type = this.loadPubForm.get('type').value;
+
+    console.log(this.loadPubForm.value);
     
-  //   this.loadService.createPub(this.publication).subscribe(
-  //     (res: any) => console.log(res),
-  //     (err) => console.log(err),
-  //     () => console.log('Publicated')
-  //   );
-  // }
+    this.editPubService.update(this.publication).subscribe(
+      (res: any) => console.log(res),
+      (err) => console.log(err),
+      () => console.log('Publicated')
+    );
+
+  }
 
   public onChanges(): void {
     this.loadPubForm.get('province').valueChanges.subscribe(val => {

@@ -122,7 +122,7 @@ export class LoadPage {
     this.publication.owner.phone = this.user.phone;
     this.publication.owner.email = this.user.email;
     this.publication.status = this.loadPubForm.get('status').value;
-    this.publication.expirationDate = moment().add(1, 'minutes').format();
+    this.publication.expirationDate = moment().add(5, 'minutes').format();
     this.publication.title = this.loadPubForm.get('title').value;
     this.publication.type = this.loadPubForm.get('type').value;
     
@@ -130,7 +130,7 @@ export class LoadPage {
       (res: any) => {
         this.loadService.saveImg(this.fileForLoad, res._id);
       },
-      (err) => console.log(err),
+        (err) => console.log(err),
       () => {
         this.navCtrl.push(MainPage);
       }

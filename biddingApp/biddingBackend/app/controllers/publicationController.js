@@ -285,47 +285,37 @@ function logReq (req, res, next){
 
 function updatePub (req, res){	
 
-	// var query = { _id: req.params.pubId },		
-	// update = {
-	// 	owner: {
-	// 		id = req.body.ownerId,
-	// 		username = req.body.ownerUsername,
-	// 	},			
-	// 	countdownStarted = req.params.countdownStarted,
-	// 	location: {
-	// 		country = req.body.country,
-	// 		province = req.body.province,
-	// 		city = req.body.city,
-	// 	},			
-	// 	type = req.body.type,
-	// 	status = req.body.status,
-	// 	description = req.body.description,
-	// 	title = req.body.title,
-	// 	expirationDate = req.body.expirationDate,
-	// 	expired = false,
-	// 	minimunPrice = req.body.minimunPrice,
-	// 	offerers = req.params.offerers,
-	// 	imgURL = req.body.imgURL.split(","),
-	// 	comments = req.params.comments,
-	// 	categories = req.body.categories.split(","),
-	// 	likesCount = 0,
-	// }
+	console.log('AAAAA');
 
-	// options = { multi: false };
+	var query = { _id: req.params.pubId },		
+	update = {		
+		location: {
+			country: req.body.country,
+			province: req.body.province,
+			city: req.body.city,
+		},			
+		type: req.body.type,
+		status: req.body.status,
+		description: req.body.description,
+		title: req.body.title,
+		minimunPrice: req.body.minimunPrice,
+		categories: req.body.categories.split(",")
+	},
+	options = { multi: false };
 	
-	// UserModel.update(query, update, options, function(err, numAffected){
-	// 	if(err){
-	// 		res.send(err);
-	// 	}
-	// 	else{
-	// 		if(numAffected.nModified === 1) {
-	// 			res.json({success: true, message:'User updated', update: update });
-	// 		}
-	// 		else {
-	// 			res.status(412).json({success: false, message:'The user couldn\'t be updated', update: null});
-	// 		}			
-	// 	}
-	// });
+	PublicationModel.update(query, update, options, function(err, numAffected){
+		if(err){
+			res.send(err);
+		}
+		else{
+			if(numAffected.nModified === 1) {
+				res.json({success: true, message:'Pub updated', update: update });
+			}
+			else {
+				res.status(412).json({success: false, message:'The Pub couldn\'t be updated', update: null});
+			}			
+		}
+	});
 };
 
 function addComment (req, res){	
@@ -427,5 +417,6 @@ module.exports = {
 	getWithFilters: getWithFilters,
 	getByUser: getByUser,
 	setExpired: setExpired,
-	saveImg: saveImg
+	saveImg: saveImg,
+	updatePub: updatePub
 };
